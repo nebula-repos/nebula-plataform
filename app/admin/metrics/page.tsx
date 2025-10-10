@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { createClient } from "@/lib/supabase/server"
+import { resolveUserProfile, buildProfileFallback } from "@/lib/supabase/profiles"
 import { BarChart3 } from "lucide-react"
 
 export default async function AdminMetricsPage() {
@@ -16,9 +17,9 @@ export default async function AdminMetricsPage() {
     redirect("/auth/login")
   }
 
-  const { data: userData } = await supabase.from("users").select("role").eq("id", user.id).single()
+  const userProfile = (await resolveUserProfile(supabase, user)) ?? buildProfileFallback(user)
 
-  if (userData?.role !== "admin") {
+  if (userProfile.role !== "admin") {
     redirect("/dashboard")
   }
 
@@ -44,8 +45,8 @@ export default async function AdminMetricsPage() {
       <main className="flex-1">
         <section className="border-b border-border bg-muted/30 py-12">
           <div className="container mx-auto px-4">
-            <h1 className="mb-2 text-4xl font-bold">Métricas y Análisis</h1>
-            <p className="text-lg text-muted-foreground">Estadísticas de uso de la plataforma</p>
+            <h1 className="mb-2 text-4xl font-bold">Metrics and Analysis</h1>
+            <p className="text-lg text-muted-foreground">Platform usage statistics</p>
           </div>
         </section>
 
@@ -55,21 +56,21 @@ export default async function AdminMetricsPage() {
               {/* User Statistics */}
               <Card>
                 <CardHeader>
-                  <CardTitle>Distribución de Usuarios</CardTitle>
-                  <CardDescription>Usuarios por tipo de membresía</CardDescription>
+                  <CardTitle>User Distribution</CardTitle>
+                  <CardDescription>Users by membership tier</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
-                      <span className="text-sm font-medium">Total de usuarios</span>
+                      <span className="text-sm font-medium">Total users</span>
                       <span className="text-2xl font-bold">{totalUsers || 0}</span>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-muted-foreground">Usuarios gratuitos</span>
+                      <span className="text-sm text-muted-foreground">Free users</span>
                       <span className="text-lg font-semibold">{freeUsers || 0}</span>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-muted-foreground">Miembros premium</span>
+                      <span className="text-sm text-muted-foreground">Premium members</span>
                       <span className="text-lg font-semibold">{memberUsers || 0}</span>
                     </div>
                   </div>
@@ -81,9 +82,9 @@ export default async function AdminMetricsPage() {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <BarChart3 className="h-5 w-5" />
-                    Actividad de Eventos
+                    Event Activity
                   </CardTitle>
-                  <CardDescription>Tipos de eventos más frecuentes</CardDescription>
+                  <CardDescription>Most frequent event types</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-2">
@@ -95,7 +96,7 @@ export default async function AdminMetricsPage() {
                         </div>
                       ))
                     ) : (
-                      <p className="text-sm text-muted-foreground">No hay datos de eventos disponibles</p>
+                      <p className="text-sm text-muted-foreground">No event data available</p>
                     )}
                   </div>
                 </CardContent>

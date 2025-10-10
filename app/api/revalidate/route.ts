@@ -1,6 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { revalidatePath } from "next/cache"
 import { createClient } from "@/lib/supabase/server"
+import { resolveUserProfile, buildProfileFallback } from "@/lib/supabase/profiles"
 
 export async function POST(request: NextRequest) {
   try {
@@ -15,9 +16,9 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
     }
 
-    const { data: userData } = await supabase.from("users").select("role").eq("id", user.id).single()
+    const userProfile = (await resolveUserProfile(supabase, user)) ?? buildProfileFallback(user)
 
-    if (userData?.role !== "admin") {
+    if (userProfile.role !== "admin") {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 })
     }
 

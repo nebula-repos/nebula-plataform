@@ -48,25 +48,25 @@ export default function LoginPage() {
       <div className="w-full max-w-sm">
         <Card>
           <CardHeader>
-            <CardTitle className="text-2xl">Iniciar sesión</CardTitle>
-            <CardDescription>Ingresa tu correo electrónico para acceder a tu cuenta</CardDescription>
+            <CardTitle className="text-2xl">Log in</CardTitle>
+            <CardDescription>Enter your email address to access your account</CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleLogin}>
               <div className="flex flex-col gap-6">
                 <div className="grid gap-2">
-                  <Label htmlFor="email">Correo electrónico</Label>
+                  <Label htmlFor="email">Email address</Label>
                   <Input
                     id="email"
                     type="email"
-                    placeholder="tu@email.com"
+                    placeholder="you@example.com"
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
                 <div className="grid gap-2">
-                  <Label htmlFor="password">Contraseña</Label>
+                  <Label htmlFor="password">Password</Label>
                   <Input
                     id="password"
                     type="password"
@@ -77,13 +77,13 @@ export default function LoginPage() {
                 </div>
                 {error && <p className="text-sm text-destructive">{error}</p>}
                 <Button type="submit" className="w-full" disabled={isLoading}>
-                  {isLoading ? "Iniciando sesión..." : "Iniciar sesión"}
+                  {isLoading ? "Logging in..." : "Log in"}
                 </Button>
               </div>
               <div className="mt-4 text-center text-sm">
-                ¿No tienes una cuenta?{" "}
+                Don&apos;t have an account?{" "}
                 <Link href="/auth/signup" className="underline underline-offset-4">
-                  Regístrate
+                  Sign up
                 </Link>
               </div>
             </form>

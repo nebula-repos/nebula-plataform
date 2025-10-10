@@ -28,7 +28,7 @@ export default function SignupPage() {
     setError(null)
 
     if (password !== repeatPassword) {
-      setError("Las contraseñas no coinciden")
+      setError("Passwords do not match")
       setIsLoading(false)
       return
     }
@@ -61,36 +61,36 @@ export default function SignupPage() {
       <div className="w-full max-w-sm">
         <Card>
           <CardHeader>
-            <CardTitle className="text-2xl">Crear cuenta</CardTitle>
-            <CardDescription>Regístrate para acceder a la plataforma</CardDescription>
+            <CardTitle className="text-2xl">Create account</CardTitle>
+            <CardDescription>Sign up to access the platform</CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSignUp}>
               <div className="flex flex-col gap-6">
                 <div className="grid gap-2">
-                  <Label htmlFor="fullName">Nombre completo</Label>
+                  <Label htmlFor="fullName">Full name</Label>
                   <Input
                     id="fullName"
                     type="text"
-                    placeholder="Juan Pérez"
+                    placeholder="John Smith"
                     required
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
                   />
                 </div>
                 <div className="grid gap-2">
-                  <Label htmlFor="email">Correo electrónico</Label>
+                  <Label htmlFor="email">Email address</Label>
                   <Input
                     id="email"
                     type="email"
-                    placeholder="tu@email.com"
+                    placeholder="you@example.com"
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
                 <div className="grid gap-2">
-                  <Label htmlFor="password">Contraseña</Label>
+                  <Label htmlFor="password">Password</Label>
                   <Input
                     id="password"
                     type="password"
@@ -100,7 +100,7 @@ export default function SignupPage() {
                   />
                 </div>
                 <div className="grid gap-2">
-                  <Label htmlFor="repeat-password">Repetir contraseña</Label>
+                  <Label htmlFor="repeat-password">Confirm password</Label>
                   <Input
                     id="repeat-password"
                     type="password"
@@ -111,13 +111,13 @@ export default function SignupPage() {
                 </div>
                 {error && <p className="text-sm text-destructive">{error}</p>}
                 <Button type="submit" className="w-full" disabled={isLoading}>
-                  {isLoading ? "Creando cuenta..." : "Crear cuenta"}
+                  {isLoading ? "Creating account..." : "Create account"}
                 </Button>
               </div>
               <div className="mt-4 text-center text-sm">
-                ¿Ya tienes una cuenta?{" "}
+                Already have an account?{" "}
                 <Link href="/auth/login" className="underline underline-offset-4">
-                  Inicia sesión
+                  Log in
                 </Link>
               </div>
             </form>

@@ -8,20 +8,20 @@ export function Footer() {
           <div>
             <h3 className="mb-4 font-semibold">Research Platform</h3>
             <p className="text-sm text-muted-foreground">
-              Plataforma de investigación académica e industrial de alta calidad.
+              High-quality academic and industry research platform.
             </p>
           </div>
           <div>
-            <h3 className="mb-4 font-semibold">Enlaces</h3>
+            <h3 className="mb-4 font-semibold">Links</h3>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link href="/research-lines" className="text-muted-foreground hover:text-foreground">
-                  Líneas de Investigación
+                  Research Lines
                 </Link>
               </li>
               <li>
                 <Link href="/about" className="text-muted-foreground hover:text-foreground">
-                  Acerca de
+                  About
                 </Link>
               </li>
             </ul>
@@ -31,19 +31,19 @@ export function Footer() {
             <ul className="space-y-2 text-sm">
               <li>
                 <Link href="/privacy" className="text-muted-foreground hover:text-foreground">
-                  Privacidad
+                  Privacy
                 </Link>
               </li>
               <li>
                 <Link href="/terms" className="text-muted-foreground hover:text-foreground">
-                  Términos
+                  Terms
                 </Link>
               </li>
             </ul>
           </div>
         </div>
         <div className="mt-8 border-t border-border pt-8 text-center text-sm text-muted-foreground">
-          © {new Date().getFullYear()} Research Platform. Todos los derechos reservados.
+          © {new Date().getFullYear()} Research Platform. All rights reserved.
         </div>
       </div>
     </footer>

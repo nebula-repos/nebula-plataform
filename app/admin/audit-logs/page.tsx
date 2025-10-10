@@ -4,8 +4,9 @@ import { Badge } from "@/components/ui/badge"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { createClient } from "@/lib/supabase/server"
+import { resolveUserProfile, buildProfileFallback } from "@/lib/supabase/profiles"
 import { format } from "date-fns"
-import { es } from "date-fns/locale"
+import { enUS } from "date-fns/locale"
 
 export default async function AdminAuditLogsPage() {
   const supabase = await createClient()
@@ -18,9 +19,9 @@ export default async function AdminAuditLogsPage() {
     redirect("/auth/login")
   }
 
-  const { data: userData } = await supabase.from("users").select("role").eq("id", user.id).single()
+  const userProfile = (await resolveUserProfile(supabase, user)) ?? buildProfileFallback(user)
 
-  if (userData?.role !== "admin") {
+  if (userProfile.role !== "admin") {
     redirect("/dashboard")
   }
 
@@ -36,8 +37,8 @@ export default async function AdminAuditLogsPage() {
       <main className="flex-1">
         <section className="border-b border-border bg-muted/30 py-12">
           <div className="container mx-auto px-4">
-            <h1 className="mb-2 text-4xl font-bold">Registro de Auditoría</h1>
-            <p className="text-lg text-muted-foreground">Historial de acciones administrativas</p>
+            <h1 className="mb-2 text-4xl font-bold">Audit Log</h1>
+            <p className="text-lg text-muted-foreground">Administrative action history</p>
           </div>
         </section>
 
@@ -45,8 +46,8 @@ export default async function AdminAuditLogsPage() {
           <div className="container mx-auto px-4">
             <Card>
               <CardHeader>
-                <CardTitle>Últimas 100 Acciones</CardTitle>
-                <CardDescription>Registro completo de actividad administrativa</CardDescription>
+                <CardTitle>Last 100 actions</CardTitle>
+                <CardDescription>Complete administrative activity log</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
@@ -65,7 +66,7 @@ export default async function AdminAuditLogsPage() {
                             <span className="font-medium">{log.users?.full_name || log.users?.email}</span>
                           </p>
                           <p className="text-xs text-muted-foreground">
-                            {format(new Date(log.created_at), "d 'de' MMMM, yyyy 'a las' HH:mm:ss", { locale: es })}
+                            {format(new Date(log.created_at), "MMMM d, yyyy 'at' HH:mm:ss", { locale: enUS })}
                           </p>
                           {log.details && (
                             <pre className="mt-2 rounded bg-muted p-2 text-xs">
@@ -76,7 +77,7 @@ export default async function AdminAuditLogsPage() {
                       </div>
                     ))
                   ) : (
-                    <p className="text-sm text-muted-foreground">No hay registros de auditoría</p>
+                    <p className="text-sm text-muted-foreground">No audit records</p>
                   )}
                 </div>
               </CardContent>

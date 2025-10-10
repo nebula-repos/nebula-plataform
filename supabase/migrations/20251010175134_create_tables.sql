@@ -1,4 +1,6 @@
--- Enable UUID extension
+-- Supabase hosts extensions under the `extensions` schema, so ensure both
+-- providers are available and rely on `extensions.gen_random_uuid()` for defaults.
+create extension if not exists "pgcrypto";
 create extension if not exists "uuid-ossp";
 
 -- Users table (extends auth.users)
@@ -14,7 +16,7 @@ create table if not exists public.users (
 
 -- Research lines table
 create table if not exists public.research_lines (
-  id uuid primary key default uuid_generate_v4(),
+  id uuid primary key default extensions.gen_random_uuid(),
   slug text not null unique,
   title text not null,
   description text,
@@ -25,7 +27,7 @@ create table if not exists public.research_lines (
 
 -- Releases table
 create table if not exists public.releases (
-  id uuid primary key default uuid_generate_v4(),
+  id uuid primary key default extensions.gen_random_uuid(),
   research_line_id uuid not null references public.research_lines(id) on delete cascade,
   slug text not null,
   title text not null,
@@ -38,7 +40,7 @@ create table if not exists public.releases (
 
 -- Release sections table (Actualidad, Implementación, Académico)
 create table if not exists public.release_sections (
-  id uuid primary key default uuid_generate_v4(),
+  id uuid primary key default extensions.gen_random_uuid(),
   release_id uuid not null references public.releases(id) on delete cascade,
   section_type text not null check (section_type in ('actualidad', 'implementacion', 'academico')),
   title text not null,
@@ -51,7 +53,7 @@ create table if not exists public.release_sections (
 
 -- Audit log table
 create table if not exists public.audit_logs (
-  id uuid primary key default uuid_generate_v4(),
+  id uuid primary key default extensions.gen_random_uuid(),
   user_id uuid not null references public.users(id) on delete cascade,
   action text not null,
   entity_type text not null,
@@ -62,7 +64,7 @@ create table if not exists public.audit_logs (
 
 -- Event tracking table
 create table if not exists public.events (
-  id uuid primary key default uuid_generate_v4(),
+  id uuid primary key default extensions.gen_random_uuid(),
   user_id uuid references public.users(id) on delete set null,
   event_type text not null,
   event_data jsonb,

@@ -37,10 +37,10 @@ export function RevalidateButton({ type, slug, researchLineSlug, releaseSlug }: 
         throw new Error("Failed to revalidate")
       }
 
-      setMessage("Contenido actualizado correctamente")
+      setMessage("Content refreshed successfully")
       setTimeout(() => setMessage(null), 3000)
     } catch (error) {
-      setMessage("Error al actualizar contenido")
+      setMessage("Error refreshing content")
       setTimeout(() => setMessage(null), 3000)
     } finally {
       setIsLoading(false)
@@ -51,7 +51,7 @@ export function RevalidateButton({ type, slug, researchLineSlug, releaseSlug }: 
     <div className="flex items-center gap-2">
       <Button onClick={handleRevalidate} disabled={isLoading} size="sm" variant="outline">
         <RefreshCw className={`h-4 w-4 ${isLoading ? "animate-spin" : ""}`} />
-        {isLoading ? "Actualizando..." : "Revalidar Cache"}
+        {isLoading ? "Refreshing..." : "Revalidate Cache"}
       </Button>
       {message && <span className="text-sm text-muted-foreground">{message}</span>}
     </div>

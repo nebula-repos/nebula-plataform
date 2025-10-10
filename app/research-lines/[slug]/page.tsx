@@ -6,7 +6,7 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { createClient } from "@/lib/supabase/server"
 import { formatDistanceToNow } from "date-fns"
-import { es } from "date-fns/locale"
+import { enUS } from "date-fns/locale"
 import { trackResearchLineView } from "@/lib/analytics"
 
 export const revalidate = 3600
@@ -50,7 +50,7 @@ export default async function ResearchLinePage({ params }: { params: Promise<{ s
 
         <section className="py-12">
           <div className="container mx-auto px-4">
-            <h2 className="mb-6 text-2xl font-bold">Publicaciones</h2>
+            <h2 className="mb-6 text-2xl font-bold">Releases</h2>
             {releases && releases.length > 0 ? (
               <div className="grid gap-6 md:grid-cols-2">
                 {releases.map((release) => (
@@ -59,8 +59,8 @@ export default async function ResearchLinePage({ params }: { params: Promise<{ s
                       <div className="mb-2 flex items-center gap-2">
                         <Badge variant="secondary">
                           {release.published_at
-                            ? formatDistanceToNow(new Date(release.published_at), { addSuffix: true, locale: es })
-                            : "Sin fecha"}
+                            ? formatDistanceToNow(new Date(release.published_at), { addSuffix: true, locale: enUS })
+                            : "No date"}
                         </Badge>
                       </div>
                       <CardTitle>{release.title}</CardTitle>
@@ -70,7 +70,7 @@ export default async function ResearchLinePage({ params }: { params: Promise<{ s
                         href={`/research-lines/${slug}/${release.slug}`}
                         className="text-sm font-medium text-primary hover:underline"
                       >
-                        Leer publicación →
+                        Read release →
                       </Link>
                     </CardContent>
                   </Card>
@@ -79,7 +79,7 @@ export default async function ResearchLinePage({ params }: { params: Promise<{ s
             ) : (
               <div className="py-12 text-center">
                 <p className="text-muted-foreground">
-                  No hay publicaciones disponibles en esta línea de investigación.
+                  No releases available for this research line.
                 </p>
               </div>
             )}

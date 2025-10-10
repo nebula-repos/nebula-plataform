@@ -1,12 +1,12 @@
 import { redirect } from "next/navigation"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { createClient } from "@/lib/supabase/server"
 import { resolveUserProfile, buildProfileFallback } from "@/lib/supabase/profiles"
-import { ProfileForm } from "@/components/profile-form"
+import { ResearchLineForm } from "@/components/admin/research-line-form"
 
-export default async function ProfilePage() {
+export default async function AdminResearchLineNewPage() {
   const supabase = await createClient()
 
   const {
@@ -19,26 +19,30 @@ export default async function ProfilePage() {
 
   const userProfile = (await resolveUserProfile(supabase, user)) ?? buildProfileFallback(user)
 
+  if (userProfile.role !== "admin") {
+    redirect("/dashboard")
+  }
+
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
       <main className="flex-1">
         <section className="border-b border-border bg-muted/30 py-12">
           <div className="container mx-auto px-4">
-            <h1 className="mb-2 text-4xl font-bold">Edit Profile</h1>
-            <p className="text-lg text-muted-foreground">Update your personal information</p>
+            <h1 className="text-4xl font-bold">New research line</h1>
+            <p className="mt-2 max-w-3xl text-muted-foreground">Define the primary details of the line. You can add releases and updates after saving.</p>
           </div>
         </section>
 
         <section className="py-12">
-          <div className="container mx-auto max-w-2xl px-4">
-            <Card>
+          <div className="container mx-auto px-4">
+            <Card className="max-w-3xl">
               <CardHeader>
-                <CardTitle>Personal Information</CardTitle>
-                <CardDescription>Update your profile details</CardDescription>
+                <CardTitle>Key details</CardTitle>
+                <CardDescription>Complete the title, slug, and description shown to users.</CardDescription>
               </CardHeader>
               <CardContent>
-                <ProfileForm user={userProfile} />
+                <ResearchLineForm mode="create" />
               </CardContent>
             </Card>
           </div>

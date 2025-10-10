@@ -34,11 +34,23 @@ export function ProfileForm({ user }: ProfileFormProps) {
     const supabase = createClient()
 
     try {
-      const { error } = await supabase.from("users").update({ full_name: fullName }).eq("id", user?.id)
+      if (!user?.id) {
+        throw new Error("Could not identify the current user.")
+      }
 
-      if (error) throw error
+      const normalizedFullName = fullName.trim()
+      const { error: authError } = await supabase.auth.updateUser({
+        data: { full_name: normalizedFullName || null },
+      })
+      if (authError) throw authError
 
-      await trackEventClient("profile_update", { full_name: fullName })
+      const { error: profileError } = await supabase
+        .from("users")
+        .update({ full_name: normalizedFullName || null })
+        .eq("id", user.id)
+      if (profileError) throw profileError
+
+      await trackEventClient("profile_update", { full_name: normalizedFullName })
 
       setSuccess(true)
       setTimeout(() => {
@@ -55,31 +67,31 @@ export function ProfileForm({ user }: ProfileFormProps) {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="space-y-2">
-        <Label htmlFor="email">Correo electrónico</Label>
+        <Label htmlFor="email">Email address</Label>
         <Input id="email" type="email" value={user?.email} disabled />
-        <p className="text-sm text-muted-foreground">El correo electrónico no se puede cambiar</p>
+        <p className="text-sm text-muted-foreground">Email address cannot be changed</p>
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="fullName">Nombre completo</Label>
+        <Label htmlFor="fullName">Full name</Label>
         <Input
           id="fullName"
           type="text"
           value={fullName}
           onChange={(e) => setFullName(e.target.value)}
-          placeholder="Tu nombre completo"
+          placeholder="Your full name"
         />
       </div>
 
       {error && <p className="text-sm text-destructive">{error}</p>}
-      {success && <p className="text-sm text-green-600">Perfil actualizado correctamente</p>}
+      {success && <p className="text-sm text-green-600">Profile updated successfully</p>}
 
       <div className="flex gap-4">
         <Button type="submit" disabled={isLoading}>
-          {isLoading ? "Guardando..." : "Guardar cambios"}
+          {isLoading ? "Saving..." : "Save changes"}
         </Button>
         <Button type="button" variant="outline" onClick={() => router.push("/dashboard")}>
-          Cancelar
+          Cancel
         </Button>
       </div>
     </form>

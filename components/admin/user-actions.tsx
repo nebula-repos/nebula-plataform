@@ -57,19 +57,19 @@ export function UserActions({ userId, currentRole, currentTier }: UserActionsPro
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         {currentRole === "user" && (
-          <DropdownMenuItem onClick={() => updateUser({ role: "admin" })}>Hacer Admin</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => updateUser({ role: "admin" })}>Make Admin</DropdownMenuItem>
         )}
         {currentRole === "admin" && (
-          <DropdownMenuItem onClick={() => updateUser({ role: "user" })}>Quitar Admin</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => updateUser({ role: "user" })}>Remove Admin</DropdownMenuItem>
         )}
         {currentTier === "free" && (
           <DropdownMenuItem onClick={() => updateUser({ membership_tier: "member" })}>
-            Actualizar a Miembro
+            Upgrade to Member
           </DropdownMenuItem>
         )}
         {currentTier === "member" && (
           <DropdownMenuItem onClick={() => updateUser({ membership_tier: "free" })}>
-            Cambiar a Gratuito
+            Switch to Free
           </DropdownMenuItem>
         )}
       </DropdownMenuContent>

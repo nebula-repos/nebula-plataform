@@ -5,9 +5,10 @@ import { Badge } from "@/components/ui/badge"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { createClient } from "@/lib/supabase/server"
+import { resolveUserProfile, buildProfileFallback } from "@/lib/supabase/profiles"
 import Link from "next/link"
 import { format } from "date-fns"
-import { es } from "date-fns/locale"
+import { enUS } from "date-fns/locale"
 import { RevalidateButton } from "@/components/admin/revalidate-button"
 
 export default async function AdminReleasesPage() {
@@ -21,9 +22,9 @@ export default async function AdminReleasesPage() {
     redirect("/auth/login")
   }
 
-  const { data: userData } = await supabase.from("users").select("role").eq("id", user.id).single()
+  const userProfile = (await resolveUserProfile(supabase, user)) ?? buildProfileFallback(user)
 
-  if (userData?.role !== "admin") {
+  if (userProfile.role !== "admin") {
     redirect("/dashboard")
   }
 
@@ -40,11 +41,11 @@ export default async function AdminReleasesPage() {
           <div className="container mx-auto px-4">
             <div className="flex items-center justify-between">
               <div>
-                <h1 className="mb-2 text-4xl font-bold">Publicaciones</h1>
-                <p className="text-lg text-muted-foreground">Gestiona las publicaciones</p>
+                <h1 className="mb-2 text-4xl font-bold">Releases</h1>
+                <p className="text-lg text-muted-foreground">Manage releases</p>
               </div>
               <Link href="/admin/releases/new">
-                <Button>Nueva Publicación</Button>
+                <Button>New Release</Button>
               </Link>
             </div>
           </div>
@@ -54,8 +55,8 @@ export default async function AdminReleasesPage() {
           <div className="container mx-auto px-4">
             <Card>
               <CardHeader>
-                <CardTitle>Todas las Publicaciones</CardTitle>
-                <CardDescription>Lista completa de publicaciones</CardDescription>
+                <CardTitle>All Releases</CardTitle>
+                <CardDescription>Complete list of releases</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
@@ -69,16 +70,16 @@ export default async function AdminReleasesPage() {
                           <div className="flex items-center gap-2">
                             <p className="font-medium">{release.title}</p>
                             <Badge variant={release.is_published ? "default" : "secondary"}>
-                              {release.is_published ? "Publicada" : "Borrador"}
+                              {release.is_published ? "Published" : "Draft"}
                             </Badge>
                           </div>
                           <p className="text-sm text-muted-foreground">
-                            Línea: {release.research_lines?.title || "Sin línea"}
+                            Line: {release.research_lines?.title || "No line"}
                           </p>
                           <p className="text-xs text-muted-foreground">
                             {release.published_at
-                              ? format(new Date(release.published_at), "d 'de' MMMM, yyyy", { locale: es })
-                              : "Sin fecha de publicación"}
+                              ? format(new Date(release.published_at), "MMMM d, yyyy", { locale: enUS })
+                              : "No publish date"}
                           </p>
                         </div>
                         <div className="flex items-center gap-2">
@@ -92,14 +93,14 @@ export default async function AdminReleasesPage() {
                             target="_blank"
                           >
                             <Button variant="outline" size="sm">
-                              Ver
+                              View
                             </Button>
                           </Link>
                         </div>
                       </div>
                     ))
                   ) : (
-                    <p className="text-sm text-muted-foreground">No hay publicaciones</p>
+                    <p className="text-sm text-muted-foreground">No releases</p>
                   )}
                 </div>
               </CardContent>

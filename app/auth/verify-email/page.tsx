@@ -6,13 +6,13 @@ export default function VerifyEmailPage() {
       <div className="w-full max-w-sm">
         <Card>
           <CardHeader>
-            <CardTitle className="text-2xl">Verifica tu correo</CardTitle>
-            <CardDescription>Revisa tu bandeja de entrada</CardDescription>
+            <CardTitle className="text-2xl">Verify your email</CardTitle>
+            <CardDescription>Check your inbox</CardDescription>
           </CardHeader>
           <CardContent>
             <p className="text-sm text-muted-foreground">
-              Te hemos enviado un correo electrónico con un enlace de verificación. Por favor, revisa tu bandeja de
-              entrada y haz clic en el enlace para activar tu cuenta.
+              We&apos;ve sent you an email with a verification link. Please check your inbox and click the link to
+              activate your account.
             </p>
           </CardContent>
         </Card>

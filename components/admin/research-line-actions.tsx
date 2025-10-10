@@ -50,7 +50,7 @@ export function ResearchLineActions({ lineId, isActive, slug }: ResearchLineActi
   }
 
   const deleteLine = async () => {
-    if (!confirm("¿Estás seguro de que quieres eliminar esta línea de investigación?")) return
+    if (!confirm("Are you sure you want to delete this research line?")) return
 
     setIsLoading(true)
     const supabase = createClient()
@@ -86,7 +86,7 @@ export function ResearchLineActions({ lineId, isActive, slug }: ResearchLineActi
     <div className="flex items-center gap-2">
       <Link href={`/admin/research-lines/${slug}/edit`}>
         <Button variant="outline" size="sm">
-          Editar
+          Edit
         </Button>
       </Link>
       <DropdownMenu>
@@ -96,9 +96,9 @@ export function ResearchLineActions({ lineId, isActive, slug }: ResearchLineActi
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuItem onClick={toggleActive}>{isActive ? "Desactivar" : "Activar"}</DropdownMenuItem>
+          <DropdownMenuItem onClick={toggleActive}>{isActive ? "Deactivate" : "Activate"}</DropdownMenuItem>
           <DropdownMenuItem onClick={deleteLine} className="text-destructive">
-            Eliminar
+            Delete
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

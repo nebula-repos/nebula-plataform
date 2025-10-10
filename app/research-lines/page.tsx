@@ -21,10 +21,8 @@ export default async function ResearchLinesPage() {
       <main className="flex-1">
         <section className="border-b border-border bg-muted/30 py-12">
           <div className="container mx-auto px-4">
-            <h1 className="mb-4 text-4xl font-bold">Líneas de Investigación</h1>
-            <p className="text-lg text-muted-foreground">
-              Explora nuestras líneas de investigación activas y sus publicaciones más recientes.
-            </p>
+            <h1 className="mb-4 text-4xl font-bold">Research Lines</h1>
+            <p className="text-lg text-muted-foreground">Explore our active research lines and their latest releases.</p>
           </div>
         </section>
 
@@ -43,7 +41,7 @@ export default async function ResearchLinesPage() {
                         href={`/research-lines/${line.slug}`}
                         className="text-sm font-medium text-primary hover:underline"
                       >
-                        Ver publicaciones →
+                        View releases →
                       </Link>
                     </CardContent>
                   </Card>
@@ -51,7 +49,7 @@ export default async function ResearchLinesPage() {
               </div>
             ) : (
               <div className="py-12 text-center">
-                <p className="text-muted-foreground">No hay líneas de investigación disponibles en este momento.</p>
+                <p className="text-muted-foreground">No research lines available at the moment.</p>
               </div>
             )}
           </div>

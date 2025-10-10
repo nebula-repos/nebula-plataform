@@ -5,8 +5,9 @@ import { Button } from "@/components/ui/button"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { createClient } from "@/lib/supabase/server"
+import { resolveUserProfile, buildProfileFallback } from "@/lib/supabase/profiles"
 import { format } from "date-fns"
-import { es } from "date-fns/locale"
+import { enUS } from "date-fns/locale"
 import Link from "next/link"
 import { Lock } from "lucide-react"
 import { trackReleaseView, trackEvent } from "@/lib/analytics"
@@ -42,8 +43,8 @@ export default async function ReleasePage({
   let membershipTier = "free"
 
   if (user) {
-    const { data: userData } = await supabase.from("users").select("membership_tier").eq("id", user.id).single()
-    membershipTier = userData?.membership_tier || "free"
+    const userProfile = (await resolveUserProfile(supabase, user)) ?? buildProfileFallback(user)
+    membershipTier = userProfile.membership_tier
   }
 
   const { data: researchLine } = await supabase.from("research_lines").select("*").eq("slug", slug).single()
@@ -89,15 +90,15 @@ export default async function ReleasePage({
           <div className="container mx-auto px-4">
             <div className="mb-4">
               <Link href={`/research-lines/${slug}`} className="text-sm text-muted-foreground hover:text-foreground">
-                ← Volver a {researchLine.title}
+                ← Back to {researchLine.title}
               </Link>
             </div>
             <h1 className="mb-4 text-4xl font-bold">{release.title}</h1>
             <div className="flex items-center gap-2">
               <Badge variant="secondary">
                 {release.published_at
-                  ? format(new Date(release.published_at), "d 'de' MMMM, yyyy", { locale: es })
-                  : "Sin fecha"}
+                  ? format(new Date(release.published_at), "MMMM d, yyyy", { locale: enUS })
+                  : "No date"}
               </Badge>
             </div>
           </div>
@@ -113,10 +114,10 @@ export default async function ReleasePage({
                       <CardTitle className="flex items-center justify-between">
                         <span>
                           {section.section_type === "actualidad"
-                            ? "Actualidad"
+                            ? "Current Landscape"
                             : section.section_type === "implementacion"
-                              ? "Implementación"
-                              : "Académico"}
+                              ? "Implementation"
+                              : "Academic"}
                         </span>
                         {!isMember && <Lock className="h-5 w-5 text-muted-foreground" />}
                       </CardTitle>
@@ -130,10 +131,10 @@ export default async function ReleasePage({
                             <div dangerouslySetInnerHTML={{ __html: section.content_teaser }} />
                             <div className="mt-6 rounded-lg border border-border bg-muted/50 p-6 text-center">
                               <p className="mb-4 text-sm text-muted-foreground">
-                                Hazte miembro para acceder al contenido completo
+                                Become a member to unlock the full content.
                               </p>
                               <Link href="/auth/signup">
-                                <Button>Actualizar a Miembro</Button>
+                                <Button>Upgrade to Member</Button>
                               </Link>
                             </div>
                           </>
@@ -145,7 +146,7 @@ export default async function ReleasePage({
               </div>
             ) : (
               <div className="py-12 text-center">
-                <p className="text-muted-foreground">No hay contenido disponible para esta publicación.</p>
+                <p className="text-muted-foreground">No content available for this release.</p>
               </div>
             )}
           </div>

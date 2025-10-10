@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { createClient } from "@/lib/supabase/server"
+import { resolveUserProfile, buildProfileFallback } from "@/lib/supabase/profiles"
 import Link from "next/link"
 import { ResearchLineActions } from "@/components/admin/research-line-actions"
 import { RevalidateButton } from "@/components/admin/revalidate-button"
@@ -20,9 +21,9 @@ export default async function AdminResearchLinesPage() {
     redirect("/auth/login")
   }
 
-  const { data: userData } = await supabase.from("users").select("role").eq("id", user.id).single()
+  const userProfile = (await resolveUserProfile(supabase, user)) ?? buildProfileFallback(user)
 
-  if (userData?.role !== "admin") {
+  if (userProfile.role !== "admin") {
     redirect("/dashboard")
   }
 
@@ -39,13 +40,13 @@ export default async function AdminResearchLinesPage() {
           <div className="container mx-auto px-4">
             <div className="flex items-center justify-between">
               <div>
-                <h1 className="mb-2 text-4xl font-bold">Líneas de Investigación</h1>
-                <p className="text-lg text-muted-foreground">Gestiona las líneas de investigación</p>
+                <h1 className="mb-2 text-4xl font-bold">Research Lines</h1>
+                <p className="text-lg text-muted-foreground">Manage research lines</p>
               </div>
               <div className="flex items-center gap-4">
                 <RevalidateButton type="all" />
                 <Link href="/admin/research-lines/new">
-                  <Button>Nueva Línea</Button>
+                  <Button>New Line</Button>
                 </Link>
               </div>
             </div>
@@ -56,8 +57,8 @@ export default async function AdminResearchLinesPage() {
           <div className="container mx-auto px-4">
             <Card>
               <CardHeader>
-                <CardTitle>Todas las Líneas</CardTitle>
-                <CardDescription>Lista completa de líneas de investigación</CardDescription>
+                <CardTitle>All Lines</CardTitle>
+                <CardDescription>Complete list of research lines</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
@@ -71,7 +72,7 @@ export default async function AdminResearchLinesPage() {
                           <div className="flex items-center gap-2">
                             <p className="font-medium">{line.title}</p>
                             <Badge variant={line.is_active ? "default" : "secondary"}>
-                              {line.is_active ? "Activa" : "Inactiva"}
+                              {line.is_active ? "Active" : "Inactive"}
                             </Badge>
                           </div>
                           <p className="text-sm text-muted-foreground">{line.description}</p>
@@ -84,7 +85,7 @@ export default async function AdminResearchLinesPage() {
                       </div>
                     ))
                   ) : (
-                    <p className="text-sm text-muted-foreground">No hay líneas de investigación</p>
+                    <p className="text-sm text-muted-foreground">No research lines available</p>
                   )}
                 </div>
               </CardContent>
