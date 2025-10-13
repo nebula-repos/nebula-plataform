@@ -39,7 +39,7 @@ export function RevalidateButton({ type, slug, researchLineSlug, releaseSlug }: 
 
       setMessage("Content refreshed successfully")
       setTimeout(() => setMessage(null), 3000)
-    } catch (error) {
+    } catch {
       setMessage("Error refreshing content")
       setTimeout(() => setMessage(null), 3000)
     } finally {

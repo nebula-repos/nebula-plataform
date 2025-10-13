@@ -1,4 +1,4 @@
-# Research Platform MVP
+# SotA MVP
 
 A production-ready research platform built with Next.js, Supabase, and TypeScript.
 

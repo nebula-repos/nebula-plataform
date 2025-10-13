@@ -2,6 +2,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { createClient } from "@/lib/supabase/server"
 import { resolveUserProfile } from "@/lib/supabase/profiles"
+import { ResearchLinesSidebar } from "@/components/research-lines-sidebar"
 
 export async function Header() {
   const supabase = await createClient()
@@ -10,13 +11,23 @@ export async function Header() {
   } = await supabase.auth.getUser()
 
   const userProfile = user ? await resolveUserProfile(supabase, user) : null
+  const { data: researchLines } = await supabase
+    .from("research_lines")
+    .select("id, title, slug")
+    .eq("is_active", true)
+    .order("title", { ascending: true })
+  const activeResearchLines = researchLines ?? []
+  const shouldShowSidebar = Boolean(user && userProfile?.role !== "admin" && activeResearchLines.length > 0)
 
   return (
     <header className="border-b border-border bg-background">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
-        <Link href="/" className="text-xl font-semibold">
-          Research Platform
-        </Link>
+        <div className="flex items-center gap-3">
+          {shouldShowSidebar && <ResearchLinesSidebar researchLines={activeResearchLines} />}
+          <Link href="/" className="text-xl font-semibold">
+            SotA
+          </Link>
+        </div>
         <nav className="flex items-center gap-6">
           <Link href="/research-lines" className="text-sm hover:text-primary">
             Research Lines

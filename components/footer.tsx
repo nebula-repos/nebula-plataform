@@ -6,7 +6,7 @@ export function Footer() {
       <div className="container mx-auto px-4">
         <div className="grid gap-8 md:grid-cols-3">
           <div>
-            <h3 className="mb-4 font-semibold">Research Platform</h3>
+            <h3 className="mb-4 font-semibold">SotA</h3>
             <p className="text-sm text-muted-foreground">
               High-quality academic and industry research platform.
             </p>
@@ -43,7 +43,7 @@ export function Footer() {
           </div>
         </div>
         <div className="mt-8 border-t border-border pt-8 text-center text-sm text-muted-foreground">
-          © {new Date().getFullYear()} Research Platform. All rights reserved.
+          © {new Date().getFullYear()} SotA. All rights reserved.
         </div>
       </div>
     </footer>

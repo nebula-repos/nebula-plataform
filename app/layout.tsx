@@ -10,9 +10,8 @@ import { Geist_Mono as V0_Font_Geist_Mono } from 'next/font/google'
 const _geistMono = V0_Font_Geist_Mono({ subsets: ['latin'], weight: ["100","200","300","400","500","600","700","800","900"] })
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
-  generator: 'v0.app',
+  title: 'SotA - State of the Art Research Platform',
+  description: 'Access high-quality academic and industry research with SotA.',
 }
 
 export default function RootLayout({

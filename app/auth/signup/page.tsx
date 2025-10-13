@@ -11,6 +11,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { trackEventClient } from "@/lib/analytics-client"
+import { Sparkles } from "lucide-react"
 
 export default function SignupPage() {
   const [email, setEmail] = useState("")
@@ -57,9 +58,30 @@ export default function SignupPage() {
   }
 
   return (
-    <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
-      <div className="w-full max-w-sm">
-        <Card>
+    <div className="relative flex min-h-svh w-full items-center justify-center overflow-hidden bg-background">
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-sky-500/12 to-transparent blur-3xl" />
+        <div className="absolute right-1/2 top-1/2 size-[520px] translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/10 blur-3xl" />
+      </div>
+      <div className="relative z-10 grid w-full max-w-5xl gap-10 px-6 py-12 md:grid-cols-[1.1fr_1fr] md:px-12">
+        <div className="hidden flex-col justify-between rounded-3xl border border-border/60 bg-background/80 p-8 shadow-lg shadow-primary/5 backdrop-blur md:flex">
+          <div>
+            <div className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-primary/80">
+              <Sparkles className="h-4 w-4" aria-hidden />
+              Join SOTA
+            </div>
+            <h2 className="mt-6 text-3xl font-semibold tracking-tight text-foreground">
+              Build your State of the Art workspace.
+            </h2>
+            <p className="mt-4 text-sm text-muted-foreground">
+              Create your profile to unlock curated research lines, activation playbooks, and the community signal feed.
+            </p>
+          </div>
+          <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground/70">
+            Instant access · Verify email to activate releases
+          </p>
+        </div>
+        <Card className="border border-border/60 bg-background/90 shadow-lg shadow-primary/5 backdrop-blur">
           <CardHeader>
             <CardTitle className="text-2xl">Create account</CardTitle>
             <CardDescription>Sign up to access the platform</CardDescription>

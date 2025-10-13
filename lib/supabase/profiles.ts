@@ -1,6 +1,7 @@
 import "server-only"
 
-import { createClient, type PostgrestError, type SupabaseClient, type User } from "@supabase/supabase-js"
+import { type PostgrestError, type SupabaseClient, type User } from "@supabase/supabase-js"
+import { getAdminClient } from "@/lib/supabase/admin"
 
 type UserProfileRole = "user" | "admin"
 type UserMembershipTier = "free" | "member"
@@ -21,36 +22,8 @@ type EnsureProfileArgs = {
   fullName?: string | null
 }
 
-type SupabaseAdminClient = ReturnType<typeof createClient>
-
-let adminClient: SupabaseAdminClient | null = null
-
-function getServiceRoleClient(): SupabaseAdminClient {
-  if (adminClient) {
-    return adminClient
-  }
-
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
-  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
-
-  if (!supabaseUrl || !serviceRoleKey) {
-    throw new Error(
-      "Missing Supabase configuration. Please ensure NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY are set.",
-    )
-  }
-
-  adminClient = createClient(supabaseUrl, serviceRoleKey, {
-    auth: {
-      autoRefreshToken: false,
-      persistSession: false,
-    },
-  })
-
-  return adminClient
-}
-
 export async function fetchUserProfile(id: string): Promise<UserProfile | null> {
-  const supabaseAdmin = getServiceRoleClient()
+  const supabaseAdmin = getAdminClient()
 
   const { data, error } = await supabaseAdmin.from("users").select("*").eq("id", id).maybeSingle()
 
@@ -66,7 +39,7 @@ export async function ensureUserProfile({ id, email, fullName }: EnsureProfileAr
     throw new Error("Cannot ensure user profile without an id.")
   }
 
-  const supabaseAdmin = getServiceRoleClient()
+  const supabaseAdmin = getAdminClient()
 
   const existingProfile = await fetchUserProfile(id)
 
@@ -142,7 +115,7 @@ export async function resolveUserProfile(
       email: user.email,
       fullName: extractFullName(user),
     })
-  } catch (error) {
+  } catch {
     const { data, error: fallbackError } = await supabaseClient.from("users").select("*").eq("id", user.id).maybeSingle()
 
     if (fallbackError) {

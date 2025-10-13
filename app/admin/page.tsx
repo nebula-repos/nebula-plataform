@@ -4,7 +4,7 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { createClient } from "@/lib/supabase/server"
 import { resolveUserProfile, buildProfileFallback } from "@/lib/supabase/profiles"
-import { Users, BookOpen, FileText, Activity } from "lucide-react"
+import { Users, BookOpen, FileText, Activity, Sparkles, ArrowRight } from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 
@@ -36,120 +36,170 @@ export default async function AdminPage() {
 
   const { count: totalEvents } = await supabase.from("events").select("*", { count: "exact", head: true })
 
+  const displayName = userProfile.full_name || userProfile.email || "Operator"
+
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
       <main className="flex-1">
-        <section className="border-b border-border bg-muted/30 py-12">
+        <section className="relative overflow-hidden border-b border-border bg-background py-20">
+          <div className="pointer-events-none absolute inset-0 -z-10">
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/18 via-sky-500/10 to-transparent blur-3xl" />
+            <div className="absolute right-1/3 top-1/2 size-[420px] -translate-y-1/2 rounded-full bg-primary/12 blur-3xl" />
+          </div>
           <div className="container mx-auto px-4">
-            <h1 className="mb-2 text-4xl font-bold">Admin Dashboard</h1>
-            <p className="text-lg text-muted-foreground">Manage users, content, and metrics</p>
+            <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+              <div>
+                <div className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-primary/80">
+                  <Sparkles className="h-4 w-4" aria-hidden />
+                  SOTA Command
+                </div>
+                <h1 className="mt-6 text-balance text-4xl font-semibold tracking-tight text-foreground md:text-5xl">
+                  {displayName}, you&apos;re steering the art.
+                </h1>
+                <p className="mt-4 max-w-2xl text-pretty text-lg text-muted-foreground">
+                  Oversee membership, releases, and telemetry from a single surface. Every action syncs instantly across
+                  the platform.
+                </p>
+              </div>
+              <Link href="/research-lines">
+                <Button variant="outline" className="gap-2 border-primary/40 bg-background/70 backdrop-blur">
+                  View public surface
+                  <ArrowRight className="h-4 w-4" aria-hidden />
+                </Button>
+              </Link>
+            </div>
+            <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              <Card className="border border-border/60 bg-background/80 shadow-lg shadow-primary/5 backdrop-blur">
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground/80">
+                    Total users
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="text-3xl font-semibold text-foreground">{totalUsers || 0}</CardContent>
+              </Card>
+              <Card className="border border-border/60 bg-background/80 shadow-lg shadow-primary/5 backdrop-blur">
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground/80">
+                    Research lines
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="text-3xl font-semibold text-foreground">{totalResearchLines || 0}</CardContent>
+              </Card>
+              <Card className="border border-border/60 bg-background/80 shadow-lg shadow-primary/5 backdrop-blur">
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground/80">
+                    Releases
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="text-3xl font-semibold text-foreground">{totalReleases || 0}</CardContent>
+              </Card>
+              <Card className="border border-border/60 bg-background/80 shadow-lg shadow-primary/5 backdrop-blur">
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground/80">
+                    Events tracked
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="text-3xl font-semibold text-foreground">{totalEvents || 0}</CardContent>
+              </Card>
+            </div>
           </div>
         </section>
 
-        <section className="py-12">
+        <section className="py-16">
           <div className="container mx-auto px-4">
-            {/* Statistics */}
-            <div className="mb-8 grid gap-6 md:grid-cols-4">
-              <Card>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Total Users</CardTitle>
-                  <Users className="h-4 w-4 text-muted-foreground" />
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">{totalUsers || 0}</div>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Research Lines</CardTitle>
-                  <BookOpen className="h-4 w-4 text-muted-foreground" />
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">{totalResearchLines || 0}</div>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Releases</CardTitle>
-                  <FileText className="h-4 w-4 text-muted-foreground" />
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">{totalReleases || 0}</div>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Total Events</CardTitle>
-                  <Activity className="h-4 w-4 text-muted-foreground" />
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">{totalEvents || 0}</div>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* Quick Actions */}
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              <Card>
+              <Card className="group relative overflow-hidden border border-border/60 bg-background/85 shadow-lg shadow-primary/5 backdrop-blur">
+                <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-primary via-sky-500 to-emerald-400 opacity-60 group-hover:opacity-100" />
                 <CardHeader>
-                  <CardTitle>User Management</CardTitle>
-                  <CardDescription>Review and manage platform users</CardDescription>
+                  <CardTitle className="flex items-center gap-2">
+                    <Users className="h-4 w-4 text-primary" aria-hidden />
+                    User management
+                  </CardTitle>
+                  <CardDescription>Review accounts, roles, and membership tiers.</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <Link href="/admin/users">
-                    <Button className="w-full">View Users</Button>
+                    <Button className="w-full gap-2">
+                      Open users
+                      <ArrowRight className="h-4 w-4" aria-hidden />
+                    </Button>
                   </Link>
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="group relative overflow-hidden border border-border/60 bg-background/85 shadow-lg shadow-primary/5 backdrop-blur">
+                <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-primary via-sky-500 to-emerald-400 opacity-60 group-hover:opacity-100" />
                 <CardHeader>
-                  <CardTitle>Research Lines</CardTitle>
-                  <CardDescription>Create and manage research lines</CardDescription>
+                  <CardTitle className="flex items-center gap-2">
+                    <BookOpen className="h-4 w-4 text-primary" aria-hidden />
+                    Research lines
+                  </CardTitle>
+                  <CardDescription>Create, edit, and publish new lines.</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <Link href="/admin/research-lines">
-                    <Button className="w-full">Manage Lines</Button>
+                    <Button className="w-full gap-2">
+                      Manage lines
+                      <ArrowRight className="h-4 w-4" aria-hidden />
+                    </Button>
                   </Link>
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="group relative overflow-hidden border border-border/60 bg-background/85 shadow-lg shadow-primary/5 backdrop-blur">
+                <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-primary via-sky-500 to-emerald-400 opacity-60 group-hover:opacity-100" />
                 <CardHeader>
-                  <CardTitle>Releases</CardTitle>
-                  <CardDescription>Create and edit releases</CardDescription>
+                  <CardTitle className="flex items-center gap-2">
+                    <FileText className="h-4 w-4 text-primary" aria-hidden />
+                    Releases
+                  </CardTitle>
+                  <CardDescription>Ship new art drops and maintain versions.</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <Link href="/admin/releases">
-                    <Button className="w-full">Manage Releases</Button>
+                    <Button className="w-full gap-2">
+                      Manage releases
+                      <ArrowRight className="h-4 w-4" aria-hidden />
+                    </Button>
                   </Link>
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="group relative overflow-hidden border border-border/60 bg-background/85 shadow-lg shadow-primary/5 backdrop-blur">
+                <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-primary via-sky-500 to-emerald-400 opacity-60 group-hover:opacity-100" />
                 <CardHeader>
-                  <CardTitle>Audit Log</CardTitle>
-                  <CardDescription>View administrative action history</CardDescription>
+                  <CardTitle className="flex items-center gap-2">
+                    <Activity className="h-4 w-4 text-primary" aria-hidden />
+                    Audit trail
+                  </CardTitle>
+                  <CardDescription>Inspect admin actions and revalidation events.</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <Link href="/admin/audit-logs">
-                    <Button className="w-full">View Log</Button>
+                    <Button className="w-full gap-2">
+                      View logs
+                      <ArrowRight className="h-4 w-4" aria-hidden />
+                    </Button>
                   </Link>
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="group relative overflow-hidden border border-border/60 bg-background/85 shadow-lg shadow-primary/5 backdrop-blur">
+                <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-primary via-sky-500 to-emerald-400 opacity-60 group-hover:opacity-100" />
                 <CardHeader>
-                  <CardTitle>Metrics and Events</CardTitle>
-                  <CardDescription>Analyze user activity</CardDescription>
+                  <CardTitle className="flex items-center gap-2">
+                    <Activity className="h-4 w-4 text-primary" aria-hidden />
+                    Metrics
+                  </CardTitle>
+                  <CardDescription>Dig into engagement signals and event volumes.</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <Link href="/admin/metrics">
-                    <Button className="w-full">View Metrics</Button>
+                    <Button className="w-full gap-2">
+                      View metrics
+                      <ArrowRight className="h-4 w-4" aria-hidden />
+                    </Button>
                   </Link>
                 </CardContent>
               </Card>

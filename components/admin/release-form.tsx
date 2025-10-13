@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
 import { createClient } from "@/lib/supabase/client"
 
-type SectionKey = "actualidad" | "implementacion" | "academico"
+type SectionKey = "actualidad" | "industria" | "academico"
 
 const SECTION_DEFINITIONS: Array<{ key: SectionKey; label: string; helper: string }> = [
   {
@@ -16,9 +16,9 @@ const SECTION_DEFINITIONS: Array<{ key: SectionKey; label: string; helper: strin
     helper: "Context, trends, and why this release matters right now.",
   },
   {
-    key: "implementacion",
-    label: "Implementation",
-    helper: "Practical guides, tools, and concrete steps.",
+    key: "industria",
+    label: "Industry Applications",
+    helper: "Real-world use cases, case studies, and industry insights.",
   },
   {
     key: "academico",
@@ -45,7 +45,7 @@ interface SectionState {
 
 const DEFAULT_SECTION_STATE: Record<SectionKey, SectionState> = {
   actualidad: { title: "", teaser: "", full: "" },
-  implementacion: { title: "", teaser: "", full: "" },
+  industria: { title: "", teaser: "", full: "" },
   academico: { title: "", teaser: "", full: "" },
 }
 
