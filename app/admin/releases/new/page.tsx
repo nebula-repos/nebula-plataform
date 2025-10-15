@@ -51,7 +51,7 @@ export default async function AdminReleasesNewPage() {
                   Publish the next art drop.
                 </h1>
                 <p className="mt-4 max-w-2xl text-pretty text-lg text-muted-foreground">
-                  Connect the release to a line, add implementation content, and choose when it goes live.
+                  Connect the drop to its line, schedule the date, and upload the three focus reports in one flow.
                 </p>
               </div>
               <Link href="/admin/releases">
@@ -68,8 +68,8 @@ export default async function AdminReleasesNewPage() {
           <div className="container mx-auto px-4">
             <Card className="border border-border/60 bg-background/85 shadow-lg shadow-primary/5 backdrop-blur">
               <CardHeader>
-                <CardTitle>Release details</CardTitle>
-                <CardDescription>Connect the release to a line, set visibility, and add optional section content.</CardDescription>
+                <CardTitle>Release upload</CardTitle>
+                <CardDescription>Select the line, define the slug, and upload the three bundled reports.</CardDescription>
               </CardHeader>
               <CardContent>
                 <ReleaseForm researchLines={researchLines ?? []} />

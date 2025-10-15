@@ -8,7 +8,6 @@ import { createClient } from "@/lib/supabase/server"
 import { resolveUserProfile, buildProfileFallback } from "@/lib/supabase/profiles"
 import Link from "next/link"
 import { ResearchLineActions } from "@/components/admin/research-line-actions"
-import { RevalidateButton } from "@/components/admin/revalidate-button"
 import { Sparkles, ArrowLeft, ArrowRight } from "lucide-react"
 
 export default async function AdminResearchLinesPage() {
@@ -66,7 +65,6 @@ export default async function AdminResearchLinesPage() {
                     Back to admin
                   </Button>
                 </Link>
-                <RevalidateButton type="all" />
                 <Link href="/admin/research-lines/new">
                   <Button className="gap-2">
                     New line
@@ -122,7 +120,6 @@ export default async function AdminResearchLinesPage() {
                           <p className="text-xs uppercase tracking-[0.25em] text-primary/70">Slug · {line.slug}</p>
                         </div>
                         <div className="flex items-center gap-2">
-                          <RevalidateButton type="research-line" slug={line.slug} />
                           <ResearchLineActions lineId={line.id} isActive={line.is_active} slug={line.slug} />
                         </div>
                       </div>

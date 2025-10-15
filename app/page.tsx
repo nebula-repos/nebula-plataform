@@ -5,6 +5,7 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { createClient } from "@/lib/supabase/server"
 import { ArrowRight, Cpu, Gauge, Radar, ShieldCheck, Sparkles, Workflow } from "lucide-react"
+import { MouseGlowCard } from "@/components/mouse-glow-card"
 
 export const revalidate = 3600 // Revalidate every hour
 
@@ -52,30 +53,30 @@ export default async function HomePage() {
               </Link>
             </div>
             <div className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              <div className="rounded-2xl border border-border/60 bg-background/80 p-6 shadow-lg shadow-primary/5 backdrop-blur">
+              <MouseGlowCard>
                 <Sparkles className="mb-4 h-10 w-10 text-primary" aria-hidden />
                 <p className="text-sm font-semibold uppercase tracking-wide text-primary/80">Curated Signals Each Week</p>
                 <p className="mt-3 text-3xl font-semibold text-foreground">400+</p>
                 <p className="mt-2 text-sm text-muted-foreground">
                   Primary research, benchmarks, and release-ready distillations.
                 </p>
-              </div>
-              <div className="rounded-2xl border border-border/60 bg-background/80 p-6 shadow-lg shadow-primary/5 backdrop-blur">
+              </MouseGlowCard>
+              <MouseGlowCard>
                 <Radar className="mb-4 h-10 w-10 text-primary" aria-hidden />
                 <p className="text-sm font-semibold uppercase tracking-wide text-primary/80">Latency to Market</p>
                 <p className="mt-3 text-3xl font-semibold text-foreground">&lt; 72 hrs</p>
                 <p className="mt-2 text-sm text-muted-foreground">
                   Fresh drops whenever the frontier shifts — no stale PDFs.
                 </p>
-              </div>
-              <div className="rounded-2xl border border-border/60 bg-background/80 p-6 shadow-lg shadow-primary/5 backdrop-blur sm:col-span-2 lg:col-span-1">
+              </MouseGlowCard>
+              <MouseGlowCard className="sm:col-span-2 lg:col-span-1">
                 <Gauge className="mb-4 h-10 w-10 text-primary" aria-hidden />
                 <p className="text-sm font-semibold uppercase tracking-wide text-primary/80">Practitioner-first</p>
                 <p className="mt-3 text-3xl font-semibold text-foreground">Actionable Playbooks</p>
                 <p className="mt-2 text-sm text-muted-foreground">
                   Every release includes implementation notes, metrics, and rollout plans.
                 </p>
-              </div>
+              </MouseGlowCard>
             </div>
           </div>
         </section>

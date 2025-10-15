@@ -9,7 +9,6 @@ import { resolveUserProfile, buildProfileFallback } from "@/lib/supabase/profile
 import Link from "next/link"
 import { format } from "date-fns"
 import { enUS } from "date-fns/locale"
-import { RevalidateButton } from "@/components/admin/revalidate-button"
 import { Sparkles, ArrowLeft, ArrowRight } from "lucide-react"
 
 export default async function AdminReleasesPage() {
@@ -57,7 +56,7 @@ export default async function AdminReleasesPage() {
                   Curate and ship SOTA releases.
                 </h1>
                 <p className="mt-4 max-w-2xl text-pretty text-lg text-muted-foreground">
-                  Publish new art drops, monitor their status, and force revalidation when changes land.
+                  Publish new art drops and monitor their status as they reach the world.
                 </p>
               </div>
               <div className="flex flex-wrap items-center gap-3">
@@ -128,11 +127,6 @@ export default async function AdminReleasesPage() {
                           </p>
                         </div>
                         <div className="flex items-center gap-2">
-                          <RevalidateButton
-                            type="release"
-                            researchLineSlug={release.research_lines?.slug}
-                            releaseSlug={release.slug}
-                          />
                           <Link
                             href={`/research-lines/${release.research_lines?.slug}/${release.slug}`}
                             target="_blank"

@@ -12,7 +12,7 @@ import { resolveUserProfile } from "@/lib/supabase/profiles"
 import { Button } from "@/components/ui/button"
 import { getAdminClient } from "@/lib/supabase/admin"
 import { subscribeToResearchLine, unsubscribeFromResearchLine } from "../actions"
-import { ArrowLeft, ArrowRight, BellRing, ShieldCheck, Sparkles } from "lucide-react"
+import { ArrowDownToLine, ArrowLeft, ArrowRight, BellRing, ShieldCheck, Sparkles } from "lucide-react"
 
 type ReleaseStaticParamsRow = {
   slug: string
@@ -59,11 +59,30 @@ const sectionTitleMap: Record<ReleaseSectionRow["section_type"], string> = {
   academico: "Academic Foundations",
 }
 
-const sectionDescriptionMap: Record<ReleaseSectionRow["section_type"], string> = {
-  actualidad: "Signal scans, market moves, and emerging dynamics shaping the art.",
-  industria: "Practical deployments, case studies, and operational guidance.",
-  academico: "Peer-reviewed insights and theoretical foundations behind the release.",
+type ReportType = "actualidad" | "industria" | "academico"
+
+const reportMeta: Record<ReportType, { label: string; description: string }> = {
+  actualidad: {
+    label: "Current Landscape Report",
+    description: "Download the macro brief covering signals, shifts, and why this release matters today.",
+  },
+  industria: {
+    label: "Industry Applications Report",
+    description: "Operational guidance and implementation blueprints to activate the release in the field.",
+  },
+  academico: {
+    label: "Academic Foundations Report",
+    description: "Source studies, references, and theoretical framing that underpin the release.",
+  },
 }
+
+const reportKeywords: Record<ReportType, string[]> = {
+  actualidad: ["actualidad", "current"],
+  industria: ["industria", "industry"],
+  academico: ["academico", "academic"],
+}
+
+const reportOrder: ReportType[] = ["actualidad", "industria", "academico"]
 
 export const revalidate = 3600
 
@@ -234,12 +253,6 @@ export default async function ReleasePage({
     .eq("release_id", release.id)
     .order("section_type")
   const releaseSections: ReleaseSectionRow[] = (sections ?? []) as ReleaseSectionRow[]
-  const sectionTypesInRelease = Array.from(new Set(releaseSections.map((section) => section.section_type))) as ReleaseSectionRow["section_type"][]
-  const activeSections = sectionTypesInRelease.map((type) => ({
-    type,
-    title: sectionTitleMap[type],
-    description: sectionDescriptionMap[type],
-  }))
 
   const { data: documents } = await supabase
     .from("release_documents")
@@ -255,6 +268,18 @@ export default async function ReleasePage({
       publicUrl: data.publicUrl ?? null,
     }
   })
+
+  const typedDocuments: Partial<Record<ReportType, ReleaseDocumentWithUrl>> = {}
+  const extraDocuments: ReleaseDocumentWithUrl[] = []
+
+  for (const document of documentsWithUrls) {
+    const resolvedType = resolveReportType(document)
+    if (resolvedType && !typedDocuments[resolvedType]) {
+      typedDocuments[resolvedType] = document
+    } else {
+      extraDocuments.push(document)
+    }
+  }
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -294,24 +319,9 @@ export default async function ReleasePage({
                   </Badge>
                 </div>
                 <p className="mt-6 max-w-2xl text-pretty text-lg text-muted-foreground">
-                  Dive into the art with curated signals, applied frameworks, and references packaged for rapid
-                  activation.
+                  Download the three focus reports below to access the brief, implementation notes, and source material
+                  packaged for rapid activation.
                 </p>
-                {activeSections.length > 0 && (
-                  <div className="mt-10 grid gap-4 sm:grid-cols-2">
-                    {activeSections.map((section) => (
-                      <div
-                        key={section.type}
-                        className="rounded-2xl border border-border/60 bg-background/80 p-5 shadow-md shadow-primary/5 backdrop-blur"
-                      >
-                        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-primary/80">
-                          {section.title}
-                        </p>
-                        <p className="mt-2 text-sm text-muted-foreground">{section.description}</p>
-                      </div>
-                    ))}
-                  </div>
-                )}
               </div>
               <div className="rounded-2xl border border-border/60 bg-background/85 p-6 shadow-lg shadow-primary/5 backdrop-blur">
                 <div className="flex items-center gap-3">
@@ -342,43 +352,101 @@ export default async function ReleasePage({
 
         <section className="py-20">
           <div className="container mx-auto max-w-5xl px-4">
-            {releaseSections.length > 0 ? (
-              <div className="space-y-10">
-                {releaseSections.map((section) => (
-                  <Card
-                    key={section.id}
-                    className="relative overflow-hidden border border-border/60 bg-background/90 shadow-lg shadow-primary/5 backdrop-blur"
-                  >
-                    <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-primary via-sky-500 to-emerald-400 opacity-80" />
-                    <CardHeader>
-                      <CardTitle className="text-xl font-semibold text-foreground">
-                        {sectionTitleMap[section.section_type]}
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="prose prose-sm max-w-none text-muted-foreground">
-                        <div dangerouslySetInnerHTML={{ __html: section.content_full }} />
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            ) : (
-              <div className="rounded-2xl border border-border/60 bg-muted/40 p-12 text-center backdrop-blur">
-                <p className="text-sm text-muted-foreground">No content available for this release yet. Stay tuned.</p>
-              </div>
-            )}
+            <div className="space-y-16">
+              <div>
+                <div className="max-w-3xl">
+                  <p className="text-sm font-semibold uppercase tracking-[0.3em] text-primary/80">Report vault</p>
+                  <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
+                    Download the focus reports
+                  </h2>
+                  <p className="mt-4 text-pretty text-muted-foreground">
+                    Each release ships with three curated artifacts. Save them for your team or route them into your
+                    intelligence stack.
+                  </p>
+                </div>
+                <div className="mt-10 grid gap-6 md:grid-cols-2">
+                  {reportOrder.map((type) => {
+                    const document = typedDocuments[type]
+                    const meta = reportMeta[type]
+                    const publicUrl = document?.publicUrl ?? null
+                    const sizeLabel = document ? formatFileSize(document.file_size) : null
+                    const fileName = document?.object_path ? document.object_path.split("/").pop() : null
 
-            {documentsWithUrls.length > 0 && (
-              <section className="mt-16">
+                    return (
+                      <div
+                        key={type}
+                        className="flex h-full flex-col justify-between rounded-2xl border border-border/60 bg-background/85 p-5 shadow-md shadow-primary/5 backdrop-blur"
+                      >
+                        <div>
+                          <p className="text-xs font-semibold uppercase tracking-[0.35em] text-primary/80">
+                            {meta.label}
+                          </p>
+                          <p className="mt-2 text-sm text-muted-foreground">{meta.description}</p>
+                        </div>
+                        <div className="mt-6 flex items-center justify-between gap-3">
+                          {publicUrl ? (
+                            <Button asChild size="sm" className="gap-2">
+                              <a href={publicUrl} target="_blank" rel="noopener noreferrer">
+                                <ArrowDownToLine className="h-4 w-4" aria-hidden />
+                                Download
+                              </a>
+                            </Button>
+                          ) : (
+                            <Badge variant="secondary" className="border border-dashed border-primary/50 text-muted-foreground">
+                              Upload pending
+                            </Badge>
+                          )}
+                          {fileName && <span className="truncate text-xs text-muted-foreground">{fileName}</span>}
+                        </div>
+                        {document && (
+                          <p className="mt-2 text-xs text-muted-foreground">
+                            {(sizeLabel ?? "—")} · {document.content_type ?? "application/octet-stream"}
+                          </p>
+                        )}
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+
+              {releaseSections.length > 0 ? (
+                <div className="space-y-10">
+                  {releaseSections.map((section) => (
+                    <Card
+                      key={section.id}
+                      className="relative overflow-hidden border border-border/60 bg-background/90 shadow-lg shadow-primary/5 backdrop-blur"
+                    >
+                      <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-primary via-sky-500 to-emerald-400 opacity-80" />
+                      <CardHeader>
+                        <CardTitle className="text-xl font-semibold text-foreground">
+                          {sectionTitleMap[section.section_type]}
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="prose prose-sm max-w-none text-muted-foreground">
+                          <div dangerouslySetInnerHTML={{ __html: section.content_full }} />
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              ) : (
+                <div className="rounded-2xl border border-border/60 bg-muted/40 p-12 text-center backdrop-blur">
+                  <p className="text-sm text-muted-foreground">
+                    Narrative notes are not available for this drop yet. The downloadable reports contain the full brief.
+                  </p>
+                </div>
+              )}
+
+              {extraDocuments.length > 0 && (
                 <Card className="relative overflow-hidden border border-border/60 bg-background/90 shadow-lg shadow-primary/5 backdrop-blur">
                   <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-primary via-sky-500 to-emerald-400 opacity-80" />
                   <CardHeader>
-                    <CardTitle className="text-xl font-semibold text-foreground">Downloadable Assets</CardTitle>
+                    <CardTitle className="text-xl font-semibold text-foreground">Additional downloads</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <ul className="space-y-4">
-                      {documentsWithUrls.map((document) => {
+                      {extraDocuments.map((document) => {
                         const sizeLabel = formatFileSize(document.file_size)
                         return (
                           <li
@@ -409,8 +477,8 @@ export default async function ReleasePage({
                     </ul>
                   </CardContent>
                 </Card>
-              </section>
-            )}
+              )}
+            </div>
           </div>
         </section>
       </main>
@@ -435,4 +503,17 @@ function formatFileSize(bytes: number | null): string | null {
 
   const precision = unitIndex === 0 ? 0 : 1
   return `${size.toFixed(precision)} ${units[unitIndex]}`
+}
+
+function resolveReportType(document: Pick<ReleaseDocumentWithUrl, "display_name" | "object_path">): ReportType | null {
+  const haystack = `${document.object_path} ${document.display_name}`.toLowerCase()
+
+  for (const type of reportOrder) {
+    const matches = reportKeywords[type].some((keyword) => haystack.includes(keyword))
+    if (matches) {
+      return type
+    }
+  }
+
+  return null
 }

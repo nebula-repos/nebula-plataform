@@ -7,23 +7,29 @@ import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
 import { createClient } from "@/lib/supabase/client"
 
-type SectionKey = "actualidad" | "industria" | "academico"
+type ReportType = "actualidad" | "industria" | "academico"
 
-const SECTION_DEFINITIONS: Array<{ key: SectionKey; label: string; helper: string }> = [
+const STORAGE_BUCKET = "research-release-assets"
+
+const REPORT_DEFINITIONS: Array<{
+  key: ReportType
+  label: string
+  helper: string
+}> = [
   {
     key: "actualidad",
-    label: "Current Landscape",
-    helper: "Context, trends, and why this release matters right now.",
+    label: "Current Landscape Report",
+    helper: "Signals, market moves, and why this drop matters right now.",
   },
   {
     key: "industria",
-    label: "Industry Applications",
-    helper: "Real-world use cases, case studies, and industry insights.",
+    label: "Industry Applications Report",
+    helper: "Deployment tactics, implementation notes, and field-tested patterns.",
   },
   {
     key: "academico",
-    label: "Academic Foundations",
-    helper: "Key theory, studies, and references.",
+    label: "Academic Foundations Report",
+    helper: "Key studies, references, and theoretical grounding for the release.",
   },
 ]
 
@@ -37,16 +43,12 @@ interface ReleaseFormProps {
   researchLines: ResearchLineOption[]
 }
 
-interface SectionState {
-  title: string
-  teaser: string
-  full: string
-}
+type ReportFileState = Record<ReportType, File | null>
 
-const DEFAULT_SECTION_STATE: Record<SectionKey, SectionState> = {
-  actualidad: { title: "", teaser: "", full: "" },
-  industria: { title: "", teaser: "", full: "" },
-  academico: { title: "", teaser: "", full: "" },
+const DEFAULT_REPORT_STATE: ReportFileState = {
+  actualidad: null,
+  industria: null,
+  academico: null,
 }
 
 export function ReleaseForm({ researchLines }: ReleaseFormProps) {
@@ -55,8 +57,8 @@ export function ReleaseForm({ researchLines }: ReleaseFormProps) {
   const [title, setTitle] = useState("")
   const [slug, setSlug] = useState("")
   const [publishedAt, setPublishedAt] = useState("")
-  const [isPublished, setIsPublished] = useState(false)
-  const [sections, setSections] = useState(DEFAULT_SECTION_STATE)
+  const [isPublished, setIsPublished] = useState(true)
+  const [reports, setReports] = useState<ReportFileState>(DEFAULT_REPORT_STATE)
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
@@ -76,13 +78,11 @@ export function ReleaseForm({ researchLines }: ReleaseFormProps) {
     }
   }, [researchLines, researchLineId])
 
-  const handleSectionChange = (key: SectionKey, field: keyof SectionState, value: string) => {
-    setSections((prev) => ({
+  const handleReportChange = (type: ReportType, fileList: FileList | null) => {
+    const file = fileList?.[0] ?? null
+    setReports((prev) => ({
       ...prev,
-      [key]: {
-        ...prev[key],
-        [field]: value,
-      },
+      [type]: file,
     }))
   }
 
@@ -92,47 +92,43 @@ export function ReleaseForm({ researchLines }: ReleaseFormProps) {
     setSuccess(null)
 
     if (!researchLineId) {
-      setError("Select a research line")
+      setError("Select a research line.")
+      return
+    }
+
+    const researchLine = researchLines.find((line) => line.id === researchLineId)
+    if (!researchLine) {
+      setError("The selected research line could not be found.")
       return
     }
 
     if (!title.trim()) {
-      setError("Title is required")
+      setError("Title is required.")
       return
     }
 
     if (!slug.trim()) {
-      setError("Slug is required")
+      setError("Slug is required.")
       return
     }
 
-    const sectionsToInsert: Array<{
-      section_type: SectionKey
-      title: string
-      content_teaser: string
-      content_full: string
-    }> = []
-    for (const definition of SECTION_DEFINITIONS) {
-      const current = sections[definition.key]
-      const hasContent = current.title.trim() || current.teaser.trim() || current.full.trim()
-      const isComplete = current.title.trim() && current.teaser.trim() && current.full.trim()
+    if (!publishedAt) {
+      setError("Choose the release date to build the storage path.")
+      return
+    }
 
-      if (hasContent && !isComplete) {
-        setError(`Complete every field in the ${definition.label} section or leave it empty.`)
+    for (const definition of REPORT_DEFINITIONS) {
+      if (!reports[definition.key]) {
+        setError(`Upload the ${definition.label.toLowerCase()}.`)
         return
-      }
-
-      if (isComplete) {
-        sectionsToInsert.push({
-          section_type: definition.key,
-          title: current.title.trim(),
-          content_teaser: current.teaser.trim(),
-          content_full: current.full.trim(),
-        })
       }
     }
 
     setIsLoading(true)
+
+    const dateFolder = normaliseDateFolder(publishedAt)
+    const uploadedObjectPaths: string[] = []
+    let createdReleaseId: string | null = null
 
     try {
       const {
@@ -149,25 +145,52 @@ export function ReleaseForm({ researchLines }: ReleaseFormProps) {
         title: title.trim(),
         slug: slug.trim(),
         is_published: isPublished,
-        published_at: publishedAt ? new Date(publishedAt).toISOString() : null,
+        published_at: new Date(publishedAt).toISOString(),
       }
 
       const { data: release, error: createError } = await supabase
         .from("releases")
         .insert(payload)
-        .select()
+        .select("id, slug")
         .single()
 
       if (createError) throw createError
+      createdReleaseId = release.id
 
-      if (sectionsToInsert.length > 0) {
-        const sectionsPayload = sectionsToInsert.map((section) => ({
-          ...section,
+      for (const definition of REPORT_DEFINITIONS) {
+        const file = reports[definition.key]
+        if (!file) continue
+
+        const extension = resolveFileExtension(file)
+        const fileName = `${release.slug}-${definition.key}.${extension}`
+        const objectPath = `${researchLine.slug}/${dateFolder}/${fileName}`
+
+        const { error: uploadError } = await supabase.storage
+          .from(STORAGE_BUCKET)
+          .upload(objectPath, file, {
+            upsert: true,
+            cacheControl: "3600",
+            contentType: file.type || "application/octet-stream",
+          })
+
+        if (uploadError) {
+          throw new Error(`Failed to upload ${definition.label.toLowerCase()}: ${uploadError.message}`)
+        }
+
+        uploadedObjectPaths.push(objectPath)
+
+        const { error: documentError } = await supabase.from("release_documents").insert({
           release_id: release.id,
-        }))
+          bucket_id: STORAGE_BUCKET,
+          object_path: objectPath,
+          display_name: definition.label,
+          file_size: file.size,
+          content_type: file.type || "application/octet-stream",
+        })
 
-        const { error: sectionError } = await supabase.from("release_sections").insert(sectionsPayload)
-        if (sectionError) throw sectionError
+        if (documentError) {
+          throw new Error(`Failed to register ${definition.label.toLowerCase()}: ${documentError.message}`)
+        }
       }
 
       await supabase.from("audit_logs").insert({
@@ -177,18 +200,27 @@ export function ReleaseForm({ researchLines }: ReleaseFormProps) {
         entity_id: release.id,
         details: {
           ...payload,
-          sections: sectionsToInsert.map((section) => section.section_type),
+          storage_bucket: STORAGE_BUCKET,
+          reports: REPORT_DEFINITIONS.map((definition) => definition.key),
         },
       })
 
-      setSuccess("Release created successfully")
+      setSuccess("Release created and reports uploaded.")
       setTimeout(() => {
         router.push("/admin/releases")
         router.refresh()
       }, 1200)
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : "An unexpected error occurred"
+      const message = err instanceof Error ? err.message : "An unexpected error occurred."
       setError(message)
+
+      if (uploadedObjectPaths.length > 0) {
+        await supabase.storage.from(STORAGE_BUCKET).remove(uploadedObjectPaths)
+      }
+
+      if (createdReleaseId) {
+        await supabase.from("releases").delete().eq("id", createdReleaseId)
+      }
     } finally {
       setIsLoading(false)
     }
@@ -203,7 +235,9 @@ export function ReleaseForm({ researchLines }: ReleaseFormProps) {
         <select
           id="researchLine"
           value={researchLineId}
-          onChange={(event) => setResearchLineId(event.target.value)}
+          onChange={(event) => {
+            setResearchLineId(event.target.value)
+          }}
           className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
           disabled={isDisabled}
         >
@@ -218,7 +252,7 @@ export function ReleaseForm({ researchLines }: ReleaseFormProps) {
           )}
         </select>
         <p className="text-sm text-muted-foreground">
-          You need at least one active line to create a release.
+          Choose where these reports will land. One release per line per date folder.
         </p>
       </div>
 
@@ -245,12 +279,14 @@ export function ReleaseForm({ researchLines }: ReleaseFormProps) {
           placeholder="e.g. ai-trends-healthcare-2025"
           disabled={isDisabled}
         />
-        <p className="text-sm text-muted-foreground">Used for the URL within the selected line.</p>
+        <p className="text-sm text-muted-foreground">
+          This slug determines the public URL: `/research-lines/&lt;line&gt;/{slug || "your-slug"}`.
+        </p>
       </div>
 
       <div className="grid gap-6 md:grid-cols-2">
         <div className="space-y-2">
-          <Label htmlFor="publishedAt">Publish date</Label>
+          <Label htmlFor="publishedAt">Release date</Label>
           <Input
             id="publishedAt"
             type="datetime-local"
@@ -258,6 +294,9 @@ export function ReleaseForm({ researchLines }: ReleaseFormProps) {
             onChange={(event) => setPublishedAt(event.target.value)}
             disabled={isDisabled}
           />
+          <p className="text-sm text-muted-foreground">
+            The date is used for scheduling and for the storage folder name.
+          </p>
         </div>
         <div className="flex items-center gap-2 pt-6 md:pt-10">
           <input
@@ -269,56 +308,45 @@ export function ReleaseForm({ researchLines }: ReleaseFormProps) {
             disabled={isDisabled}
           />
           <Label htmlFor="isPublished" className="text-sm font-normal">
-            Mark as published and visible to users
+            Mark as published and visible to members immediately
           </Label>
         </div>
       </div>
 
       <div className="space-y-8">
-        <h3 className="text-lg font-semibold">Content sections</h3>
-        <p className="text-sm text-muted-foreground">Complete sections now or save as draft and edit later.</p>
+        <h3 className="text-lg font-semibold">Upload the reports</h3>
+        <p className="text-sm text-muted-foreground">
+          Each focus area expects a single archive (PDF, docx, or similar). Files are stored under{" "}
+          <code className="rounded bg-muted px-1 py-0.5 text-xs">
+            {STORAGE_BUCKET}/
+            {researchLines.find((line) => line.id === researchLineId)?.slug ?? "line"}/
+            {publishedAt ? normaliseDateFolder(publishedAt) : "YYYY-MM-DD"}
+          </code>
+          .
+        </p>
 
-        {SECTION_DEFINITIONS.map((definition) => (
-          <div key={definition.key} className="space-y-4 rounded-lg border border-border bg-background p-4 shadow-sm">
-            <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
-              <h4 className="text-base font-semibold">{definition.label}</h4>
+        {REPORT_DEFINITIONS.map((definition) => (
+          <div
+            key={definition.key}
+            className="space-y-3 rounded-xl border border-border/70 bg-background/80 p-4 shadow-sm shadow-primary/5 backdrop-blur"
+          >
+            <div className="flex flex-col gap-1">
+              <Label htmlFor={`report-${definition.key}`}>{definition.label}</Label>
               <span className="text-sm text-muted-foreground">{definition.helper}</span>
             </div>
-
-            <div className="space-y-2">
-              <Label htmlFor={`${definition.key}-title`}>Section title</Label>
-              <Input
-                id={`${definition.key}-title`}
-                value={sections[definition.key].title}
-                onChange={(event) => handleSectionChange(definition.key, "title", event.target.value)}
-                placeholder="Descriptive heading"
-                disabled={isDisabled}
-              />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor={`${definition.key}-teaser`}>Visible summary (free users)</Label>
-              <textarea
-                id={`${definition.key}-teaser`}
-                value={sections[definition.key].teaser}
-                onChange={(event) => handleSectionChange(definition.key, "teaser", event.target.value)}
-                placeholder="Short overview with the main findings."
-                className="min-h-[120px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                disabled={isDisabled}
-              />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor={`${definition.key}-full`}>Full content (members)</Label>
-              <textarea
-                id={`${definition.key}-full`}
-                value={sections[definition.key].full}
-                onChange={(event) => handleSectionChange(definition.key, "full", event.target.value)}
-                placeholder="Detailed content, references, and next steps."
-                className="min-h-[160px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                disabled={isDisabled}
-              />
-            </div>
+            <input
+              id={`report-${definition.key}`}
+              type="file"
+              accept=".pdf,.doc,.docx,.ppt,.pptx,.txt"
+              onChange={(event) => handleReportChange(definition.key, event.target.files)}
+              className="w-full cursor-pointer rounded-md border border-dashed border-input bg-background px-3 py-2 text-sm shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+              disabled={isDisabled}
+            />
+            {reports[definition.key] && (
+              <p className="text-xs text-muted-foreground">
+                Attached: {reports[definition.key]?.name} · {formatFileSize(reports[definition.key]?.size ?? 0)}
+              </p>
+            )}
           </div>
         ))}
       </div>
@@ -346,4 +374,35 @@ function slugify(value: string) {
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "")
     .slice(0, 60)
+}
+
+function normaliseDateFolder(value: string): string {
+  const parsed = new Date(value)
+  if (Number.isNaN(parsed.getTime())) {
+    return new Date().toISOString().slice(0, 10)
+  }
+  return parsed.toISOString().slice(0, 10)
+}
+
+function resolveFileExtension(file: File): string {
+  const nameParts = file.name.split(".")
+  if (nameParts.length > 1) {
+    const candidate = nameParts.pop()?.toLowerCase()
+    if (candidate) return candidate
+  }
+  const typeParts = file.type.split("/")
+  const fallback = typeParts[typeParts.length - 1]
+  return fallback ? fallback.toLowerCase() : "bin"
+}
+
+function formatFileSize(bytes: number) {
+  if (!bytes || bytes <= 0) return "0 B"
+  const units = ["B", "KB", "MB", "GB"]
+  let size = bytes
+  let index = 0
+  while (size >= 1024 && index < units.length - 1) {
+    size /= 1024
+    index += 1
+  }
+  return `${size.toFixed(index === 0 ? 0 : 1)} ${units[index]}`
 }

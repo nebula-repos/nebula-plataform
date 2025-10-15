@@ -55,7 +55,8 @@ A production-ready research platform built with Next.js, Supabase, and TypeScrip
 - **users**: User profiles with role and membership tier
 - **research_lines**: Research lines/topics
 - **releases**: Publications within research lines
-- **release_sections**: Three sections per release (Actualidad, Implementación, Académico)
+- **release_sections**: Optional long-form narratives for each release focus area
+- **release_documents**: Metadata for storage-backed release reports (Current Landscape, Industry Applications, Academic Foundations)
 - **audit_logs**: Administrative action history
 - **events**: User activity tracking
 
@@ -76,7 +77,11 @@ Public pages use ISR with 1-hour revalidation:
 - Individual research line: `/research-lines/[slug]`
 - Release pages: `/research-lines/[slug]/[releaseSlug]`
 
-Admins can manually revalidate cache via the admin panel.
+### Release Assets
+
+Each release is distributed as three downloadable reports (Current Landscape, Industry Applications, Academic Foundations).
+Uploads land in the Supabase storage bucket `research-release-assets` using the convention
+`<research-line-slug>/<release-date>/release-slug-<focus>.pdf`, and metadata is tracked in the `release_documents` table.
 
 ### Event Tracking
 
