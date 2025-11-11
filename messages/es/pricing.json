@@ -32,7 +32,7 @@
       "tag": "Paquete",
       "name": "Pack 3 RL",
       "price": "USD 15/mes",
-      "originalPrice": "USD 30/mes",
+      "originalPrice": "USD 18/mes",
       "highlightLabel": "el más popular",
       "description": "Sigue tres líneas de investigación a la vez para ampliar la cobertura sin perder profundidad.",
       "features": [
@@ -47,7 +47,7 @@
       "tag": "Paquete",
       "name": "Pack 5 RL",
       "price": "USD 20/mes",
-      "originalPrice": "USD 50/mes",
+      "originalPrice": "USD 30/mes",
       "highlightLabel": null,
       "description": "Cobertura máxima para organizaciones que necesitan monitorear toda la frontera.",
       "features": [

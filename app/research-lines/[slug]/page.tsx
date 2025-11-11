@@ -13,7 +13,7 @@ import { ReleasesCarousel } from "@/components/releases-carousel"
 import { Button } from "@/components/ui/button"
 import { resolveUserProfile } from "@/lib/supabase/profiles"
 import { subscribeToResearchLine, unsubscribeFromResearchLine } from "./actions"
-import { ArrowRight, BellRing, ShieldCheck, Sparkles } from "lucide-react"
+import { ArrowRight, ShieldCheck, Sparkles } from "lucide-react"
 import { getLocale } from "@/lib/i18n/server"
 import { getDictionary } from "@/lib/i18n/get-dictionary"
 import { cn } from "@/lib/utils"
@@ -101,46 +101,42 @@ export default async function ResearchLinePage({ params }: { params: Promise<{ s
     <div className="flex min-h-screen flex-col">
       <Header />
       <main className="flex-1">
-        <section className="relative overflow-hidden border-b border-border bg-background py-20">
+        <section className="relative overflow-hidden border-b border-border/60 bg-gradient-to-b from-background via-background/80 to-primary/5 py-24">
           <div className="pointer-events-none absolute inset-0 -z-10">
-            <div className="absolute inset-0 bg-gradient-to-tr from-primary/18 via-sky-500/10 to-transparent blur-3xl" />
+            <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-primary/15 via-sky-500/10 to-transparent blur-3xl" />
             <div className="absolute left-1/3 top-1/2 size-[420px] -translate-y-1/2 rounded-full bg-primary/12 blur-3xl" />
+            <div className="absolute -right-20 top-1/4 size-[360px] rounded-full bg-emerald-400/10 blur-3xl" />
           </div>
           <div className="container mx-auto px-4">
-            <p className="text-sm font-semibold uppercase tracking-[0.35em] text-primary/90">{detailCopy.hero.badge}</p>
-            <h1 className="mt-4 text-balance text-4xl font-semibold tracking-tight text-foreground md:text-5xl">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.4em] text-primary/90 shadow-lg shadow-primary/20 backdrop-blur">
+              <Sparkles className="h-3.5 w-3.5" aria-hidden />
+              <span>{detailCopy.hero.badge}</span>
+            </div>
+            <h1 className="mt-8 text-balance text-4xl font-semibold tracking-tight text-foreground md:text-5xl">
               {researchLine.title}
             </h1>
-            <p className="mt-6 max-w-3xl text-pretty text-lg text-muted-foreground">{researchLine.description}</p>
-            <div className="mt-12 grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-start">
-              <div className="grid gap-4 sm:grid-cols-2">
-                <div className="rounded-2xl border border-border/60 bg-background/80 p-5 shadow-md shadow-primary/5 backdrop-blur">
-                  <Sparkles className="mb-3 h-8 w-8 text-primary" aria-hidden />
-                  <p className="text-xs font-semibold uppercase tracking-[0.3em] text-primary/80">
-                    {detailCopy.hero.cards.signal.title}
-                  </p>
-                  <p className="mt-2 text-sm text-muted-foreground">{signalDescription}</p>
-                </div>
-                <div className="rounded-2xl border border-border/60 bg-background/80 p-5 shadow-md shadow-primary/5 backdrop-blur">
-                  <ShieldCheck className="mb-3 h-8 w-8 text-primary" aria-hidden />
-                  <p className="text-xs font-semibold uppercase tracking-[0.3em] text-primary/80">
-                    {detailCopy.hero.cards.refresh.title}
-                  </p>
-                  <p className="mt-2 text-sm text-muted-foreground">{lastUpdatedLabel}</p>
-                  <p className="mt-1 text-xs text-muted-foreground/70">{launchCopy}</p>
-                </div>
-                <div className="rounded-2xl border border-border/60 bg-background/80 p-5 shadow-md shadow-primary/5 backdrop-blur sm:col-span-2">
-                  <BellRing className="mb-3 h-8 w-8 text-primary" aria-hidden />
-                  <p className="text-xs font-semibold uppercase tracking-[0.3em] text-primary/80">
-                    {detailCopy.hero.cards.cadence.title}
-                  </p>
-                  <p className="mt-2 text-sm text-muted-foreground">{detailCopy.hero.cards.cadence.description}</p>
-                </div>
+            <p className="mt-6 text-pretty text-lg text-muted-foreground md:text-xl">{researchLine.description}</p>
+
+            <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-5 shadow-inner shadow-white/5 backdrop-blur">
+                <Sparkles className="mb-3 h-8 w-8 text-primary" aria-hidden />
+                <p className="text-[0.6rem] font-semibold uppercase tracking-[0.35em] text-primary/80">
+                  {detailCopy.hero.cards.signal.title}
+                </p>
+                <p className="mt-2 text-sm text-muted-foreground">{signalDescription}</p>
               </div>
-              <div className="rounded-2xl border border-border/60 bg-background/85 p-6 shadow-lg shadow-primary/5 backdrop-blur">
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-5 shadow-inner shadow-white/5 backdrop-blur">
+                <ShieldCheck className="mb-3 h-8 w-8 text-primary" aria-hidden />
+                <p className="text-[0.6rem] font-semibold uppercase tracking-[0.35em] text-primary/80">
+                  {detailCopy.hero.cards.refresh.title}
+                </p>
+                <p className="mt-2 text-sm text-muted-foreground">{lastUpdatedLabel}</p>
+                <p className="mt-1 text-xs text-muted-foreground/70">{launchCopy}</p>
+              </div>
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-6 shadow-inner shadow-white/5 backdrop-blur">
                 <div className="flex items-center gap-3">
                   <Badge variant={canViewReleases ? "default" : "secondary"}>{accessStatusLabel}</Badge>
-                  <span className="text-xs uppercase tracking-[0.25em] text-muted-foreground/80">
+                  <span className="text-[0.6rem] uppercase tracking-[0.35em] text-muted-foreground/80">
                     {detailCopy.hero.access.streamLabel}
                   </span>
                 </div>
@@ -154,7 +150,7 @@ export default async function ResearchLinePage({ params }: { params: Promise<{ s
                         <form action={unsubscribeFromResearchLine}>
                           <input type="hidden" name="researchLineId" value={researchLine.id} />
                           <input type="hidden" name="slug" value={slug} />
-                          <Button variant="outline" className="w-full border-primary/40 gap-2">
+                          <Button className="w-full gap-2 rounded-full border border-white/30 bg-white/5 text-foreground shadow-inner shadow-white/5 transition-colors hover:border-primary/50 hover:bg-white/10 hover:text-primary">
                             {detailCopy.hero.access.actions.unsubscribe}
                             <ArrowRight className="h-4 w-4" aria-hidden />
                           </Button>
@@ -164,7 +160,7 @@ export default async function ResearchLinePage({ params }: { params: Promise<{ s
                       <form action={subscribeToResearchLine}>
                         <input type="hidden" name="researchLineId" value={researchLine.id} />
                         <input type="hidden" name="slug" value={slug} />
-                        <Button className="w-full gap-2">
+                        <Button className="w-full gap-2 rounded-full bg-gradient-to-r from-primary via-sky-500 to-emerald-500 text-primary-foreground shadow-lg shadow-primary/20 transition-transform transition-colors hover:scale-[1.01] hover:text-primary-foreground hover:brightness-110">
                           {detailCopy.hero.access.actions.subscribe}
                           <ArrowRight className="h-4 w-4" aria-hidden />
                         </Button>
@@ -172,7 +168,7 @@ export default async function ResearchLinePage({ params }: { params: Promise<{ s
                     )
                   ) : (
                     <Link href={`/auth/login?next=/research-lines/${slug}`}>
-                      <Button className="w-full gap-2">
+                      <Button className="w-full gap-2 rounded-full bg-gradient-to-r from-primary via-sky-500 to-emerald-500 text-primary-foreground shadow-lg shadow-primary/20 transition-transform transition-colors hover:scale-[1.01] hover:text-primary-foreground hover:brightness-110">
                         {detailCopy.hero.access.actions.login}
                         <ArrowRight className="h-4 w-4" aria-hidden />
                       </Button>
@@ -189,7 +185,11 @@ export default async function ResearchLinePage({ params }: { params: Promise<{ s
           </div>
         </section>
 
-        <section id="releases" className="border-t border-border bg-muted/40 py-20">
+        <section id="releases" className="relative overflow-hidden border-t border-border/60 bg-gradient-to-b from-background via-muted/20 to-background py-24">
+          <div className="pointer-events-none absolute inset-0 -z-10">
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-emerald-300/10 blur-[260px]" />
+            <div className="absolute left-1/3 top-1/3 size-[420px] -translate-x-1/2 rounded-full bg-primary/5 blur-3xl" />
+          </div>
           <div className="container mx-auto px-4">
             <div className="mx-auto max-w-2xl text-center">
               <p className="text-sm font-semibold uppercase tracking-[0.3em] text-primary/90">{detailCopy.releases.eyebrow}</p>
@@ -198,7 +198,7 @@ export default async function ResearchLinePage({ params }: { params: Promise<{ s
             </div>
             {canViewReleases ? (
               releases.length > 0 ? (
-                <div className="mt-12">
+                <div className="mt-12 overflow-visible pb-12">
                   <ReleasesCarousel copy={common.carousel} wrapItems={false}>
                     {releases.map((releaseItem) => {
                       const isPublished = Boolean(releaseItem.published_at)
@@ -220,7 +220,7 @@ export default async function ResearchLinePage({ params }: { params: Promise<{ s
                         <div
                           key={releaseItem.id}
                           className={cn(
-                            "group relative flex min-w-[260px] flex-shrink-0 flex-col items-center pt-16 text-center sm:min-w-[320px]",
+                            "group relative flex min-w-[260px] flex-shrink-0 flex-col items-center pt-16 pb-12 text-center sm:min-w-[320px]",
                             hasMultipleReleases &&
                               "before:pointer-events-none before:absolute before:-left-6 before:top-8 before:h-px before:w-[calc(100%+3rem)] before:bg-gradient-to-r before:from-primary/40 before:via-border before:to-primary/40 before:opacity-80 before:content-[''] before:-z-10 first:before:left-0 first:before:w-[calc(100%+1.5rem)] last:before:-left-6 last:before:w-[calc(100%+1.5rem)] only:before:hidden",
                           )}
@@ -247,10 +247,10 @@ export default async function ResearchLinePage({ params }: { params: Promise<{ s
                             <p className="text-xs text-muted-foreground">{publishedLabel}</p>
                           </div>
                           <span
-                            className="mt-5 block h-12 w-px bg-gradient-to-b from-primary/70 via-primary/20 to-transparent"
+                            className="mt-5 block h-16 w-px bg-gradient-to-b from-primary/70 via-primary/20 to-transparent"
                             aria-hidden
                           />
-                          <Card className="mt-6 w-full max-w-sm border border-border/60 bg-background/90 text-left shadow-xl shadow-primary/10 backdrop-blur">
+                          <Card className="mt-6 w-full max-w-sm border border-white/10 bg-gradient-to-b from-background/95 via-background/70 to-background/40 text-left shadow-[0_25px_60px_-40px_rgba(15,15,15,0.7)] backdrop-blur">
                             <CardHeader className="space-y-3">
                               <CardTitle className="text-2xl font-semibold leading-tight text-foreground">
                                 {releaseItem.title}
@@ -280,17 +280,17 @@ export default async function ResearchLinePage({ params }: { params: Promise<{ s
                   </ReleasesCarousel>
                 </div>
               ) : (
-                <div className="mt-12 rounded-2xl border border-border/60 bg-background/80 p-12 text-center backdrop-blur">
+                <div className="mt-12 rounded-3xl border border-white/10 bg-white/5 p-12 text-center shadow-inner shadow-white/5 backdrop-blur">
                   <p className="text-sm text-muted-foreground">{detailCopy.releases.empty}</p>
                 </div>
               )
             ) : (
-              <div className="mt-12 rounded-2xl border border-border/60 bg-background/85 p-10 text-center shadow-lg shadow-primary/5 backdrop-blur">
+              <div className="mt-12 rounded-3xl border border-white/10 bg-white/5 p-10 text-center shadow-[0_35px_80px_-50px_rgba(15,15,15,0.6)] backdrop-blur">
                 <p className="text-sm text-muted-foreground">{detailCopy.releases.locked}</p>
                 {!user && (
                   <div className="mt-6 flex justify-center">
                     <Link href={`/auth/login?next=/research-lines/${slug}`}>
-                      <Button className="gap-2">
+                      <Button className="gap-2 rounded-full bg-gradient-to-r from-primary via-sky-500 to-emerald-500 text-primary-foreground shadow-lg shadow-primary/20 transition-transform transition-colors hover:scale-[1.01] hover:text-primary-foreground hover:brightness-110">
                         {detailCopy.releases.login}
                         <ArrowRight className="h-4 w-4" aria-hidden />
                       </Button>

@@ -30,55 +30,65 @@ export default async function ProfilePage() {
     <div className="flex min-h-screen flex-col">
       <Header />
       <main className="flex-1">
-        <section className="relative overflow-hidden border-b border-border bg-background py-20">
+        <section className="relative overflow-hidden border-b border-border/60 bg-gradient-to-b from-background via-background/80 to-primary/5 py-24">
           <div className="pointer-events-none absolute inset-0 -z-10">
-            <div className="absolute inset-0 bg-gradient-to-tr from-primary/18 via-sky-500/10 to-transparent blur-3xl" />
-            <div className="absolute right-1/3 top-1/2 size-[420px] -translate-y-1/2 rounded-full bg-primary/12 blur-3xl" />
+            <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-primary/15 via-sky-500/10 to-transparent blur-3xl" />
+            <div className="absolute right-1/3 top-1/2 size-[420px] -translate-y-1/2 rounded-full bg-emerald-400/10 blur-3xl" />
           </div>
           <div className="container mx-auto px-4">
             <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
               <div>
-                <div className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-primary/80">
-                  <Sparkles className="h-4 w-4" aria-hidden />
+                <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.4em] text-primary/90 shadow-lg shadow-primary/20 backdrop-blur">
+                  <Sparkles className="h-3.5 w-3.5" aria-hidden />
                   {profileCopy.hero.badge}
                 </div>
-                <h1 className="mt-6 text-balance text-4xl font-semibold tracking-tight text-foreground md:text-5xl">
+                <h1 className="mt-8 text-balance text-4xl font-semibold tracking-tight text-foreground md:text-5xl">
                   {profileCopy.hero.title}
                 </h1>
-                <p className="mt-4 max-w-2xl text-pretty text-lg text-muted-foreground">{profileCopy.hero.description}</p>
+                <p className="mt-6 max-w-2xl text-pretty text-lg text-muted-foreground md:text-xl">
+                  {profileCopy.hero.description}
+                </p>
               </div>
               <Link href="/dashboard">
-                <Button variant="outline" className="gap-2 border-primary/40 bg-background/70 backdrop-blur">
+                <Button
+                  variant="outline"
+                  className="gap-2 rounded-full border-white/30 bg-white/5 text-foreground shadow-lg shadow-primary/10 backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/40 hover:bg-white/10 hover:text-primary"
+                >
                   <ArrowLeft className="h-4 w-4" aria-hidden />
                   {profileCopy.hero.backCta}
                 </Button>
               </Link>
             </div>
-            <div className="mt-10 grid gap-4 sm:grid-cols-2">
-              <div className="rounded-2xl border border-border/60 bg-background/80 p-5 shadow-md shadow-primary/5 backdrop-blur">
-                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-primary/80">
+            <div className="mt-12 grid gap-4 sm:grid-cols-2">
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-5 text-sm text-foreground shadow-inner shadow-white/5 backdrop-blur">
+                <p className="text-[0.6rem] font-semibold uppercase tracking-[0.35em] text-primary/80">
                   {profileCopy.details.currentName}
                 </p>
-                <p className="mt-2 text-sm text-muted-foreground">
+                <p className="mt-2 text-base">
                   {userProfile.full_name || profileCopy.details.missing}
                 </p>
               </div>
-              <div className="rounded-2xl border border-border/60 bg-background/80 p-5 shadow-md shadow-primary/5 backdrop-blur">
-                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-primary/80">
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-5 text-sm text-foreground shadow-inner shadow-white/5 backdrop-blur">
+                <p className="text-[0.6rem] font-semibold uppercase tracking-[0.35em] text-primary/80">
                   {profileCopy.details.email}
                 </p>
-                <p className="mt-2 text-sm text-muted-foreground">{userProfile.email}</p>
+                <p className="mt-2 text-base">{userProfile.email}</p>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="py-16">
+        <section className="relative overflow-hidden border-y border-border/60 bg-gradient-to-b from-background via-muted/20 to-background py-20">
+          <div className="pointer-events-none absolute inset-0 -z-10">
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-emerald-300/10 blur-[260px]" />
+            <div className="absolute left-1/3 top-1/3 size-[360px] -translate-x-1/2 rounded-full bg-primary/5 blur-3xl" />
+          </div>
           <div className="container mx-auto max-w-2xl px-4">
-            <Card className="border border-border/60 bg-background/85 shadow-lg shadow-primary/5 backdrop-blur">
+            <Card className="group relative overflow-hidden border border-white/10 bg-gradient-to-b from-background/95 via-background/70 to-background/40 shadow-[0_35px_80px_-50px_rgba(15,15,15,0.6)] backdrop-blur">
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-emerald-300/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               <CardHeader>
-                <CardTitle className="text-lg">{profileCopy.form.cardTitle}</CardTitle>
-                <CardDescription>{profileCopy.form.cardDescription}</CardDescription>
+                <CardTitle className="text-lg text-foreground">{profileCopy.form.cardTitle}</CardTitle>
+                <CardDescription className="text-muted-foreground">{profileCopy.form.cardDescription}</CardDescription>
               </CardHeader>
               <CardContent>
                 <ProfileForm user={userProfile} copy={profileCopy.form} />
