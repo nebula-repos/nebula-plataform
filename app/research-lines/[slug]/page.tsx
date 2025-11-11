@@ -16,6 +16,7 @@ import { subscribeToResearchLine, unsubscribeFromResearchLine } from "./actions"
 import { ArrowRight, BellRing, ShieldCheck, Sparkles } from "lucide-react"
 import { getLocale } from "@/lib/i18n/server"
 import { getDictionary } from "@/lib/i18n/get-dictionary"
+import { cn } from "@/lib/utils"
 
 export const revalidate = 3600
 
@@ -77,6 +78,8 @@ export default async function ResearchLinePage({ params }: { params: Promise<{ s
 
     releases = data ?? []
   }
+
+  const hasMultipleReleases = releases.length > 1
 
   const accessStatusLabel = isAdmin
     ? detailCopy.hero.access.status.admin
@@ -196,44 +199,82 @@ export default async function ResearchLinePage({ params }: { params: Promise<{ s
             {canViewReleases ? (
               releases.length > 0 ? (
                 <div className="mt-12">
-                  <ReleasesCarousel
-                    itemClassName="min-w-[280px] sm:min-w-[320px] lg:min-w-[360px]"
-                    copy={common.carousel}
-                  >
+                  <ReleasesCarousel copy={common.carousel} wrapItems={false}>
                     {releases.map((releaseItem) => {
-                      const publishedLabel = releaseItem.published_at
+                      const isPublished = Boolean(releaseItem.published_at)
+                      const publishedLabel = isPublished
                         ? formatDistanceToNow(new Date(releaseItem.published_at), {
                             addSuffix: true,
                             locale: dateLocale,
                           })
                         : detailCopy.releases.unpublished
+                      const publishedDateLabel = isPublished
+                        ? new Date(releaseItem.published_at).toLocaleDateString(dateFormatter, {
+                            day: "numeric",
+                            month: "short",
+                            year: "numeric",
+                          })
+                        : detailCopy.releases.unpublished
 
                       return (
-                        <Card
+                        <div
                           key={releaseItem.id}
-                          className="group relative flex h-full flex-col justify-between overflow-hidden border border-border/60 bg-background/90 shadow-lg shadow-primary/5 backdrop-blur"
+                          className={cn(
+                            "group relative flex min-w-[260px] flex-shrink-0 flex-col items-center pt-16 text-center sm:min-w-[320px]",
+                            hasMultipleReleases &&
+                              "before:pointer-events-none before:absolute before:-left-6 before:top-8 before:h-px before:w-[calc(100%+3rem)] before:bg-gradient-to-r before:from-primary/40 before:via-border before:to-primary/40 before:opacity-80 before:content-[''] before:-z-10 first:before:left-0 first:before:w-[calc(100%+1.5rem)] last:before:-left-6 last:before:w-[calc(100%+1.5rem)] only:before:hidden",
+                          )}
                         >
-                          <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-primary via-sky-500 to-emerald-400 opacity-80" />
-                          <CardHeader className="space-y-3">
-                            <div className="flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-muted-foreground/70">
-                              <Badge variant="secondary" className="border-none bg-primary/15 text-primary">
-                                {publishedLabel}
-                              </Badge>
-                              <span>{detailCopy.releases.cardBadge}</span>
-                            </div>
-                            <CardTitle className="text-lg font-semibold leading-snug text-foreground">
-                              {releaseItem.title}
-                            </CardTitle>
-                          </CardHeader>
-                          <CardContent>
-                            <Link href={`/research-lines/${slug}/${releaseItem.slug}`}>
-                              <Button variant="ghost" size="sm" className="gap-2 text-primary">
-                                {detailCopy.releases.viewRelease}
-                                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden />
-                              </Button>
-                            </Link>
-                          </CardContent>
-                        </Card>
+                          <span
+                            className={cn(
+                              "pointer-events-none absolute top-8 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border bg-background/95 shadow-[0_10px_30px_rgba(14,165,233,0.25)] transition-all duration-300",
+                              isPublished ? "border-primary/40" : "border-border/60 shadow-none",
+                            )}
+                            aria-hidden
+                          >
+                            <span
+                              className={cn(
+                                "inline-flex h-3 w-3 rounded-full",
+                                isPublished ? "bg-primary" : "bg-muted-foreground/40",
+                              )}
+                            />
+                          </span>
+                          <div className="mt-10 space-y-1">
+                            <p className="text-xs font-semibold uppercase tracking-[0.35em] text-primary/80">
+                              {detailCopy.releases.cardBadge}
+                            </p>
+                            <p className="text-sm font-medium text-foreground">{publishedDateLabel}</p>
+                            <p className="text-xs text-muted-foreground">{publishedLabel}</p>
+                          </div>
+                          <span
+                            className="mt-5 block h-12 w-px bg-gradient-to-b from-primary/70 via-primary/20 to-transparent"
+                            aria-hidden
+                          />
+                          <Card className="mt-6 w-full max-w-sm border border-border/60 bg-background/90 text-left shadow-xl shadow-primary/10 backdrop-blur">
+                            <CardHeader className="space-y-3">
+                              <CardTitle className="text-2xl font-semibold leading-tight text-foreground">
+                                {releaseItem.title}
+                              </CardTitle>
+                            </CardHeader>
+                            <CardContent className="flex flex-col gap-4">
+                              <div className="flex flex-wrap items-center justify-between gap-3 text-xs uppercase tracking-[0.3em] text-muted-foreground/70">
+                                <Badge variant="secondary" className="border-none bg-primary/15 text-primary">
+                                  {detailCopy.releases.cardBadge}
+                                </Badge>
+                                <span className="tracking-normal text-muted-foreground">{publishedLabel}</span>
+                              </div>
+                              <Link href={`/research-lines/${slug}/${releaseItem.slug}`}>
+                                <Button variant="ghost" className="group/link w-full justify-between gap-2 px-0 text-primary">
+                                  <span>{detailCopy.releases.viewRelease}</span>
+                                  <ArrowRight
+                                    className="h-4 w-4 transition-transform duration-300 group-hover/link:translate-x-1"
+                                    aria-hidden
+                                  />
+                                </Button>
+                              </Link>
+                            </CardContent>
+                          </Card>
+                        </div>
                       )
                     })}
                   </ReleasesCarousel>

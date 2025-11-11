@@ -15,12 +15,24 @@ interface ReleasesCarouselProps {
     scrollLeft: string
     scrollRight: string
   }
+  /**
+   * When false, children are rendered directly so they can manage their own layout/styling.
+   * Defaults to wrapping each child in a flex item.
+   */
+  wrapItems?: boolean
 }
 
-export function ReleasesCarousel({ children, className, itemClassName, copy }: ReleasesCarouselProps) {
+export function ReleasesCarousel({
+  children,
+  className,
+  itemClassName,
+  copy,
+  wrapItems = true,
+}: ReleasesCarouselProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const [canScrollLeft, setCanScrollLeft] = useState(false)
   const [canScrollRight, setCanScrollRight] = useState(false)
+  const childrenArray = Children.toArray(children)
 
   useEffect(() => {
     const container = containerRef.current
@@ -62,16 +74,18 @@ export function ReleasesCarousel({ children, className, itemClassName, copy }: R
       <div
         ref={containerRef}
         className={cn(
-          "flex gap-6 overflow-x-auto scroll-smooth py-2",
+          "flex gap-12 overflow-x-auto scroll-smooth py-4",
           "[-ms-overflow-style:none] [scrollbar-width:none]",
           "[&::-webkit-scrollbar]:hidden",
         )}
       >
-        {Children.toArray(children).map((child, index) => (
-          <div key={index} className={cn("flex-shrink-0", itemClassName)}>
-            {child}
-          </div>
-        ))}
+        {wrapItems
+          ? childrenArray.map((child, index) => (
+              <div key={index} className={cn("flex-shrink-0", itemClassName)}>
+                {child}
+              </div>
+            ))
+          : childrenArray}
       </div>
       <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-2">
         <Button
