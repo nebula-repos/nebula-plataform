@@ -1,6 +1,7 @@
 {
   "header": {
     "nav": {
+      "pricing": "Precios",
       "researchLines": "Líneas de investigación",
       "myAccount": "Mi cuenta",
       "admin": "Administración"
@@ -28,6 +29,7 @@
     },
     "links": {
       "researchLines": "Líneas de investigación",
+      "pricing": "Precios",
       "about": "Acerca de",
       "privacy": "Privacidad",
       "terms": "Términos"

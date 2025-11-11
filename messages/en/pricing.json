@@ -1,0 +1,75 @@
+{
+  "hero": {
+    "eyebrow": "Pricing",
+    "title": "Simple pricing aligned with your research velocity.",
+    "description": "Start with the base subscription or choose a bundle of research lines (RL) to keep multiple tracks active. Upgrade or downgrade at any time directly from your workspace.",
+    "primaryCta": "Start subscription",
+    "secondaryCta": "Contact sales"
+  },
+  "overview": {
+    "eyebrow": "Plans",
+    "title": "Choose how many research lines you want to monitor.",
+    "description": "Each bundle unlocks the same SOTA intelligence — you only decide how many live research lines (RL) you want to follow simultaneously.",
+    "cta": "View full pricing details",
+    "note": "All prices are in USD and billed monthly. You can still access the Current Landscape briefing even without a subscription."
+  },
+  "plans": [
+    {
+      "id": "subscription",
+      "tag": "Base",
+      "name": "SOTA Subscription",
+      "price": "USD 6/mo",
+      "description": "Stay connected to the SOTA drops with one active research line and weekly curated releases.",
+      "features": [
+        "1 concurrent research line (RL)",
+        "Weekly briefings and implementation notes",
+        "Cancel or upgrade anytime"
+      ],
+      "cta": "Start with subscription"
+    },
+    {
+      "id": "bundle-3",
+      "tag": "Bundle",
+      "name": "3 RL Pack",
+      "price": "USD 15/mo",
+      "originalPrice": "USD 30/mo",
+      "highlightLabel": "Most popular",
+      "description": "Follow three research lines at once for broader coverage without losing depth.",
+      "features": [
+        "3 concurrent RL slots for your team",
+        "Priority alerts for new releases",
+        "Shared workspace for collaborators"
+      ],
+      "cta": "Activate 3 RL pack"
+    },
+    {
+      "id": "bundle-5",
+      "tag": "Bundle",
+      "name": "5 RL Pack",
+      "price": "USD 20/mo",
+      "originalPrice": "USD 50/mo",
+      "highlightLabel": null,
+      "description": "Maximum coverage for organizations that need the full frontier monitor.",
+      "features": [
+        "5 concurrent RL slots",
+        "Early access to experimental drops",
+        "Dedicated success check-ins"
+      ],
+      "cta": "Activate 5 RL pack"
+    }
+  ],
+  "included": {
+    "title": "Every plan includes",
+    "items": [
+      "Unlimited access to historical releases and playbooks",
+      "Live updates when a research line shifts",
+      "Support from the Nebula team inside the platform"
+    ]
+  },
+  "contact": {
+    "title": "Need a custom bundle?",
+    "description": "Tell us how many research lines you want to operate and we will tailor the bundle for your workflow.",
+    "cta": "Email the team",
+    "email": "hola@nebula.ai"
+  }
+}

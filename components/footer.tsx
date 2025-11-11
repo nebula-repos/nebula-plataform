@@ -27,6 +27,11 @@ export async function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/pricing" className="text-muted-foreground hover:text-foreground">
+                  {footerCopy.links.pricing}
+                </Link>
+              </li>
+              <li>
                 <Link href="/about" className="text-muted-foreground hover:text-foreground">
                   {footerCopy.links.about}
                 </Link>

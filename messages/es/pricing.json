@@ -1,0 +1,75 @@
+{
+  "hero": {
+    "eyebrow": "Precios",
+    "title": "Precios simples alineados con tu velocidad de investigación.",
+    "description": "Comienza con la suscripción base o elige un paquete de líneas de investigación (RL) para mantener varios frentes activos. Puedes cambiar de plan en cualquier momento desde tu espacio de trabajo.",
+    "primaryCta": "Comenzar suscripción",
+    "secondaryCta": "Hablar con el equipo"
+  },
+  "overview": {
+    "eyebrow": "Planes",
+    "title": "Elige cuántas líneas de investigación quieres monitorear.",
+    "description": "Cada paquete desbloquea la misma inteligencia SOTA; solo decides cuántas líneas de investigación (RL) activas quieres seguir al mismo tiempo.",
+    "cta": "Ver detalles de precios",
+    "note": "Todos los precios están en USD y se facturan mensualmente. Aunque no te suscribas, igual puedes acceder al documento del Panorama Actual."
+  },
+  "plans": [
+    {
+      "id": "subscription",
+      "tag": "Base",
+      "name": "Suscripción SOTA",
+      "price": "USD 6/mes",
+      "description": "Mantente conectado a las entregas SOTA con una línea de investigación activa y lanzamientos semanales curados.",
+      "features": [
+        "1 línea de investigación (RL) concurrente",
+        "Briefings semanales y notas de implementación",
+        "Cancela o mejora cuando quieras"
+      ],
+      "cta": "Comenzar con la suscripción"
+    },
+    {
+      "id": "bundle-3",
+      "tag": "Paquete",
+      "name": "Pack 3 RL",
+      "price": "USD 15/mes",
+      "originalPrice": "USD 30/mes",
+      "highlightLabel": "el más popular",
+      "description": "Sigue tres líneas de investigación a la vez para ampliar la cobertura sin perder profundidad.",
+      "features": [
+        "3 cupos de RL concurrentes para tu equipo",
+        "Alertas prioritarias para nuevos lanzamientos",
+        "Espacio compartido para colaboradores"
+      ],
+      "cta": "Activar pack de 3 RL"
+    },
+    {
+      "id": "bundle-5",
+      "tag": "Paquete",
+      "name": "Pack 5 RL",
+      "price": "USD 20/mes",
+      "originalPrice": "USD 50/mes",
+      "highlightLabel": null,
+      "description": "Cobertura máxima para organizaciones que necesitan monitorear toda la frontera.",
+      "features": [
+        "5 cupos de RL concurrentes",
+        "Acceso anticipado a lanzamientos experimentales",
+        "Sesiones de éxito dedicadas"
+      ],
+      "cta": "Activar pack de 5 RL"
+    }
+  ],
+  "included": {
+    "title": "Cada plan incluye",
+    "items": [
+      "Acceso ilimitado a lanzamientos y playbooks históricos",
+      "Actualizaciones en vivo cuando cambia una línea de investigación",
+      "Soporte del equipo Nebula dentro de la plataforma"
+    ]
+  },
+  "contact": {
+    "title": "¿Necesitas un paquete a medida?",
+    "description": "Cuéntanos cuántas líneas de investigación quieres operar y ajustamos el paquete a tu flujo de trabajo.",
+    "cta": "Escríbenos",
+    "email": "hola@nebula.ai"
+  }
+}

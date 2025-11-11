@@ -1,6 +1,7 @@
 {
   "header": {
     "nav": {
+      "pricing": "Pricing",
       "researchLines": "Research Lines",
       "myAccount": "My Account",
       "admin": "Admin"
@@ -28,6 +29,7 @@
     },
     "links": {
       "researchLines": "Research Lines",
+      "pricing": "Pricing",
       "about": "About",
       "privacy": "Privacy",
       "terms": "Terms"

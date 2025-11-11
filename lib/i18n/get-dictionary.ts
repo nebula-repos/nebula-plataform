@@ -4,6 +4,7 @@ const dictionaries = {
   en: {
     common: () => import("@/messages/en/common.json").then((module) => module.default),
     home: () => import("@/messages/en/home.json").then((module) => module.default),
+    pricing: () => import("@/messages/en/pricing.json").then((module) => module.default),
     about: () => import("@/messages/en/about.json").then((module) => module.default),
     privacy: () => import("@/messages/en/privacy.json").then((module) => module.default),
     terms: () => import("@/messages/en/terms.json").then((module) => module.default),
@@ -25,6 +26,7 @@ const dictionaries = {
   es: {
     common: () => import("@/messages/es/common.json").then((module) => module.default),
     home: () => import("@/messages/es/home.json").then((module) => module.default),
+    pricing: () => import("@/messages/es/pricing.json").then((module) => module.default),
     about: () => import("@/messages/es/about.json").then((module) => module.default),
     privacy: () => import("@/messages/es/privacy.json").then((module) => module.default),
     terms: () => import("@/messages/es/terms.json").then((module) => module.default),
