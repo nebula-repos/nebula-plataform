@@ -1,0 +1,77 @@
+{
+  "gate": {
+    "back": "Volver a {lineTitle}",
+    "eyebrow": "Acceso requerido",
+    "title": "Desbloquea este lanzamiento SOTA para mantenerte alineado con el arte.",
+    "description": "Suscribirte a {lineTitle} te da acceso completo al flujo de lanzamientos, futuros drops y playbooks de activación para tu equipo.",
+    "advantage": {
+      "title": "Ventaja SOTA",
+      "body": "Accede a inteligencia curada, frameworks anotados y la bóveda de lanzamientos SOTA de esta línea.",
+      "live": {
+        "title": "Señales en vivo",
+        "description": "Drops frescos y comentarios cada vez que la frontera se mueve."
+      },
+      "activation": {
+        "title": "Listo para activar",
+        "description": "Notas de implementación y checklists de despliegue para aplicar al instante."
+      }
+    },
+    "subscribe": {
+      "title": "Suscríbete ahora",
+      "description": "Activa tu pase SOTA para ver todo el contenido del lanzamiento y descargar recursos.",
+      "cta": "Suscribirse a la línea",
+      "login": "Inicia sesión para suscribirte"
+    }
+  },
+  "release": {
+    "back": "Volver a {lineTitle}",
+    "eyebrow": "Lanzamiento SOTA · {lineTitle}",
+    "status": {
+      "unpublished": "Sin publicar",
+      "accessGranted": "Acceso al flujo de lanzamientos concedido",
+      "admin": "Acceso admin",
+      "member": "Suscripción activa",
+      "adminNote": "Estás viendo este lanzamiento con privilegios administrativos completos.",
+      "memberNote": "Esta línea permanece desbloqueada mientras tu suscripción siga activa."
+    },
+    "body": "Descarga los tres reportes clave para acceder al brief, notas de implementación y material fuente empaquetado para activación rápida.",
+    "reports": {
+      "eyebrow": "Bóveda de reportes",
+      "title": "Descarga los reportes clave",
+      "description": "Cada lanzamiento incluye tres artefactos curados. Úsalos con tu equipo o intégralos en tu stack de inteligencia.",
+      "download": "Descargar",
+      "pending": "Carga pendiente",
+      "fileFallback": "application/octet-stream"
+    },
+    "sections": {
+      "titles": {
+        "actualidad": "Panorama actual",
+        "industria": "Aplicaciones en la industria",
+        "academico": "Fundamentos académicos"
+      },
+      "empty": "Las notas narrativas aún no están disponibles para este drop. Los reportes descargables contienen el brief completo."
+    },
+    "documents": {
+      "title": "Descargas adicionales",
+      "contentFallback": "application/pdf",
+      "secureNote": "El acceso al archivo requiere un enlace firmado"
+    },
+    "actions": {
+      "unsubscribe": "Cancelar suscripción"
+    }
+  },
+  "reportsMeta": {
+    "actualidad": {
+      "label": "Reporte de panorama actual",
+      "description": "Descarga el brief macro con señales, cambios y por qué este lanzamiento importa hoy."
+    },
+    "industria": {
+      "label": "Reporte de aplicaciones en la industria",
+      "description": "Guías operativas y planos de implementación para activar el lanzamiento en campo."
+    },
+    "academico": {
+      "label": "Reporte de fundamentos académicos",
+      "description": "Estudios fuente, referencias y marco teórico que sustentan el lanzamiento."
+    }
+  }
+}

@@ -9,8 +9,12 @@ import { resolveUserProfile, buildProfileFallback } from "@/lib/supabase/profile
 import Link from "next/link"
 import { ResearchLineActions } from "@/components/admin/research-line-actions"
 import { Sparkles, ArrowLeft, ArrowRight } from "lucide-react"
+import { getLocale } from "@/lib/i18n/server"
+import { getDictionary } from "@/lib/i18n/get-dictionary"
 
 export default async function AdminResearchLinesPage() {
+  const locale = await getLocale()
+  const copy = await getDictionary(locale, "admin.researchLines")
   const supabase = await createClient()
 
   const {
@@ -49,25 +53,25 @@ export default async function AdminResearchLinesPage() {
               <div>
                 <div className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-primary/80">
                   <Sparkles className="h-4 w-4" aria-hidden />
-                  Line Ops
+                  {copy.hero.eyebrow}
                 </div>
                 <h1 className="mt-6 text-balance text-4xl font-semibold tracking-tight text-foreground md:text-5xl">
-                  Govern every SOTA research line.
+                  {copy.hero.title}
                 </h1>
                 <p className="mt-4 max-w-2xl text-pretty text-lg text-muted-foreground">
-                  Activate, pause, and refresh lines to keep the art aligned with the frontier.
+                  {copy.hero.subtitle}
                 </p>
               </div>
               <div className="flex flex-wrap items-center gap-3">
                 <Link href="/admin">
                   <Button variant="outline" className="gap-2 border-primary/40 bg-background/70 backdrop-blur">
                     <ArrowLeft className="h-4 w-4" aria-hidden />
-                    Back to admin
+                    {copy.hero.back}
                   </Button>
                 </Link>
                 <Link href="/admin/research-lines/new">
                   <Button className="gap-2">
-                    New line
+                    {copy.hero.new}
                     <ArrowRight className="h-4 w-4" aria-hidden />
                   </Button>
                 </Link>
@@ -77,7 +81,7 @@ export default async function AdminResearchLinesPage() {
               <Card className="border border-border/60 bg-background/80 shadow-lg shadow-primary/5 backdrop-blur">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground/80">
-                    Total lines
+                    {copy.stats.total}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="text-3xl font-semibold text-foreground">{totalLines}</CardContent>
@@ -85,7 +89,7 @@ export default async function AdminResearchLinesPage() {
               <Card className="border border-border/60 bg-background/80 shadow-lg shadow-primary/5 backdrop-blur">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground/80">
-                    Active lines
+                    {copy.stats.active}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="text-3xl font-semibold text-foreground">{activeLines}</CardContent>
@@ -96,11 +100,15 @@ export default async function AdminResearchLinesPage() {
 
         <section className="py-16">
           <div className="container mx-auto px-4">
-            <Card className="border border-border/60 bg-background/85 shadow-lg shadow-primary/5 backdrop-blur">
-              <CardHeader>
-                <CardTitle className="text-lg">All lines</CardTitle>
-                <CardDescription>Complete list of research lines.</CardDescription>
-              </CardHeader>
+              <Card className="border border-border/60 bg-background/85 shadow-lg shadow-primary/5 backdrop-blur">
+                <CardHeader>
+                  <CardTitle className="text-lg">
+                    {copy.list.title}
+                  </CardTitle>
+                  <CardDescription>
+                    {copy.list.description}
+                  </CardDescription>
+                </CardHeader>
               <CardContent>
                 <div className="space-y-4">
                   {researchLines && researchLines.length > 0 ? (
@@ -113,19 +121,24 @@ export default async function AdminResearchLinesPage() {
                           <div className="flex items-center gap-2">
                             <p className="font-medium">{line.title}</p>
                             <Badge variant={line.is_active ? "default" : "secondary"}>
-                              {line.is_active ? "Active" : "Inactive"}
+                              {line.is_active ? copy.status.active : copy.status.inactive}
                             </Badge>
                           </div>
                           <p className="text-sm text-muted-foreground">{line.description}</p>
-                          <p className="text-xs uppercase tracking-[0.25em] text-primary/70">Slug · {line.slug}</p>
+                          <p className="text-xs uppercase tracking-[0.25em] text-primary/70">
+                            {copy.list.slugLabel}{" "}
+                            · {line.slug}
+                          </p>
                         </div>
                         <div className="flex items-center gap-2">
-                          <ResearchLineActions lineId={line.id} isActive={line.is_active} slug={line.slug} />
+                          <ResearchLineActions lineId={line.id} isActive={line.is_active} slug={line.slug} copy={copy.actions} />
                         </div>
                       </div>
                     ))
                   ) : (
-                    <p className="text-sm text-muted-foreground">No research lines available.</p>
+                    <p className="text-sm text-muted-foreground">
+                      {copy.empty}
+                    </p>
                   )}
                 </div>
               </CardContent>

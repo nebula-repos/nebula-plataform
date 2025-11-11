@@ -1,0 +1,16 @@
+{
+  "badge": "SOTA Access",
+  "headline": "Welcome back to the art.",
+  "subhead": "Log in to jump straight into the latest releases, activation playbooks, and signal briefings curated for your teams.",
+  "badgeFooter": "Secure Supabase authentication · Session monitored",
+  "cardTitle": "Log in",
+  "cardDescription": "Enter your credentials to access SOTA releases",
+  "emailLabel": "Email address",
+  "emailPlaceholder": "you@example.com",
+  "passwordLabel": "Password",
+  "submitLoading": "Logging in...",
+  "submit": "Log in",
+  "signupPrompt": "Don't have an account?",
+  "signupCta": "Sign up",
+  "genericError": "An error occurred"
+}

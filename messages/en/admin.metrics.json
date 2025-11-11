@@ -1,0 +1,26 @@
+{
+  "hero": {
+    "eyebrow": "Telemetry",
+    "title": "Decode how teams engage with the art.",
+    "subtitle": "Monitor event streams, user growth, and membership distribution to inform your next release decisions.",
+    "back": "Back to admin"
+  },
+  "stats": {
+    "totalUsers": "Total users",
+    "freeUsers": "Free users",
+    "members": "Premium members",
+    "eventTypes": "Event types tracked"
+  },
+  "distribution": {
+    "title": "User distribution",
+    "description": "Users by membership tier.",
+    "total": "Total users",
+    "free": "Free users",
+    "members": "Premium members"
+  },
+  "activity": {
+    "title": "Event activity",
+    "description": "Most frequent event types.",
+    "empty": "No event data available"
+  }
+}

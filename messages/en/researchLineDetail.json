@@ -1,0 +1,50 @@
+{
+  "labels": {
+    "recentlyUpdated": "Recently updated",
+    "inceptionPending": "Inception pending"
+  },
+  "hero": {
+    "badge": "SOTA Line",
+    "cards": {
+      "signal": {
+        "title": "Signal density",
+        "description": "Curated drops and applied insights engineered for the {lineTitle} domain."
+      },
+      "refresh": {
+        "title": "Last refreshed",
+        "launch": "Line launched {date}"
+      },
+      "cadence": {
+        "title": "Drops cadence",
+        "description": "SOTA editors push new releases as signals emerge — expect movement multiple times a month."
+      }
+    },
+    "access": {
+      "status": {
+        "admin": "Admin Access",
+        "subscribed": "Subscribed",
+        "locked": "Locked"
+      },
+      "streamLabel": "Release stream",
+      "granted": "You have full access to every release and activation note in this SOTA line.",
+      "locked": "Subscribe to unlock releases, frameworks, and ongoing intelligence for this line.",
+      "actions": {
+        "unsubscribe": "Unsubscribe from line",
+        "subscribe": "Subscribe to unlock",
+        "login": "Log in to subscribe",
+        "back": "Back to all lines"
+      }
+    }
+  },
+  "releases": {
+    "eyebrow": "Release vault",
+    "title": "Latest drops inside {lineTitle}",
+    "description": "Access the full art stream: every release is packaged with briefs, implementation notes, and signal callouts.",
+    "cardBadge": "SOTA Release",
+    "viewRelease": "View release",
+    "empty": "No releases available for this research line yet.",
+    "locked": "Subscribe to unlock every SOTA release in this line and receive alerts when new drops land.",
+    "login": "Log in to subscribe",
+    "unpublished": "Unpublished"
+  }
+}

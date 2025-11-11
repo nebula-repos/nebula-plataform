@@ -1,0 +1,99 @@
+{
+  "hero": {
+    "eyebrow": "Release Ops",
+    "title": "Curate and ship SOTA releases.",
+    "subtitle": "Publish new art drops and monitor their status as they reach the world.",
+    "back": "Back to admin",
+    "new": "New release"
+  },
+  "stats": {
+    "total": "Total releases",
+    "published": "Published"
+  },
+  "list": {
+    "title": "All releases",
+    "description": "Complete list of releases.",
+    "lineLabel": "Line",
+    "noLine": "No line",
+    "noDate": "No publish date",
+    "viewAction": "View"
+  },
+  "status": {
+    "published": "Published",
+    "draft": "Draft"
+  },
+  "empty": "No releases",
+  "newPage": {
+    "eyebrow": "New Release",
+    "title": "Publish the next art drop.",
+    "subtitle": "Connect the drop to its line, schedule the date, and upload the three focus reports in one flow.",
+    "back": "Back to releases",
+    "cardTitle": "Release upload",
+    "cardDescription": "Select the line, define the slug, and upload the three bundled reports."
+  },
+  "form": {
+    "fields": {
+      "researchLine": {
+        "label": "Research line",
+        "noLines": "No lines available",
+        "helper": "Choose where these reports will land. One release per line per date folder."
+      },
+      "title": {
+        "label": "Title",
+        "placeholder": "e.g. AI trends in healthcare systems 2025"
+      },
+      "slug": {
+        "label": "Slug",
+        "placeholder": "e.g. ai-trends-healthcare-2025",
+        "helperPrefix": "This slug determines the public URL:",
+        "helperSuffix": ".",
+        "fallback": "your-slug"
+      },
+      "releaseDate": {
+        "label": "Release date",
+        "helper": "The date is used for scheduling and for the storage folder name."
+      },
+      "published": {
+        "label": "Mark as published and visible to members immediately"
+      }
+    },
+    "reports": {
+      "heading": "Upload the reports",
+      "description": "Each focus area expects a single archive (PDF, docx, or similar). Files are stored under",
+      "descriptionSuffix": ".",
+      "attached": "Attached",
+      "definitions": {
+        "actualidad": {
+          "label": "Current Landscape Report",
+          "helper": "Signals, market moves, and why this drop matters right now."
+        },
+        "industria": {
+          "label": "Industry Applications Report",
+          "helper": "Deployment tactics, implementation notes, and field-tested patterns."
+        },
+        "academico": {
+          "label": "Academic Foundations Report",
+          "helper": "Key studies, references, and theoretical grounding for the release."
+        }
+      }
+    },
+    "messages": {
+      "selectLine": "Select a research line.",
+      "lineMissing": "The selected research line could not be found.",
+      "titleRequired": "Title is required.",
+      "slugRequired": "Slug is required.",
+      "dateRequired": "Choose the release date to build the storage path.",
+      "missingReport": "Upload the {report}.",
+      "session": "Could not validate the user session.",
+      "uploadFailed": "Failed to upload {report}: {error}",
+      "registerFailed": "Failed to register {report}: {error}",
+      "unexpected": "An unexpected error occurred.",
+      "success": "Release created and reports uploaded."
+    },
+    "buttons": {
+      "saving": "Saving...",
+      "submit": "Create release",
+      "cancel": "Cancel"
+    }
+  }
+}

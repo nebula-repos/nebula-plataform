@@ -1,0 +1,57 @@
+{
+  "hero": {
+    "title": "Política de privacidad",
+    "subtitle": "Conoce cómo recopilamos, usamos y protegemos tu información cuando utilizas Nebula.",
+    "reviewed": "Última revisión: 10 de octubre de 2025"
+  },
+  "sections": {
+    "collect": {
+      "title": "1. Información que recopilamos",
+      "body": "Recopilamos los datos necesarios para operar la plataforma y mejorar la experiencia:",
+      "items": [
+        "Datos de cuenta: nombre, correo electrónico y preferencia de membresía.",
+        "Actividad en la plataforma: líneas visitadas, lanzamientos consultados y acciones administrativas.",
+        "Información técnica: dirección IP, configuración del dispositivo y registros de acceso."
+      ]
+    },
+    "use": {
+      "title": "2. Cómo usamos la información",
+      "body": "Usamos tus datos para operar y mejorar nuestros servicios, entre ellos:",
+      "items": [
+        "Autenticar usuarios y otorgar los niveles de acceso adecuados.",
+        "Personalizar recomendaciones y medir la relevancia del contenido.",
+        "Supervisar el uso de la plataforma, detectar abusos y mantener la seguridad."
+      ]
+    },
+    "share": {
+      "title": "3. Compartir con terceros",
+      "body": "No vendemos información personal. Solo compartimos datos cuando es estrictamente necesario para:",
+      "items": [
+        "Procesar autenticación y almacenamiento seguro a través de nuestros proveedores en la nube.",
+        "Cumplir requisitos legales o responder a solicitudes legítimas.",
+        "Integrar herramientas de analítica agregada para comprender el desempeño de la plataforma."
+      ]
+    },
+    "security": {
+      "title": "4. Seguridad y retención",
+      "body": "Implementamos controles técnicos y organizacionales para proteger tus datos. El acceso administrativo se audita y los registros sensibles se almacenan cifrados. Conservamos la información mientras tengas una cuenta activa o durante el tiempo exigido por obligaciones legales."
+    },
+    "rights": {
+      "title": "5. Tus derechos",
+      "body": "Puedes acceder, actualizar o eliminar tu información desde la plataforma o escribiendo a",
+      "email": "privacidad@nebula.ai",
+      "note": "Respondemos dentro de los 30 días."
+    },
+    "changes": {
+      "title": "6. Cambios a esta política",
+      "body": "Publicamos las actualizaciones con su fecha de vigencia. Si realizamos cambios significativos, avisaremos por correo a los usuarios registrados con antelación.",
+      "effective": "Vigente desde el 10 de octubre de 2025."
+    }
+  },
+  "cta": {
+    "title": "¿Preguntas o solicitudes?",
+    "prefix": "Escríbenos a",
+    "email": "privacidad@nebula.ai",
+    "suffix": "para solicitudes de privacidad o más información sobre nuestras prácticas de datos."
+  }
+}

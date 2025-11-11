@@ -10,15 +10,29 @@ import { Label } from "@/components/ui/label"
 import { createClient } from "@/lib/supabase/client"
 import { trackEventClient } from "@/lib/analytics-client"
 
+interface ProfileFormCopy {
+  missingUser: string
+  genericError: string
+  emailLabel: string
+  emailHelp: string
+  fullNameLabel: string
+  fullNamePlaceholder: string
+  success: string
+  saving: string
+  save: string
+  cancel: string
+}
+
 interface ProfileFormProps {
   user: {
     id: string
     email: string
     full_name: string | null
   } | null
+  copy: ProfileFormCopy
 }
 
-export function ProfileForm({ user }: ProfileFormProps) {
+export function ProfileForm({ user, copy }: ProfileFormProps) {
   const [fullName, setFullName] = useState(user?.full_name || "")
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -35,7 +49,7 @@ export function ProfileForm({ user }: ProfileFormProps) {
 
     try {
       if (!user?.id) {
-        throw new Error("Could not identify the current user.")
+        throw new Error(copy.missingUser)
       }
 
       const normalizedFullName = fullName.trim()
@@ -58,7 +72,7 @@ export function ProfileForm({ user }: ProfileFormProps) {
         router.refresh()
       }, 1500)
     } catch (error: unknown) {
-      setError(error instanceof Error ? error.message : "An error occurred")
+      setError(error instanceof Error ? error.message : copy.genericError)
     } finally {
       setIsLoading(false)
     }
@@ -67,31 +81,31 @@ export function ProfileForm({ user }: ProfileFormProps) {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="space-y-2">
-        <Label htmlFor="email">Email address</Label>
+        <Label htmlFor="email">{copy.emailLabel}</Label>
         <Input id="email" type="email" value={user?.email} disabled />
-        <p className="text-sm text-muted-foreground">Email address cannot be changed</p>
+        <p className="text-sm text-muted-foreground">{copy.emailHelp}</p>
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="fullName">Full name</Label>
+        <Label htmlFor="fullName">{copy.fullNameLabel}</Label>
         <Input
           id="fullName"
           type="text"
           value={fullName}
           onChange={(e) => setFullName(e.target.value)}
-          placeholder="Your full name"
+          placeholder={copy.fullNamePlaceholder}
         />
       </div>
 
       {error && <p className="text-sm text-destructive">{error}</p>}
-      {success && <p className="text-sm text-green-600">Profile updated successfully</p>}
+      {success && <p className="text-sm text-green-600">{copy.success}</p>}
 
       <div className="flex gap-4">
         <Button type="submit" disabled={isLoading}>
-          {isLoading ? "Saving..." : "Save changes"}
+          {isLoading ? copy.saving : copy.save}
         </Button>
         <Button type="button" variant="outline" onClick={() => router.push("/dashboard")}>
-          Cancel
+          {copy.cancel}
         </Button>
       </div>
     </form>

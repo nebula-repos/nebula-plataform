@@ -1,0 +1,16 @@
+{
+  "badge": "Acceso SOTA",
+  "headline": "Bienvenido de nuevo al arte.",
+  "subhead": "Inicia sesión para ir directo a los últimos lanzamientos, playbooks de activación y briefings de señales curados para tus equipos.",
+  "badgeFooter": "Autenticación segura con Supabase · Sesión monitoreada",
+  "cardTitle": "Iniciar sesión",
+  "cardDescription": "Ingresa tus credenciales para acceder a los lanzamientos SOTA",
+  "emailLabel": "Correo electrónico",
+  "emailPlaceholder": "tu@ejemplo.com",
+  "passwordLabel": "Contraseña",
+  "submitLoading": "Iniciando sesión...",
+  "submit": "Iniciar sesión",
+  "signupPrompt": "¿No tienes una cuenta?",
+  "signupCta": "Crear cuenta",
+  "genericError": "Ocurrió un error"
+}

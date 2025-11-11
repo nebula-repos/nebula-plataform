@@ -1,0 +1,67 @@
+{
+  "hero": {
+    "eyebrow": "Dentro de SOTA",
+    "title": "Nebula convierte la investigación de frontera en apalancamiento operativo de estado del arte.",
+    "description": "Mapeamos las señales, curamos el arte y entregamos lanzamientos listos para activar para que los equipos desplieguen lo que viene, no lo que fue relevante el trimestre pasado.",
+    "primaryCta": "Explorar líneas SOTA",
+    "secondaryCta": "Ver lanzamientos recientes"
+  },
+  "principles": [
+    {
+      "icon": "target",
+      "title": "Nuestra misión",
+      "description": "Reducimos la brecha entre la investigación académica y la implementación real en organizaciones, equipos y comunidades.",
+      "body": "Seleccionamos investigación con alto potencial transformador, la estructuramos en recorridos comprensibles y resaltamos los pasos concretos para llevarla a la práctica.",
+      "bullets": null
+    },
+    {
+      "icon": "users",
+      "title": "Comunidad experta",
+      "description": "Colaboramos con investigadores, especialistas de la industria y mentores para validar cada línea.",
+      "body": "La plataforma evoluciona junto a la comunidad. Cada lanzamiento mezcla retroalimentación, métricas de uso y resultados de equipos reales.",
+      "bullets": null
+    },
+    {
+      "icon": "lightbulb",
+      "title": "Metodología",
+      "description": "Cada lanzamiento combina contexto actual, guía de implementación y fundamentos académicos en un solo lugar.",
+      "body": null,
+      "bullets": [
+        "Panorama actual: qué está sucediendo y por qué importa.",
+        "Implementación: guías tácticas, herramientas y casos reales.",
+        "Fundamentos académicos: marcos teóricos y referencias para profundizar."
+      ]
+    },
+    {
+      "icon": "shield",
+      "title": "Compromiso",
+      "description": "La transparencia, la seguridad y la calidad del contenido son los pilares de nuestra operación.",
+      "body": "Invertimos en procesos editoriales robustos, auditorías continuas y métricas que nos permiten medir el impacto real de cada lanzamiento.",
+      "bullets": null
+    }
+  ],
+  "how": {
+    "title": "Cómo trabajamos",
+    "intro": "El colectivo Nebula combina experiencia en investigación, producto y operaciones. Cada lanzamiento SOTA atraviesa un pipeline editorial que une insights cualitativos con resultados medibles.",
+    "body": "Nuestra hoja de ruta se construye con la comunidad: detectamos arte emergente, co-diseñamos líneas con socios y sostenemos ciclos de actualización para que la inteligencia nunca se estanque.",
+    "pillars": {
+      "title": "Pilares de impacto",
+      "items": [
+        "Habilitar decisiones estratégicas informadas entre equipos.",
+        "Acortar los tiempos de adopción de tecnologías emergentes.",
+        "Fortalecer el intercambio de conocimiento entre academia e industria.",
+        "Medir resultados y devolver los aprendizajes a la red."
+      ]
+    },
+    "collaboration": {
+      "title": "¿Quieres colaborar?",
+      "description": "Nos asociamos con investigadores, operadores y organizaciones que quieran compartir proyectos, datos o casos de uso. Escríbenos en"
+    }
+  },
+  "cta": {
+    "title": "¿Listo para construir con el arte?",
+    "description": "Únete a la plataforma SOTA, explora líneas activas y colabora con nosotros en futuros lanzamientos.",
+    "primary": "Crear una cuenta gratuita",
+    "secondary": "Explorar líneas SOTA"
+  }
+}

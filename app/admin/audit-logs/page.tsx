@@ -6,12 +6,26 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { createClient } from "@/lib/supabase/server"
 import { resolveUserProfile, buildProfileFallback } from "@/lib/supabase/profiles"
-import { format } from "date-fns"
-import { enUS } from "date-fns/locale"
 import Link from "next/link"
 import { ArrowLeft, Sparkles } from "lucide-react"
+import { getLocale } from "@/lib/i18n/server"
+import { getDictionary } from "@/lib/i18n/get-dictionary"
+
+type AuditLog = {
+  id: string
+  action: string
+  entity_type: string
+  created_at: string
+  details: Record<string, unknown> | null
+  users: {
+    email: string | null
+    full_name: string | null
+  } | null
+}
 
 export default async function AdminAuditLogsPage() {
+  const locale = await getLocale()
+  const copy = await getDictionary(locale, "admin.audit")
   const supabase = await createClient()
 
   const {
@@ -33,8 +47,10 @@ export default async function AdminAuditLogsPage() {
     .select("*, users(email, full_name)")
     .order("created_at", { ascending: false })
     .limit(100)
+    .returns<AuditLog[]>()
 
   const totalLogs = auditLogs?.length ?? 0
+  const timestampFormatter = new Intl.DateTimeFormat(locale, { dateStyle: "long", timeStyle: "medium" })
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -50,19 +66,17 @@ export default async function AdminAuditLogsPage() {
               <div>
                 <div className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-primary/80">
                   <Sparkles className="h-4 w-4" aria-hidden />
-                  Audit Trail
+                  {copy.hero.eyebrow}
                 </div>
                 <h1 className="mt-6 text-balance text-4xl font-semibold tracking-tight text-foreground md:text-5xl">
-                  Monitor every SOTA admin move.
+                  {copy.hero.title}
                 </h1>
-                <p className="mt-4 max-w-2xl text-pretty text-lg text-muted-foreground">
-                  Inspect the latest administrative actions, revalidations, and state changes to keep the art protected.
-                </p>
+                <p className="mt-4 max-w-2xl text-pretty text-lg text-muted-foreground">{copy.hero.subtitle}</p>
               </div>
               <Link href="/admin">
                 <Button variant="outline" className="gap-2 border-primary/40 bg-background/70 backdrop-blur">
                   <ArrowLeft className="h-4 w-4" aria-hidden />
-                  Back to admin
+                  {copy.hero.back}
                 </Button>
               </Link>
             </div>
@@ -70,7 +84,7 @@ export default async function AdminAuditLogsPage() {
               <Card className="border border-border/60 bg-background/80 shadow-lg shadow-primary/5 backdrop-blur">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground/80">
-                    Records reviewed
+                    {copy.stats.records}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="text-3xl font-semibold text-foreground">{totalLogs}</CardContent>
@@ -83,13 +97,13 @@ export default async function AdminAuditLogsPage() {
           <div className="container mx-auto px-4">
             <Card className="border border-border/60 bg-background/85 shadow-lg shadow-primary/5 backdrop-blur">
               <CardHeader>
-                <CardTitle className="text-lg">Last 100 actions</CardTitle>
-                <CardDescription>Complete administrative activity log.</CardDescription>
+                <CardTitle className="text-lg">{copy.list.title}</CardTitle>
+                <CardDescription>{copy.list.description}</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
                   {auditLogs && auditLogs.length > 0 ? (
-                    auditLogs.map((log: any) => (
+                    auditLogs.map((log) => (
                       <div
                         key={log.id}
                         className="space-y-3 rounded-2xl border border-border/60 bg-background/80 p-5 shadow-sm shadow-primary/5 backdrop-blur"
@@ -103,7 +117,7 @@ export default async function AdminAuditLogsPage() {
                             <span className="font-medium">{log.users?.full_name || log.users?.email}</span>
                           </p>
                           <p className="text-xs uppercase tracking-[0.25em] text-primary/70">
-                            {format(new Date(log.created_at), "MMMM d, yyyy 'at' HH:mm:ss", { locale: enUS })}
+                            {timestampFormatter.format(new Date(log.created_at))}
                           </p>
                         </div>
                         {log.details && (
@@ -114,7 +128,7 @@ export default async function AdminAuditLogsPage() {
                       </div>
                     ))
                   ) : (
-                    <p className="text-sm text-muted-foreground">No audit records yet.</p>
+                    <p className="text-sm text-muted-foreground">{copy.list.empty}</p>
                   )}
                 </div>
               </CardContent>

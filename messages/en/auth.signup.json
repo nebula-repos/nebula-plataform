@@ -1,0 +1,20 @@
+{
+  "badge": "Join SOTA",
+  "headline": "Build your State of the Art workspace.",
+  "subhead": "Create your profile to unlock curated research lines, activation playbooks, and the community signal feed.",
+  "badgeFooter": "Instant access · Verify email to activate releases",
+  "cardTitle": "Create account",
+  "cardDescription": "Sign up to access the platform",
+  "fullNameLabel": "Full name",
+  "fullNamePlaceholder": "John Smith",
+  "emailLabel": "Email address",
+  "emailPlaceholder": "you@example.com",
+  "passwordLabel": "Password",
+  "confirmPasswordLabel": "Confirm password",
+  "submitLoading": "Creating account...",
+  "submit": "Create account",
+  "loginPrompt": "Already have an account?",
+  "loginCta": "Log in",
+  "passwordMismatch": "Passwords do not match",
+  "genericError": "An error occurred"
+}

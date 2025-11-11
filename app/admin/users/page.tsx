@@ -7,12 +7,17 @@ import { Footer } from "@/components/footer"
 import { createClient } from "@/lib/supabase/server"
 import { resolveUserProfile, buildProfileFallback } from "@/lib/supabase/profiles"
 import { format } from "date-fns"
-import { enUS } from "date-fns/locale"
+import { enUS, es as esLocale } from "date-fns/locale"
 import { UserActions } from "@/components/admin/user-actions"
 import Link from "next/link"
 import { ArrowLeft, Sparkles } from "lucide-react"
+import { getLocale } from "@/lib/i18n/server"
+import { getDictionary } from "@/lib/i18n/get-dictionary"
 
 export default async function AdminUsersPage() {
+  const locale = await getLocale()
+  const copy = await getDictionary(locale, "admin.users")
+  const dateLocale = locale === "es" ? esLocale : enUS
   const supabase = await createClient()
 
   const {
@@ -49,20 +54,19 @@ export default async function AdminUsersPage() {
               <div>
                 <div className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-primary/80">
                   <Sparkles className="h-4 w-4" aria-hidden />
-                  Access Control
+                  {copy.hero.badge}
                 </div>
                 <h1 className="mt-6 text-balance text-4xl font-semibold tracking-tight text-foreground md:text-5xl">
-                  Manage operators and membership tiers.
+                  {copy.hero.title}
                 </h1>
                 <p className="mt-4 max-w-2xl text-pretty text-lg text-muted-foreground">
-                  Audit roles, upgrade membership, and ensure every workspace has the right privileges to deploy the
-                  art.
+                  {copy.hero.description}
                 </p>
               </div>
               <Link href="/admin">
                 <Button variant="outline" className="gap-2 border-primary/40 bg-background/70 backdrop-blur">
                   <ArrowLeft className="h-4 w-4" aria-hidden />
-                  Back to admin
+                  {copy.hero.back}
                 </Button>
               </Link>
             </div>
@@ -70,7 +74,7 @@ export default async function AdminUsersPage() {
               <Card className="border border-border/60 bg-background/80 shadow-lg shadow-primary/5 backdrop-blur">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground/80">
-                    Total users
+                    {copy.stats.total}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="text-3xl font-semibold text-foreground">{totalUsers}</CardContent>
@@ -78,7 +82,7 @@ export default async function AdminUsersPage() {
               <Card className="border border-border/60 bg-background/80 shadow-lg shadow-primary/5 backdrop-blur">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground/80">
-                    Admins
+                    {copy.stats.admins}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="text-3xl font-semibold text-foreground">{adminCount}</CardContent>
@@ -86,7 +90,7 @@ export default async function AdminUsersPage() {
               <Card className="border border-border/60 bg-background/80 shadow-lg shadow-primary/5 backdrop-blur">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground/80">
-                    Premium members
+                    {copy.stats.members}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="text-3xl font-semibold text-foreground">{memberCount}</CardContent>
@@ -97,39 +101,42 @@ export default async function AdminUsersPage() {
 
         <section className="py-16">
           <div className="container mx-auto px-4">
-            <Card className="border border-border/60 bg-background/85 shadow-lg shadow-primary/5 backdrop-blur">
-              <CardHeader>
-                <CardTitle className="text-lg">All users</CardTitle>
-                <CardDescription>Complete list of registered operators and their status.</CardDescription>
-              </CardHeader>
+              <Card className="border border-border/60 bg-background/85 shadow-lg shadow-primary/5 backdrop-blur">
+                <CardHeader>
+                  <CardTitle className="text-lg">{copy.list.title}</CardTitle>
+                  <CardDescription>{copy.list.description}</CardDescription>
+                </CardHeader>
               <CardContent>
                 <div className="space-y-4">
                   {users && users.length > 0 ? (
-                    users.map((u) => (
-                      <div
-                        key={u.id}
-                        className="flex flex-col gap-4 rounded-2xl border border-border/60 bg-background/80 p-5 shadow-sm shadow-primary/5 backdrop-blur md:flex-row md:items-center md:justify-between"
-                      >
-                        <div className="space-y-2">
-                          <div className="flex flex-wrap items-center gap-2">
-                            <p className="font-medium text-foreground">{u.full_name || "No name"}</p>
-                            <Badge variant={u.role === "admin" ? "default" : "secondary"}>{u.role}</Badge>
-                            <Badge variant={u.membership_tier === "member" ? "default" : "outline"}>
-                              {u.membership_tier}
-                            </Badge>
+                    users.map((u) => {
+                      const roleLabel =
+                        u.role === "admin" ? copy.list.role.admin : copy.list.role.member
+                      const tierLabel =
+                        u.membership_tier === "member" ? copy.list.tier.premium : copy.list.tier.free
+                      return (
+                        <div
+                          key={u.id}
+                          className="flex flex-col gap-4 rounded-2xl border border-border/60 bg-background/80 p-5 shadow-sm shadow-primary/5 backdrop-blur md:flex-row md:items-center md:justify-between"
+                        >
+                          <div className="space-y-2">
+                            <div className="flex flex-wrap items-center gap-2">
+                              <p className="font-medium text-foreground">{u.full_name || copy.list.noName}</p>
+                              <Badge variant={u.role === "admin" ? "default" : "secondary"}>{roleLabel}</Badge>
+                              <Badge variant={u.membership_tier === "member" ? "default" : "outline"}>{tierLabel}</Badge>
+                            </div>
+                            <p className="text-sm text-muted-foreground">{u.email}</p>
+                            <p className="text-xs uppercase tracking-[0.25em] text-primary/70">
+                              {copy.list.registered}{" "}
+                              {format(new Date(u.created_at), "MMMM d, yyyy", { locale: dateLocale })}
+                            </p>
                           </div>
-                          <p className="text-sm text-muted-foreground">{u.email}</p>
-                          <p className="text-xs uppercase tracking-[0.25em] text-primary/70">
-                            Registered {format(new Date(u.created_at), "MMMM d, yyyy", { locale: enUS })}
-                          </p>
+                          <UserActions userId={u.id} currentRole={u.role} currentTier={u.membership_tier} copy={copy.actions} />
                         </div>
-                        <UserActions userId={u.id} currentRole={u.role} currentTier={u.membership_tier} />
-                      </div>
-                    ))
+                      )
+                    })
                   ) : (
-                    <p className="text-sm text-muted-foreground">
-                      No registered users yet. Onboard a team to populate this list.
-                    </p>
+                    <p className="text-sm text-muted-foreground">{copy.list.empty}</p>
                   )}
                 </div>
               </CardContent>

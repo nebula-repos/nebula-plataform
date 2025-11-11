@@ -8,9 +8,13 @@ import { resolveUserProfile, buildProfileFallback } from "@/lib/supabase/profile
 import { ProfileForm } from "@/components/profile-form"
 import Link from "next/link"
 import { ArrowLeft, Sparkles } from "lucide-react"
+import { getLocale } from "@/lib/i18n/server"
+import { getDictionary } from "@/lib/i18n/get-dictionary"
 
 export default async function ProfilePage() {
   const supabase = await createClient()
+  const locale = await getLocale()
+  const profileCopy = await getDictionary(locale, "dashboard.profile")
 
   const {
     data: { user },
@@ -36,30 +40,33 @@ export default async function ProfilePage() {
               <div>
                 <div className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-primary/80">
                   <Sparkles className="h-4 w-4" aria-hidden />
-                  Profile Sync
+                  {profileCopy.hero.badge}
                 </div>
                 <h1 className="mt-6 text-balance text-4xl font-semibold tracking-tight text-foreground md:text-5xl">
-                  Tune your SOTA identity.
+                  {profileCopy.hero.title}
                 </h1>
-                <p className="mt-4 max-w-2xl text-pretty text-lg text-muted-foreground">
-                  Keep your details sharp so we can tailor releases, alerts, and collaboration invites to your operating
-                  context.
-                </p>
+                <p className="mt-4 max-w-2xl text-pretty text-lg text-muted-foreground">{profileCopy.hero.description}</p>
               </div>
               <Link href="/dashboard">
                 <Button variant="outline" className="gap-2 border-primary/40 bg-background/70 backdrop-blur">
                   <ArrowLeft className="h-4 w-4" aria-hidden />
-                  Back to dashboard
+                  {profileCopy.hero.backCta}
                 </Button>
               </Link>
             </div>
             <div className="mt-10 grid gap-4 sm:grid-cols-2">
               <div className="rounded-2xl border border-border/60 bg-background/80 p-5 shadow-md shadow-primary/5 backdrop-blur">
-                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-primary/80">Current name</p>
-                <p className="mt-2 text-sm text-muted-foreground">{userProfile.full_name || "Not specified"}</p>
+                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-primary/80">
+                  {profileCopy.details.currentName}
+                </p>
+                <p className="mt-2 text-sm text-muted-foreground">
+                  {userProfile.full_name || profileCopy.details.missing}
+                </p>
               </div>
               <div className="rounded-2xl border border-border/60 bg-background/80 p-5 shadow-md shadow-primary/5 backdrop-blur">
-                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-primary/80">Email</p>
+                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-primary/80">
+                  {profileCopy.details.email}
+                </p>
                 <p className="mt-2 text-sm text-muted-foreground">{userProfile.email}</p>
               </div>
             </div>
@@ -70,13 +77,11 @@ export default async function ProfilePage() {
           <div className="container mx-auto max-w-2xl px-4">
             <Card className="border border-border/60 bg-background/85 shadow-lg shadow-primary/5 backdrop-blur">
               <CardHeader>
-                <CardTitle className="text-lg">Personal information</CardTitle>
-                <CardDescription>
-                  Update your profile details. Changes take effect immediately across SOTA surfaces.
-                </CardDescription>
+                <CardTitle className="text-lg">{profileCopy.form.cardTitle}</CardTitle>
+                <CardDescription>{profileCopy.form.cardDescription}</CardDescription>
               </CardHeader>
               <CardContent>
-                <ProfileForm user={userProfile} />
+                <ProfileForm user={userProfile} copy={profileCopy.form} />
               </CardContent>
             </Card>
           </div>

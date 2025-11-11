@@ -1,0 +1,37 @@
+{
+  "hero": {
+    "badge": "My SOTA Control",
+    "greeting": "Welcome back,",
+    "fallbackName": "Operator",
+    "description": "Monitor your subscription status, track releases you've touched, and keep your profile aligned with the latest art drops.",
+    "primaryCta": "Explore live releases",
+    "secondaryCta": "Update profile"
+  },
+  "membership": {
+    "title": "Membership Status",
+    "premiumLabel": "Premium member",
+    "freeLabel": "Free account",
+    "premiumDescription": "You have full access to every SOTA release and activation playbook.",
+    "freeDescription": "Upgrade to unlock premium releases, advanced playbooks, and community drops.",
+    "memberSince": "Member since",
+    "unknown": "Unknown",
+    "upgradeCta": "Upgrade to Premium"
+  },
+  "profileCard": {
+    "title": "Profile information",
+    "description": "Keep your details aligned with your operating footprint.",
+    "fields": {
+      "fullName": "Full name",
+      "email": "Email",
+      "lastUpdated": "Last updated",
+      "missing": "Not specified",
+      "notAvailable": "Not available"
+    },
+    "cta": "Edit profile"
+  },
+  "activityCard": {
+    "title": "Recent activity",
+    "description": "Your latest interactions across SOTA",
+    "empty": "No recent activity yet — explore a line to get started."
+  }
+}

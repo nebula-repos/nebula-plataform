@@ -1,0 +1,27 @@
+{
+  "hero": {
+    "badge": "Sincronización de perfil",
+    "title": "Ajusta tu identidad SOTA.",
+    "description": "Mantén tus datos al día para personalizar lanzamientos, alertas e invitaciones de colaboración según tu contexto operativo.",
+    "backCta": "Volver al panel"
+  },
+  "details": {
+    "currentName": "Nombre actual",
+    "email": "Correo",
+    "missing": "Sin especificar"
+  },
+  "form": {
+    "cardTitle": "Información personal",
+    "cardDescription": "Actualiza tus datos. Los cambios se aplican al instante en todas las superficies de SOTA.",
+    "missingUser": "No pudimos identificar al usuario actual.",
+    "genericError": "Ocurrió un error.",
+    "emailLabel": "Correo electrónico",
+    "emailHelp": "El correo electrónico no se puede cambiar",
+    "fullNameLabel": "Nombre completo",
+    "fullNamePlaceholder": "Tu nombre completo",
+    "success": "Perfil actualizado correctamente",
+    "saving": "Guardando...",
+    "save": "Guardar cambios",
+    "cancel": "Cancelar"
+  }
+}

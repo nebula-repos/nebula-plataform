@@ -1,0 +1,42 @@
+{
+  "hero": {
+    "badge": "Comando SOTA",
+    "titleSuffix": "estás guiando el arte.",
+    "description": "Supervisa membresías, lanzamientos y telemetría desde una sola superficie. Cada acción se sincroniza al instante en toda la plataforma.",
+    "cta": "Ver superficie pública",
+    "fallbackName": "Operador"
+  },
+  "stats": {
+    "users": "Usuarios totales",
+    "lines": "Líneas de investigación",
+    "releases": "Lanzamientos",
+    "events": "Eventos registrados"
+  },
+  "sections": {
+    "users": {
+      "title": "Gestión de usuarios",
+      "description": "Revisa cuentas, roles y niveles de membresía.",
+      "cta": "Abrir usuarios"
+    },
+    "lines": {
+      "title": "Líneas de investigación",
+      "description": "Crea, edita y publica nuevas líneas.",
+      "cta": "Gestionar líneas"
+    },
+    "releases": {
+      "title": "Lanzamientos",
+      "description": "Entrega nuevos drops y mantiene versiones.",
+      "cta": "Gestionar lanzamientos"
+    },
+    "audit": {
+      "title": "Registro de auditoría",
+      "description": "Inspecciona acciones administrativas y eventos de revalidación.",
+      "cta": "Ver registros"
+    },
+    "metrics": {
+      "title": "Métricas",
+      "description": "Profundiza en señales de engagement y volúmenes de eventos.",
+      "cta": "Ver métricas"
+    }
+  }
+}

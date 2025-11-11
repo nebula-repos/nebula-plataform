@@ -1,0 +1,87 @@
+{
+  "hero": {
+    "eyebrow": "SOTA · State of the Art",
+    "title": "Signal-first intelligence for State of the Art operators.",
+    "subtitle": "We distill the noise into the SOTA briefings you need: structured releases, applied frameworks, and ready to activate plays that keep your team ahead of the curve.",
+    "primaryCta": "Explore SOTA Releases",
+    "secondaryCta": "Start for Free"
+  },
+  "highlights": [
+    {
+      "icon": "sparkles",
+      "label": "Curated Signals Each Week",
+      "value": "400+",
+      "description": "Primary research, benchmarks, and release-ready distillations.",
+      "className": null
+    },
+    {
+      "icon": "radar",
+      "label": "Latency to Market",
+      "value": "< 72 hrs",
+      "description": "Fresh drops whenever the frontier shifts — no stale PDFs.",
+      "className": null
+    },
+    {
+      "icon": "gauge",
+      "label": "Practitioner-first",
+      "value": "Actionable Playbooks",
+      "description": "Every release includes implementation notes, metrics, and rollout plans.",
+      "className": "sm:col-span-2 lg:col-span-1"
+    }
+  ],
+  "features": {
+    "title": "SOTA pillars to translate frontier research into leverage.",
+    "subtitle": "The SOTA layer blends academic rigor with applied context so your org can deploy what is next — not what was relevant last quarter.",
+    "cards": [
+      {
+        "icon": "cpu",
+        "title": "Frontier Intelligence",
+        "description": "Rapid synthesis of bleeding-edge research with the context that matters for product, policy, and growth teams."
+      },
+      {
+        "icon": "workflow",
+        "title": "SOTA Playbooks",
+        "description": "Opinionated frameworks, reference architectures, and implementation notes engineered for velocity."
+      },
+      {
+        "icon": "shield",
+        "title": "Signal Guardrails",
+        "description": "Curation, validation, and expert review that filters hype and surfaces only the durable moves."
+      }
+    ]
+  },
+  "latest": {
+    "eyebrow": "Latest SOTA drops",
+    "title": "Releases landing now inside the platform.",
+    "description": "Your fast lane to the art: we surface the newest lines, ready to plug into your roadmap.",
+    "newLabel": "New",
+    "cardEyebrow": "SOTA Release",
+    "button": "View all releases",
+    "cta": "Dive into the Art"
+  },
+  "releaseTags": ["Brief", "Implementation", "Signals"],
+  "workflow": {
+    "title": "A workflow engineered for SOTA decision-making.",
+    "description": "From signal detection to rollout, SOTA keeps your organisation aligned on the art that matters. Each release travels through our live pipeline so you can trust the output.",
+    "steps": [
+      {
+        "title": "Capture & context",
+        "description": "Blend academic breakouts, community intelligence, and market telemetry into a single signal map."
+      },
+      {
+        "title": "Art distillation",
+        "description": "Editorial sprints transform research lines into concise briefs, annotated diagrams, and applied frameworks."
+      },
+      {
+        "title": "Activation ready",
+        "description": "Playbooks ship with success metrics, rollout checklists, and integration notes so teams can move instantly."
+      }
+    ]
+  },
+  "cta": {
+    "title": "Ready to operate at the state of the art?",
+    "description": "Join the SOTA platform and transform how your team senses, understands, and deploys what is next.",
+    "primary": "Create a free account",
+    "secondary": "Learn about the mission"
+  }
+}

@@ -8,6 +8,8 @@ import { resolveUserProfile, buildProfileFallback } from "@/lib/supabase/profile
 import { ResearchLineForm } from "@/components/admin/research-line-form"
 import Link from "next/link"
 import { ArrowLeft, Sparkles } from "lucide-react"
+import { getLocale } from "@/lib/i18n/server"
+import { getDictionary } from "@/lib/i18n/get-dictionary"
 
 interface AdminResearchLineEditPageProps {
   params: {
@@ -16,6 +18,8 @@ interface AdminResearchLineEditPageProps {
 }
 
 export default async function AdminResearchLineEditPage({ params }: AdminResearchLineEditPageProps) {
+  const locale = await getLocale()
+  const copy = await getDictionary(locale, "admin.researchLines")
   const supabase = await createClient()
 
   const {
@@ -52,19 +56,17 @@ export default async function AdminResearchLineEditPage({ params }: AdminResearc
               <div>
                 <div className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-primary/80">
                   <Sparkles className="h-4 w-4" aria-hidden />
-                  Edit Line
+                  {copy.editPage.eyebrow}
                 </div>
                 <h1 className="mt-6 text-balance text-4xl font-semibold tracking-tight text-foreground md:text-5xl">
                   {researchLine.title}
                 </h1>
-                <p className="mt-4 max-w-3xl text-pretty text-lg text-muted-foreground">
-                  Update the public information and control availability across the platform.
-                </p>
+                <p className="mt-4 max-w-3xl text-pretty text-lg text-muted-foreground">{copy.editPage.subtitle}</p>
               </div>
               <Link href="/admin/research-lines">
                 <Button variant="outline" className="gap-2 border-primary/40 bg-background/70 backdrop-blur">
                   <ArrowLeft className="h-4 w-4" aria-hidden />
-                  Back to lines
+                  {copy.editPage.back}
                 </Button>
               </Link>
             </div>
@@ -75,8 +77,8 @@ export default async function AdminResearchLineEditPage({ params }: AdminResearc
           <div className="container mx-auto px-4">
             <Card className="max-w-3xl border border-border/60 bg-background/85 shadow-lg shadow-primary/5 backdrop-blur">
               <CardHeader>
-                <CardTitle>General information</CardTitle>
-                <CardDescription>Changes appear automatically on the public site and in admin listings.</CardDescription>
+                <CardTitle>{copy.editPage.cardTitle}</CardTitle>
+                <CardDescription>{copy.editPage.cardDescription}</CardDescription>
               </CardHeader>
               <CardContent>
                 <ResearchLineForm
@@ -88,6 +90,7 @@ export default async function AdminResearchLineEditPage({ params }: AdminResearc
                     description: researchLine.description,
                     is_active: researchLine.is_active,
                   }}
+                  copy={copy.form}
                 />
               </CardContent>
             </Card>

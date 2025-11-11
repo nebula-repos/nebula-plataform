@@ -1,0 +1,83 @@
+{
+  "hero": {
+    "eyebrow": "Line Ops",
+    "title": "Govern every SOTA research line.",
+    "subtitle": "Activate, pause, and refresh lines to keep the art aligned with the frontier.",
+    "back": "Back to admin",
+    "new": "New line"
+  },
+  "stats": {
+    "total": "Total lines",
+    "active": "Active lines"
+  },
+  "list": {
+    "title": "All lines",
+    "description": "Complete list of research lines.",
+    "slugLabel": "Slug"
+  },
+  "status": {
+    "active": "Active",
+    "inactive": "Inactive"
+  },
+  "empty": "No research lines available.",
+  "actions": {
+    "edit": "Edit",
+    "activate": "Activate",
+    "deactivate": "Deactivate",
+    "delete": "Delete",
+    "confirmDelete": "Are you sure you want to delete this research line?"
+  },
+  "createPage": {
+    "eyebrow": "New Line",
+    "title": "Spin up a fresh research line.",
+    "subtitle": "Define public details now. Add releases, documents, and signals once the line is live.",
+    "back": "Back to lines",
+    "cardTitle": "Key details",
+    "cardDescription": "Complete the title, slug, and description shown to users."
+  },
+  "editPage": {
+    "eyebrow": "Edit Line",
+    "subtitle": "Update the public information and control availability across the platform.",
+    "back": "Back to lines",
+    "cardTitle": "General information",
+    "cardDescription": "Changes appear automatically on the public site and in admin listings."
+  },
+  "form": {
+    "fields": {
+      "title": {
+        "label": "Title",
+        "placeholder": "e.g. Applied AI for the healthcare sector"
+      },
+      "slug": {
+        "label": "Slug",
+        "placeholder": "e.g. ai-healthcare-sector",
+        "helper": "Used to generate the public URL. You can modify it before saving."
+      },
+      "description": {
+        "label": "Description",
+        "placeholder": "Describe the scope, objectives, and expected outcomes."
+      }
+    },
+    "toggles": {
+      "isActive": "Active line visible on the platform"
+    },
+    "messages": {
+      "errors": {
+        "titleRequired": "Title is required",
+        "slugRequired": "Slug is required",
+        "session": "Could not validate the user session.",
+        "unexpected": "An unexpected error occurred"
+      },
+      "success": {
+        "created": "Research line created successfully",
+        "updated": "Changes saved successfully"
+      }
+    },
+    "buttons": {
+      "saving": "Saving...",
+      "create": "Create line",
+      "update": "Save changes",
+      "cancel": "Cancel"
+    }
+  }
+}

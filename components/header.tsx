@@ -3,8 +3,13 @@ import { Button } from "@/components/ui/button"
 import { createClient } from "@/lib/supabase/server"
 import { resolveUserProfile } from "@/lib/supabase/profiles"
 import { ResearchLinesSidebar } from "@/components/research-lines-sidebar"
+import { LanguageToggle } from "@/components/language-toggle"
+import { getLocale } from "@/lib/i18n/server"
+import { getDictionary } from "@/lib/i18n/get-dictionary"
 
 export async function Header() {
+  const locale = await getLocale()
+  const common = await getDictionary(locale, "common")
   const supabase = await createClient()
   const {
     data: { user },
@@ -21,30 +26,30 @@ export async function Header() {
 
   return (
     <header className="border-b border-border bg-background">
-      <div className="container mx-auto flex h-16 items-center justify-between px-4">
+      <div className="container mx-auto flex h-16 items-center justify-between gap-4 px-4">
         <div className="flex items-center gap-3">
-          {shouldShowSidebar && <ResearchLinesSidebar researchLines={activeResearchLines} />}
+          {shouldShowSidebar && <ResearchLinesSidebar researchLines={activeResearchLines} copy={common.sidebar} />}
           <Link href="/" className="text-xl font-semibold">
             SotA
           </Link>
         </div>
-        <nav className="flex items-center gap-6">
+        <nav className="flex items-center gap-4">
           <Link href="/research-lines" className="text-sm hover:text-primary">
-            Research Lines
+            {common.header.nav.researchLines}
           </Link>
           {user ? (
             <>
               <Link href="/dashboard" className="text-sm hover:text-primary">
-                My Account
+                {common.header.nav.myAccount}
               </Link>
               {userProfile?.role === "admin" && (
                 <Link href="/admin" className="text-sm hover:text-primary">
-                  Admin
+                  {common.header.nav.admin}
                 </Link>
               )}
               <form action="/auth/signout" method="post">
                 <Button variant="outline" size="sm" type="submit">
-                  Sign out
+                  {common.header.auth.signout}
                 </Button>
               </form>
             </>
@@ -52,14 +57,17 @@ export async function Header() {
             <>
               <Link href="/auth/login">
                 <Button variant="outline" size="sm">
-                  Log in
+                  {common.header.auth.login}
                 </Button>
               </Link>
               <Link href="/auth/signup">
-                <Button size="sm">Sign up</Button>
+                <Button size="sm">
+                  {common.header.auth.signup}
+                </Button>
               </Link>
             </>
           )}
+          <LanguageToggle locale={locale} />
         </nav>
       </div>
     </header>

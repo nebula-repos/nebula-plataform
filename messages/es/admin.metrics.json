@@ -1,0 +1,26 @@
+{
+  "hero": {
+    "eyebrow": "Telemetría",
+    "title": "Descifra cómo los equipos se relacionan con el arte.",
+    "subtitle": "Monitorea flujos de eventos, crecimiento de usuarios y distribución de membresías para informar tu próximo lanzamiento.",
+    "back": "Volver a administración"
+  },
+  "stats": {
+    "totalUsers": "Usuarios totales",
+    "freeUsers": "Usuarios gratuitos",
+    "members": "Miembros premium",
+    "eventTypes": "Tipos de eventos rastreados"
+  },
+  "distribution": {
+    "title": "Distribución de usuarios",
+    "description": "Usuarios por nivel de membresía.",
+    "total": "Usuarios totales",
+    "free": "Usuarios gratuitos",
+    "members": "Miembros premium"
+  },
+  "activity": {
+    "title": "Actividad de eventos",
+    "description": "Tipos de eventos más frecuentes.",
+    "empty": "No hay datos de eventos disponibles"
+  }
+}

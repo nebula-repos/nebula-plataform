@@ -1,0 +1,16 @@
+{
+  "hero": {
+    "eyebrow": "Audit Trail",
+    "title": "Monitor every SOTA admin move.",
+    "subtitle": "Inspect the latest administrative actions, revalidations, and state changes to keep the art protected.",
+    "back": "Back to admin"
+  },
+  "stats": {
+    "records": "Records reviewed"
+  },
+  "list": {
+    "title": "Last 100 actions",
+    "description": "Complete administrative activity log.",
+    "empty": "No audit records yet."
+  }
+}

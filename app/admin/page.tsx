@@ -7,8 +7,12 @@ import { resolveUserProfile, buildProfileFallback } from "@/lib/supabase/profile
 import { Users, BookOpen, FileText, Activity, Sparkles, ArrowRight } from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import { getLocale } from "@/lib/i18n/server"
+import { getDictionary } from "@/lib/i18n/get-dictionary"
 
 export default async function AdminPage() {
+  const locale = await getLocale()
+  const adminCopy = await getDictionary(locale, "admin")
   const supabase = await createClient()
 
   const {
@@ -36,7 +40,7 @@ export default async function AdminPage() {
 
   const { count: totalEvents } = await supabase.from("events").select("*", { count: "exact", head: true })
 
-  const displayName = userProfile.full_name || userProfile.email || "Operator"
+  const displayName = userProfile.full_name || userProfile.email || adminCopy.hero.fallbackName
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -52,19 +56,18 @@ export default async function AdminPage() {
               <div>
                 <div className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-primary/80">
                   <Sparkles className="h-4 w-4" aria-hidden />
-                  SOTA Command
+                  {adminCopy.hero.badge}
                 </div>
                 <h1 className="mt-6 text-balance text-4xl font-semibold tracking-tight text-foreground md:text-5xl">
-                  {displayName}, you&apos;re steering the art.
+                  {displayName}, {adminCopy.hero.titleSuffix}
                 </h1>
                 <p className="mt-4 max-w-2xl text-pretty text-lg text-muted-foreground">
-                  Oversee membership, releases, and telemetry from a single surface. Every action syncs instantly across
-                  the platform.
+                  {adminCopy.hero.description}
                 </p>
               </div>
               <Link href="/research-lines">
                 <Button variant="outline" className="gap-2 border-primary/40 bg-background/70 backdrop-blur">
-                  View public surface
+                  {adminCopy.hero.cta}
                   <ArrowRight className="h-4 w-4" aria-hidden />
                 </Button>
               </Link>
@@ -73,7 +76,7 @@ export default async function AdminPage() {
               <Card className="border border-border/60 bg-background/80 shadow-lg shadow-primary/5 backdrop-blur">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground/80">
-                    Total users
+                    {adminCopy.stats.users}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="text-3xl font-semibold text-foreground">{totalUsers || 0}</CardContent>
@@ -81,7 +84,7 @@ export default async function AdminPage() {
               <Card className="border border-border/60 bg-background/80 shadow-lg shadow-primary/5 backdrop-blur">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground/80">
-                    Research lines
+                    {adminCopy.stats.lines}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="text-3xl font-semibold text-foreground">{totalResearchLines || 0}</CardContent>
@@ -89,7 +92,7 @@ export default async function AdminPage() {
               <Card className="border border-border/60 bg-background/80 shadow-lg shadow-primary/5 backdrop-blur">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground/80">
-                    Releases
+                    {adminCopy.stats.releases}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="text-3xl font-semibold text-foreground">{totalReleases || 0}</CardContent>
@@ -97,7 +100,7 @@ export default async function AdminPage() {
               <Card className="border border-border/60 bg-background/80 shadow-lg shadow-primary/5 backdrop-blur">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground/80">
-                    Events tracked
+                    {adminCopy.stats.events}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="text-3xl font-semibold text-foreground">{totalEvents || 0}</CardContent>
@@ -114,14 +117,14 @@ export default async function AdminPage() {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Users className="h-4 w-4 text-primary" aria-hidden />
-                    User management
+                    {adminCopy.sections.users.title}
                   </CardTitle>
-                  <CardDescription>Review accounts, roles, and membership tiers.</CardDescription>
+                  <CardDescription>{adminCopy.sections.users.description}</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <Link href="/admin/users">
                     <Button className="w-full gap-2">
-                      Open users
+                      {adminCopy.sections.users.cta}
                       <ArrowRight className="h-4 w-4" aria-hidden />
                     </Button>
                   </Link>
@@ -133,14 +136,14 @@ export default async function AdminPage() {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <BookOpen className="h-4 w-4 text-primary" aria-hidden />
-                    Research lines
+                    {adminCopy.sections.lines.title}
                   </CardTitle>
-                  <CardDescription>Create, edit, and publish new lines.</CardDescription>
+                  <CardDescription>{adminCopy.sections.lines.description}</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <Link href="/admin/research-lines">
                     <Button className="w-full gap-2">
-                      Manage lines
+                      {adminCopy.sections.lines.cta}
                       <ArrowRight className="h-4 w-4" aria-hidden />
                     </Button>
                   </Link>
@@ -152,14 +155,14 @@ export default async function AdminPage() {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <FileText className="h-4 w-4 text-primary" aria-hidden />
-                    Releases
+                    {adminCopy.sections.releases.title}
                   </CardTitle>
-                  <CardDescription>Ship new art drops and maintain versions.</CardDescription>
+                  <CardDescription>{adminCopy.sections.releases.description}</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <Link href="/admin/releases">
                     <Button className="w-full gap-2">
-                      Manage releases
+                      {adminCopy.sections.releases.cta}
                       <ArrowRight className="h-4 w-4" aria-hidden />
                     </Button>
                   </Link>
@@ -171,14 +174,14 @@ export default async function AdminPage() {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Activity className="h-4 w-4 text-primary" aria-hidden />
-                    Audit trail
+                    {adminCopy.sections.audit.title}
                   </CardTitle>
-                  <CardDescription>Inspect admin actions and revalidation events.</CardDescription>
+                  <CardDescription>{adminCopy.sections.audit.description}</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <Link href="/admin/audit-logs">
                     <Button className="w-full gap-2">
-                      View logs
+                      {adminCopy.sections.audit.cta}
                       <ArrowRight className="h-4 w-4" aria-hidden />
                     </Button>
                   </Link>
@@ -190,14 +193,14 @@ export default async function AdminPage() {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Activity className="h-4 w-4 text-primary" aria-hidden />
-                    Metrics
+                    {adminCopy.sections.metrics.title}
                   </CardTitle>
-                  <CardDescription>Dig into engagement signals and event volumes.</CardDescription>
+                  <CardDescription>{adminCopy.sections.metrics.description}</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <Link href="/admin/metrics">
                     <Button className="w-full gap-2">
-                      View metrics
+                      {adminCopy.sections.metrics.cta}
                       <ArrowRight className="h-4 w-4" aria-hidden />
                     </Button>
                   </Link>

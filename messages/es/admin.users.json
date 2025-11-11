@@ -1,0 +1,34 @@
+{
+  "hero": {
+    "badge": "Control de acceso",
+    "title": "Gestiona operadores y niveles de membresía.",
+    "description": "Audita roles, mejora membresías y garantiza que cada espacio tenga los privilegios correctos para desplegar el arte.",
+    "back": "Volver a administración"
+  },
+  "stats": {
+    "total": "Usuarios totales",
+    "admins": "Administradores",
+    "members": "Miembros premium"
+  },
+  "list": {
+    "title": "Todos los usuarios",
+    "description": "Lista completa de operadores registrados y su estado.",
+    "role": {
+      "admin": "Administrador",
+      "member": "Miembro"
+    },
+    "tier": {
+      "premium": "Premium",
+      "free": "Gratis"
+    },
+    "noName": "Sin nombre",
+    "registered": "Registrado",
+    "empty": "Todavía no hay usuarios registrados. Incorpora un equipo para completar esta lista."
+  },
+  "actions": {
+    "promote": "Convertir en admin",
+    "demote": "Quitar admin",
+    "upgrade": "Cambiar a Premium",
+    "downgrade": "Cambiar a gratuito"
+  }
+}

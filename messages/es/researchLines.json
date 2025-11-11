@@ -1,0 +1,39 @@
+{
+  "hero": {
+    "eyebrow": "Atlas SOTA",
+    "title": "Líneas de investigación diseñadas para entregar velocidad de estado del arte.",
+    "description": "Explora el catálogo vivo de líneas de investigación SOTA. Cada track cura las señales, lanzamientos y playbooks que mantienen a tus equipos alineados con la frontera.",
+    "primaryCta": "Ver líneas activas",
+    "authCta": "Ir a mi panel",
+    "guestCta": "Solicitar acceso a SOTA"
+  },
+  "stats": [
+    {
+      "icon": "sparkles",
+      "title": "Señales mapeadas",
+      "description": "Los curadores destilan el ruido en entregas de inteligencia actualizadas cada semana."
+    },
+    {
+      "icon": "layers",
+      "title": "Lanzamientos estructurados",
+      "description": "Cada línea se entrega con lanzamientos escalonados y notas de activación."
+    },
+    {
+      "icon": "compass",
+      "title": "Cobertura sectorial",
+      "description": "Desde infraestructura de IA hasta cambios regulatorios, seguimos la frontera."
+    },
+    {
+      "icon": "calendar",
+      "title": "Frescura semanal",
+      "description": "La cadencia de lanzamientos mantiene el arte alineado con la realidad actual."
+    }
+  ],
+  "list": {
+    "badge": "Línea SOTA",
+    "releasesLabel": "Lanzamientos activos",
+    "viewReleases": "Ver lanzamientos",
+    "freshFallback": "Lanzamiento reciente",
+    "empty": "No hay líneas de investigación disponibles por ahora."
+  }
+}

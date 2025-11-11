@@ -1,0 +1,83 @@
+{
+  "hero": {
+    "eyebrow": "Operaciones de líneas",
+    "title": "Gobierna cada línea de investigación SOTA.",
+    "subtitle": "Activa, pausa y renueva líneas para mantener el arte alineado con la frontera.",
+    "back": "Volver a administración",
+    "new": "Nueva línea"
+  },
+  "stats": {
+    "total": "Líneas totales",
+    "active": "Líneas activas"
+  },
+  "list": {
+    "title": "Todas las líneas",
+    "description": "Lista completa de líneas de investigación.",
+    "slugLabel": "Slug"
+  },
+  "status": {
+    "active": "Activa",
+    "inactive": "Inactiva"
+  },
+  "empty": "No hay líneas de investigación disponibles.",
+  "actions": {
+    "edit": "Editar",
+    "activate": "Activar",
+    "deactivate": "Desactivar",
+    "delete": "Eliminar",
+    "confirmDelete": "¿Estás seguro de que deseas eliminar esta línea de investigación?"
+  },
+  "createPage": {
+    "eyebrow": "Nueva línea",
+    "title": "Lanza una nueva línea de investigación.",
+    "subtitle": "Define ahora los detalles públicos. Agrega lanzamientos, documentos y señales una vez que la línea esté activa.",
+    "back": "Volver a líneas",
+    "cardTitle": "Detalles clave",
+    "cardDescription": "Completa el título, el slug y la descripción que verán los usuarios."
+  },
+  "editPage": {
+    "eyebrow": "Editar línea",
+    "subtitle": "Actualiza la información pública y controla la disponibilidad en toda la plataforma.",
+    "back": "Volver a líneas",
+    "cardTitle": "Información general",
+    "cardDescription": "Los cambios aparecen automáticamente en el sitio público y en las listas de administración."
+  },
+  "form": {
+    "fields": {
+      "title": {
+        "label": "Título",
+        "placeholder": "ej. IA aplicada para el sector salud"
+      },
+      "slug": {
+        "label": "Slug",
+        "placeholder": "ej. ia-sector-salud",
+        "helper": "Se usa para generar la URL pública. Puedes modificarlo antes de guardar."
+      },
+      "description": {
+        "label": "Descripción",
+        "placeholder": "Describe el alcance, los objetivos y los resultados esperados."
+      }
+    },
+    "toggles": {
+      "isActive": "Línea activa visible en la plataforma"
+    },
+    "messages": {
+      "errors": {
+        "titleRequired": "El título es obligatorio",
+        "slugRequired": "El slug es obligatorio",
+        "session": "No se pudo validar la sesión del usuario.",
+        "unexpected": "Ocurrió un error inesperado"
+      },
+      "success": {
+        "created": "Línea de investigación creada correctamente",
+        "updated": "Cambios guardados correctamente"
+      }
+    },
+    "buttons": {
+      "saving": "Guardando...",
+      "create": "Crear línea",
+      "update": "Guardar cambios",
+      "cancel": "Cancelar"
+    }
+  }
+}

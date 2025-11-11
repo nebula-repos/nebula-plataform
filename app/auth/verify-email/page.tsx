@@ -1,7 +1,12 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Sparkles } from "lucide-react"
+import { getLocale } from "@/lib/i18n/server"
+import { getDictionary } from "@/lib/i18n/get-dictionary"
 
-export default function VerifyEmailPage() {
+export default async function VerifyEmailPage() {
+  const locale = await getLocale()
+  const copy = await getDictionary(locale, "auth.verify")
+
   return (
     <div className="relative flex min-h-svh w-full items-center justify-center overflow-hidden bg-background">
       <div className="pointer-events-none absolute inset-0">
@@ -14,17 +19,12 @@ export default function VerifyEmailPage() {
             <div className="inline-flex items-center justify-center rounded-full border border-primary/40 bg-primary/10 p-2">
               <Sparkles className="h-5 w-5 text-primary" aria-hidden />
             </div>
-            <CardTitle className="text-2xl">Verify your email</CardTitle>
-            <CardDescription>Check your inbox</CardDescription>
+            <CardTitle className="text-2xl">{copy.title}</CardTitle>
+            <CardDescription>{copy.subtitle}</CardDescription>
           </CardHeader>
           <CardContent>
-            <p className="text-sm text-muted-foreground">
-              We&apos;ve sent you an email with a verification link. Please check your inbox and click the link to
-              activate your account.
-            </p>
-            <p className="mt-4 text-xs uppercase tracking-[0.3em] text-muted-foreground/70">
-              Didn&apos;t receive it? Resend from the login screen.
-            </p>
+            <p className="text-sm text-muted-foreground">{copy.body}</p>
+            <p className="mt-4 text-xs uppercase tracking-[0.3em] text-muted-foreground/70">{copy.note}</p>
           </CardContent>
         </Card>
       </div>

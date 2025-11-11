@@ -8,8 +8,12 @@ import { resolveUserProfile, buildProfileFallback } from "@/lib/supabase/profile
 import { ReleaseForm } from "@/components/admin/release-form"
 import Link from "next/link"
 import { ArrowLeft, Sparkles } from "lucide-react"
+import { getLocale } from "@/lib/i18n/server"
+import { getDictionary } from "@/lib/i18n/get-dictionary"
 
 export default async function AdminReleasesNewPage() {
+  const locale = await getLocale()
+  const copy = await getDictionary(locale, "admin.releases")
   const supabase = await createClient()
 
   const {
@@ -45,19 +49,19 @@ export default async function AdminReleasesNewPage() {
               <div>
                 <div className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-primary/80">
                   <Sparkles className="h-4 w-4" aria-hidden />
-                  New Release
+                  {copy.newPage.eyebrow}
                 </div>
                 <h1 className="mt-6 text-balance text-4xl font-semibold tracking-tight text-foreground md:text-5xl">
-                  Publish the next art drop.
+                  {copy.newPage.title}
                 </h1>
                 <p className="mt-4 max-w-2xl text-pretty text-lg text-muted-foreground">
-                  Connect the drop to its line, schedule the date, and upload the three focus reports in one flow.
+                  {copy.newPage.subtitle}
                 </p>
               </div>
               <Link href="/admin/releases">
                 <Button variant="outline" className="gap-2 border-primary/40 bg-background/70 backdrop-blur">
                   <ArrowLeft className="h-4 w-4" aria-hidden />
-                  Back to releases
+                  {copy.newPage.back}
                 </Button>
               </Link>
             </div>
@@ -68,11 +72,11 @@ export default async function AdminReleasesNewPage() {
           <div className="container mx-auto px-4">
             <Card className="border border-border/60 bg-background/85 shadow-lg shadow-primary/5 backdrop-blur">
               <CardHeader>
-                <CardTitle>Release upload</CardTitle>
-                <CardDescription>Select the line, define the slug, and upload the three bundled reports.</CardDescription>
+                <CardTitle>{copy.newPage.cardTitle}</CardTitle>
+                <CardDescription>{copy.newPage.cardDescription}</CardDescription>
               </CardHeader>
               <CardContent>
-                <ReleaseForm researchLines={researchLines ?? []} />
+                <ReleaseForm researchLines={researchLines ?? []} copy={copy.form} />
               </CardContent>
             </Card>
           </div>

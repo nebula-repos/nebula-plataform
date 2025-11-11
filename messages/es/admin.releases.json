@@ -1,0 +1,99 @@
+{
+  "hero": {
+    "eyebrow": "Operaciones de lanzamientos",
+    "title": "Cura y despacha lanzamientos SOTA.",
+    "subtitle": "Publica nuevos drops artísticos y monitorea su estado a medida que llegan al mundo.",
+    "back": "Volver a administración",
+    "new": "Nuevo lanzamiento"
+  },
+  "stats": {
+    "total": "Lanzamientos totales",
+    "published": "Publicados"
+  },
+  "list": {
+    "title": "Todos los lanzamientos",
+    "description": "Lista completa de lanzamientos.",
+    "lineLabel": "Línea",
+    "noLine": "Sin línea",
+    "noDate": "Sin fecha de publicación",
+    "viewAction": "Ver"
+  },
+  "status": {
+    "published": "Publicado",
+    "draft": "Borrador"
+  },
+  "empty": "No hay lanzamientos",
+  "newPage": {
+    "eyebrow": "Nuevo lanzamiento",
+    "title": "Publica el próximo drop.",
+    "subtitle": "Conecta el drop con su línea, programa la fecha y carga los tres reportes foco en un mismo flujo.",
+    "back": "Volver a lanzamientos",
+    "cardTitle": "Carga del lanzamiento",
+    "cardDescription": "Selecciona la línea, define el slug y sube los tres reportes agrupados."
+  },
+  "form": {
+    "fields": {
+      "researchLine": {
+        "label": "Línea de investigación",
+        "noLines": "No hay líneas disponibles",
+        "helper": "Elige dónde aterrizarán los reportes. Un lanzamiento por línea y por carpeta de fecha."
+      },
+      "title": {
+        "label": "Título",
+        "placeholder": "ej. Tendencias de IA en sistemas de salud 2025"
+      },
+      "slug": {
+        "label": "Slug",
+        "placeholder": "ej. ia-tendencias-salud-2025",
+        "helperPrefix": "Este slug determina la URL pública:",
+        "helperSuffix": ".",
+        "fallback": "tu-slug"
+      },
+      "releaseDate": {
+        "label": "Fecha del lanzamiento",
+        "helper": "La fecha se usa para la programación y para nombrar la carpeta de almacenamiento."
+      },
+      "published": {
+        "label": "Marcar como publicado y visible para los miembros de inmediato"
+      }
+    },
+    "reports": {
+      "heading": "Sube los reportes",
+      "description": "Cada foco espera un único archivo (PDF, docx u otro). Los archivos se guardan en",
+      "descriptionSuffix": ".",
+      "attached": "Adjunto",
+      "definitions": {
+        "actualidad": {
+          "label": "Reporte de panorama actual",
+          "helper": "Señales, movimientos del mercado y por qué este drop importa ahora."
+        },
+        "industria": {
+          "label": "Reporte de aplicaciones industriales",
+          "helper": "Tácticas de despliegue, notas de implementación y patrones probados en campo."
+        },
+        "academico": {
+          "label": "Reporte de bases académicas",
+          "helper": "Estudios clave, referencias y sustento teórico del lanzamiento."
+        }
+      }
+    },
+    "messages": {
+      "selectLine": "Selecciona una línea de investigación.",
+      "lineMissing": "No se encontró la línea seleccionada.",
+      "titleRequired": "El título es obligatorio.",
+      "slugRequired": "El slug es obligatorio.",
+      "dateRequired": "Elige la fecha del lanzamiento para crear la ruta de almacenamiento.",
+      "missingReport": "Sube el {report}.",
+      "session": "No se pudo validar la sesión del usuario.",
+      "uploadFailed": "No se pudo subir el {report}: {error}",
+      "registerFailed": "No se pudo registrar el {report}: {error}",
+      "unexpected": "Ocurrió un error inesperado.",
+      "success": "Lanzamiento creado y reportes cargados."
+    },
+    "buttons": {
+      "saving": "Guardando...",
+      "submit": "Crear lanzamiento",
+      "cancel": "Cancelar"
+    }
+  }
+}

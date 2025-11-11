@@ -11,9 +11,15 @@ interface UserActionsProps {
   userId: string
   currentRole: string
   currentTier: string
+  copy: {
+    promote: string
+    demote: string
+    upgrade: string
+    downgrade: string
+  }
 }
 
-export function UserActions({ userId, currentRole, currentTier }: UserActionsProps) {
+export function UserActions({ userId, currentRole, currentTier, copy }: UserActionsProps) {
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
 
@@ -57,19 +63,23 @@ export function UserActions({ userId, currentRole, currentTier }: UserActionsPro
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         {currentRole === "user" && (
-          <DropdownMenuItem onClick={() => updateUser({ role: "admin" })}>Make Admin</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => updateUser({ role: "admin" })}>
+            {copy.promote}
+          </DropdownMenuItem>
         )}
         {currentRole === "admin" && (
-          <DropdownMenuItem onClick={() => updateUser({ role: "user" })}>Remove Admin</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => updateUser({ role: "user" })}>
+            {copy.demote}
+          </DropdownMenuItem>
         )}
         {currentTier === "free" && (
           <DropdownMenuItem onClick={() => updateUser({ membership_tier: "member" })}>
-            Upgrade to Member
+            {copy.upgrade}
           </DropdownMenuItem>
         )}
         {currentTier === "member" && (
           <DropdownMenuItem onClick={() => updateUser({ membership_tier: "free" })}>
-            Switch to Free
+            {copy.downgrade}
           </DropdownMenuItem>
         )}
       </DropdownMenuContent>

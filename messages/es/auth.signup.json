@@ -1,0 +1,20 @@
+{
+  "badge": "Únete a SOTA",
+  "headline": "Construye tu espacio de trabajo de estado del arte.",
+  "subhead": "Crea tu perfil para desbloquear líneas de investigación curadas, playbooks de activación y el feed de señales de la comunidad.",
+  "badgeFooter": "Acceso inmediato · Verifica tu correo para activar los lanzamientos",
+  "cardTitle": "Crear cuenta",
+  "cardDescription": "Regístrate para acceder a la plataforma",
+  "fullNameLabel": "Nombre completo",
+  "fullNamePlaceholder": "Juan Pérez",
+  "emailLabel": "Correo electrónico",
+  "emailPlaceholder": "tu@ejemplo.com",
+  "passwordLabel": "Contraseña",
+  "confirmPasswordLabel": "Confirmar contraseña",
+  "submitLoading": "Creando cuenta...",
+  "submit": "Crear cuenta",
+  "loginPrompt": "¿Ya tienes una cuenta?",
+  "loginCta": "Iniciar sesión",
+  "passwordMismatch": "Las contraseñas no coinciden",
+  "genericError": "Ocurrió un error"
+}

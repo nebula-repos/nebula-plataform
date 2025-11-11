@@ -8,8 +8,12 @@ import { resolveUserProfile, buildProfileFallback } from "@/lib/supabase/profile
 import { ResearchLineForm } from "@/components/admin/research-line-form"
 import Link from "next/link"
 import { ArrowLeft, Sparkles } from "lucide-react"
+import { getLocale } from "@/lib/i18n/server"
+import { getDictionary } from "@/lib/i18n/get-dictionary"
 
 export default async function AdminResearchLineNewPage() {
+  const locale = await getLocale()
+  const copy = await getDictionary(locale, "admin.researchLines")
   const supabase = await createClient()
 
   const {
@@ -40,19 +44,19 @@ export default async function AdminResearchLineNewPage() {
               <div>
                 <div className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-primary/80">
                   <Sparkles className="h-4 w-4" aria-hidden />
-                  New Line
+                  {copy.createPage.eyebrow}
                 </div>
                 <h1 className="mt-6 text-balance text-4xl font-semibold tracking-tight text-foreground md:text-5xl">
-                  Spin up a fresh research line.
+                  {copy.createPage.title}
                 </h1>
                 <p className="mt-4 max-w-2xl text-pretty text-lg text-muted-foreground">
-                  Define public details now. Add releases, documents, and signals once the line is live.
+                  {copy.createPage.subtitle}
                 </p>
               </div>
               <Link href="/admin/research-lines">
                 <Button variant="outline" className="gap-2 border-primary/40 bg-background/70 backdrop-blur">
                   <ArrowLeft className="h-4 w-4" aria-hidden />
-                  Back to lines
+                  {copy.createPage.back}
                 </Button>
               </Link>
             </div>
@@ -63,11 +67,15 @@ export default async function AdminResearchLineNewPage() {
           <div className="container mx-auto px-4">
             <Card className="max-w-3xl border border-border/60 bg-background/85 shadow-lg shadow-primary/5 backdrop-blur">
               <CardHeader>
-                <CardTitle>Key details</CardTitle>
-                <CardDescription>Complete the title, slug, and description shown to users.</CardDescription>
+                <CardTitle>
+                  {copy.createPage.cardTitle}
+                </CardTitle>
+                <CardDescription>
+                  {copy.createPage.cardDescription}
+                </CardDescription>
               </CardHeader>
               <CardContent>
-                <ResearchLineForm mode="create" />
+                <ResearchLineForm mode="create" copy={copy.form} />
               </CardContent>
             </Card>
           </div>

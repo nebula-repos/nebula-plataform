@@ -7,8 +7,17 @@ import { createClient } from "@/lib/supabase/server"
 import { resolveUserProfile, buildProfileFallback } from "@/lib/supabase/profiles"
 import { BarChart3, Sparkles, ArrowLeft } from "lucide-react"
 import Link from "next/link"
+import { getLocale } from "@/lib/i18n/server"
+import { getDictionary } from "@/lib/i18n/get-dictionary"
+
+type EventCount = {
+  event_type: string
+  count: number
+}
 
 export default async function AdminMetricsPage() {
+  const locale = await getLocale()
+  const copy = await getDictionary(locale, "admin.metrics")
   const supabase = await createClient()
 
   const {
@@ -26,7 +35,7 @@ export default async function AdminMetricsPage() {
   }
 
   // Get event type counts
-  const { data: eventCounts } = await supabase.rpc("get_event_counts" as any).limit(10)
+  const { data: eventCounts } = await supabase.rpc<EventCount>("get_event_counts").limit(10)
 
   // Get user growth
   const { count: totalUsers } = await supabase.from("users").select("*", { count: "exact", head: true })
@@ -57,19 +66,19 @@ export default async function AdminMetricsPage() {
               <div>
                 <div className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-primary/80">
                   <Sparkles className="h-4 w-4" aria-hidden />
-                  Telemetry
+                  {copy.hero.eyebrow}
                 </div>
                 <h1 className="mt-6 text-balance text-4xl font-semibold tracking-tight text-foreground md:text-5xl">
-                  Decode how teams engage with the art.
+                  {copy.hero.title}
                 </h1>
                 <p className="mt-4 max-w-2xl text-pretty text-lg text-muted-foreground">
-                  Monitor event streams, user growth, and membership distribution to inform your next release decisions.
+                  {copy.hero.subtitle}
                 </p>
               </div>
               <Link href="/admin">
                 <Button variant="outline" className="gap-2 border-primary/40 bg-background/70 backdrop-blur">
                   <ArrowLeft className="h-4 w-4" aria-hidden />
-                  Back to admin
+                  {copy.hero.back}
                 </Button>
               </Link>
             </div>
@@ -77,7 +86,7 @@ export default async function AdminMetricsPage() {
               <Card className="border border-border/60 bg-background/80 shadow-lg shadow-primary/5 backdrop-blur">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground/80">
-                    Total users
+                    {copy.stats.totalUsers}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="text-3xl font-semibold text-foreground">{totalUsers || 0}</CardContent>
@@ -85,7 +94,7 @@ export default async function AdminMetricsPage() {
               <Card className="border border-border/60 bg-background/80 shadow-lg shadow-primary/5 backdrop-blur">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground/80">
-                    Free users
+                    {copy.stats.freeUsers}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="text-3xl font-semibold text-foreground">{freeUsers || 0}</CardContent>
@@ -93,7 +102,7 @@ export default async function AdminMetricsPage() {
               <Card className="border border-border/60 bg-background/80 shadow-lg shadow-primary/5 backdrop-blur">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground/80">
-                    Premium members
+                    {copy.stats.members}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="text-3xl font-semibold text-foreground">{memberUsers || 0}</CardContent>
@@ -101,7 +110,7 @@ export default async function AdminMetricsPage() {
               <Card className="border border-border/60 bg-background/80 shadow-lg shadow-primary/5 backdrop-blur">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground/80">
-                    Event types tracked
+                    {copy.stats.eventTypes}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="text-3xl font-semibold text-foreground">{eventTypeCount}</CardContent>
@@ -116,21 +125,21 @@ export default async function AdminMetricsPage() {
               {/* User Statistics */}
               <Card className="border border-border/60 bg-background/85 shadow-lg shadow-primary/5 backdrop-blur">
                 <CardHeader>
-                  <CardTitle>User distribution</CardTitle>
-                  <CardDescription>Users by membership tier.</CardDescription>
+                  <CardTitle>{copy.distribution.title}</CardTitle>
+                  <CardDescription>{copy.distribution.description}</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
-                      <span className="text-sm font-medium">Total users</span>
+                      <span className="text-sm font-medium">{copy.distribution.total}</span>
                       <span className="text-2xl font-bold">{totalUsers || 0}</span>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-muted-foreground">Free users</span>
+                      <span className="text-sm text-muted-foreground">{copy.distribution.free}</span>
                       <span className="text-lg font-semibold">{freeUsers || 0}</span>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-muted-foreground">Premium members</span>
+                      <span className="text-sm text-muted-foreground">{copy.distribution.members}</span>
                       <span className="text-lg font-semibold">{memberUsers || 0}</span>
                     </div>
                   </div>
@@ -142,14 +151,14 @@ export default async function AdminMetricsPage() {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <BarChart3 className="h-5 w-5" />
-                    Event activity
+                    {copy.activity.title}
                   </CardTitle>
-                  <CardDescription>Most frequent event types.</CardDescription>
+                  <CardDescription>{copy.activity.description}</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-2">
                     {eventCounts && eventCounts.length > 0 ? (
-                      eventCounts.map((event: any) => (
+                      eventCounts.map((event) => (
                         <div
                           key={event.event_type}
                           className="flex items-center justify-between rounded-xl border border-border/50 bg-background/80 p-3 text-sm shadow-sm shadow-primary/5"
@@ -159,7 +168,7 @@ export default async function AdminMetricsPage() {
                         </div>
                       ))
                     ) : (
-                      <p className="text-sm text-muted-foreground">No event data available</p>
+                      <p className="text-sm text-muted-foreground">{copy.activity.empty}</p>
                     )}
                   </div>
                 </CardContent>

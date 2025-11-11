@@ -12,9 +12,16 @@ interface ResearchLineActionsProps {
   lineId: string
   isActive: boolean
   slug: string
+  copy: {
+    edit: string
+    activate: string
+    deactivate: string
+    delete: string
+    confirmDelete: string
+  }
 }
 
-export function ResearchLineActions({ lineId, isActive, slug }: ResearchLineActionsProps) {
+export function ResearchLineActions({ lineId, isActive, slug, copy }: ResearchLineActionsProps) {
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
 
@@ -50,7 +57,10 @@ export function ResearchLineActions({ lineId, isActive, slug }: ResearchLineActi
   }
 
   const deleteLine = async () => {
-    if (!confirm("Are you sure you want to delete this research line?")) return
+    if (
+      !confirm(copy.confirmDelete)
+    )
+      return
 
     setIsLoading(true)
     const supabase = createClient()
@@ -86,7 +96,7 @@ export function ResearchLineActions({ lineId, isActive, slug }: ResearchLineActi
     <div className="flex items-center gap-2">
       <Link href={`/admin/research-lines/${slug}/edit`}>
         <Button variant="outline" size="sm">
-          Edit
+          {copy.edit}
         </Button>
       </Link>
       <DropdownMenu>
@@ -96,9 +106,11 @@ export function ResearchLineActions({ lineId, isActive, slug }: ResearchLineActi
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuItem onClick={toggleActive}>{isActive ? "Deactivate" : "Activate"}</DropdownMenuItem>
+          <DropdownMenuItem onClick={toggleActive}>
+            {isActive ? copy.deactivate : copy.activate}
+          </DropdownMenuItem>
           <DropdownMenuItem onClick={deleteLine} className="text-destructive">
-            Delete
+            {copy.delete}
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

@@ -6,6 +6,44 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
 import { createClient } from "@/lib/supabase/client"
+interface ResearchLineFormCopy {
+  fields: {
+    title: {
+      label: string
+      placeholder: string
+    }
+    slug: {
+      label: string
+      placeholder: string
+      helper: string
+    }
+    description: {
+      label: string
+      placeholder: string
+    }
+  }
+  toggles: {
+    isActive: string
+  }
+  messages: {
+    errors: {
+      titleRequired: string
+      slugRequired: string
+      session: string
+      unexpected: string
+    }
+    success: {
+      created: string
+      updated: string
+    }
+  }
+  buttons: {
+    saving: string
+    create: string
+    update: string
+    cancel: string
+  }
+}
 
 interface ResearchLineFormProps {
   mode: "create" | "edit"
@@ -16,9 +54,10 @@ interface ResearchLineFormProps {
     description: string | null
     is_active: boolean
   }
+  copy: ResearchLineFormCopy
 }
 
-export function ResearchLineForm({ mode, initialData }: ResearchLineFormProps) {
+export function ResearchLineForm({ mode, initialData, copy }: ResearchLineFormProps) {
   const router = useRouter()
   const [title, setTitle] = useState(initialData?.title ?? "")
   const [slug, setSlug] = useState(initialData?.slug ?? "")
@@ -43,12 +82,12 @@ export function ResearchLineForm({ mode, initialData }: ResearchLineFormProps) {
     setSuccess(null)
 
     if (!title.trim()) {
-      setError("Title is required")
+      setError(copy.messages.errors.titleRequired)
       return
     }
 
     if (!slug.trim()) {
-      setError("Slug is required")
+      setError(copy.messages.errors.slugRequired)
       return
     }
 
@@ -61,7 +100,7 @@ export function ResearchLineForm({ mode, initialData }: ResearchLineFormProps) {
       } = await supabase.auth.getUser()
 
       if (authError || !user) {
-        throw new Error("Could not validate the user session.")
+        throw new Error(copy.messages.errors.session)
       }
 
       const payload = {
@@ -88,7 +127,7 @@ export function ResearchLineForm({ mode, initialData }: ResearchLineFormProps) {
           details: payload,
         })
 
-        setSuccess("Research line created successfully")
+        setSuccess(copy.messages.success.created)
       } else if (initialData) {
         const { error: updateError } = await supabase.from("research_lines").update(payload).eq("id", initialData.id)
 
@@ -102,7 +141,7 @@ export function ResearchLineForm({ mode, initialData }: ResearchLineFormProps) {
           details: payload,
         })
 
-        setSuccess("Changes saved successfully")
+        setSuccess(copy.messages.success.updated)
       }
 
       setTimeout(() => {
@@ -110,7 +149,7 @@ export function ResearchLineForm({ mode, initialData }: ResearchLineFormProps) {
         router.refresh()
       }, 1200)
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : "An unexpected error occurred"
+      const message = err instanceof Error ? err.message : copy.messages.errors.unexpected
       setError(message)
     } finally {
       setIsLoading(false)
@@ -120,17 +159,17 @@ export function ResearchLineForm({ mode, initialData }: ResearchLineFormProps) {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="space-y-2">
-        <Label htmlFor="title">Title</Label>
+        <Label htmlFor="title">{copy.fields.title.label}</Label>
         <Input
           id="title"
           value={title}
           onChange={(event) => setTitle(event.target.value)}
-          placeholder="e.g. Applied AI for the healthcare sector"
+          placeholder={copy.fields.title.placeholder}
         />
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="slug">Slug</Label>
+        <Label htmlFor="slug">{copy.fields.slug.label}</Label>
         <Input
           id="slug"
           value={slug}
@@ -138,20 +177,18 @@ export function ResearchLineForm({ mode, initialData }: ResearchLineFormProps) {
             setSlug(event.target.value)
             setIsSlugEdited(true)
           }}
-          placeholder="e.g. ai-healthcare-sector"
+          placeholder={copy.fields.slug.placeholder}
         />
-        <p className="text-sm text-muted-foreground">
-          Used to generate the public URL. You can modify it before saving.
-        </p>
+        <p className="text-sm text-muted-foreground">{copy.fields.slug.helper}</p>
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="description">Description</Label>
+        <Label htmlFor="description">{copy.fields.description.label}</Label>
         <textarea
           id="description"
           value={description}
           onChange={(event) => setDescription(event.target.value)}
-          placeholder="Describe the scope, objectives, and expected outcomes."
+          placeholder={copy.fields.description.placeholder}
           className="min-h-[140px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
         />
       </div>
@@ -165,7 +202,7 @@ export function ResearchLineForm({ mode, initialData }: ResearchLineFormProps) {
           className="h-4 w-4 rounded border border-input"
         />
         <Label htmlFor="isActive" className="text-sm font-normal">
-          Active line visible on the platform
+          {copy.toggles.isActive}
         </Label>
       </div>
 
@@ -174,10 +211,10 @@ export function ResearchLineForm({ mode, initialData }: ResearchLineFormProps) {
 
       <div className="flex flex-wrap gap-3">
         <Button type="submit" disabled={isLoading}>
-          {isLoading ? "Saving..." : mode === "create" ? "Create line" : "Save changes"}
+          {isLoading ? copy.buttons.saving : mode === "create" ? copy.buttons.create : copy.buttons.update}
         </Button>
         <Button type="button" variant="outline" onClick={() => router.push("/admin/research-lines")} disabled={isLoading}>
-          Cancel
+          {copy.buttons.cancel}
         </Button>
       </div>
     </form>

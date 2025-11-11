@@ -1,0 +1,77 @@
+{
+  "gate": {
+    "back": "Back to {lineTitle}",
+    "eyebrow": "Access required",
+    "title": "Unlock this SOTA release to stay aligned with the art.",
+    "description": "Subscribing to {lineTitle} grants the full release stream, future drops, and activation playbooks for your team.",
+    "advantage": {
+      "title": "SOTA advantage",
+      "body": "Access curated intelligence, annotated frameworks, and the SOTA release vault for this line.",
+      "live": {
+        "title": "Live Signals",
+        "description": "Fresh drops and commentary whenever the frontier shifts."
+      },
+      "activation": {
+        "title": "Activation Ready",
+        "description": "Implementation notes and rollout checklists to apply instantly."
+      }
+    },
+    "subscribe": {
+      "title": "Subscribe now",
+      "description": "Activate your SOTA pass to see the full release content and download resources.",
+      "cta": "Subscribe to the line",
+      "login": "Log in to subscribe"
+    }
+  },
+  "release": {
+    "back": "Back to {lineTitle}",
+    "eyebrow": "SOTA Release · {lineTitle}",
+    "status": {
+      "unpublished": "Unpublished",
+      "accessGranted": "Release stream access granted",
+      "admin": "Admin access",
+      "member": "Active subscription",
+      "adminNote": "You are viewing this release with full admin privileges.",
+      "memberNote": "This line stays unlocked while your subscription remains active."
+    },
+    "body": "Download the three focus reports below to access the brief, implementation notes, and source material packaged for rapid activation.",
+    "reports": {
+      "eyebrow": "Report vault",
+      "title": "Download the focus reports",
+      "description": "Each release ships with three curated artifacts. Save them for your team or route them into your intelligence stack.",
+      "download": "Download",
+      "pending": "Upload pending",
+      "fileFallback": "application/octet-stream"
+    },
+    "sections": {
+      "titles": {
+        "actualidad": "Current Landscape",
+        "industria": "Industry Applications",
+        "academico": "Academic Foundations"
+      },
+      "empty": "Narrative notes are not available for this drop yet. The downloadable reports contain the full brief."
+    },
+    "documents": {
+      "title": "Additional downloads",
+      "contentFallback": "application/pdf",
+      "secureNote": "File access requires a signed link"
+    },
+    "actions": {
+      "unsubscribe": "Unsubscribe from line"
+    }
+  },
+  "reportsMeta": {
+    "actualidad": {
+      "label": "Current Landscape Report",
+      "description": "Download the macro brief covering signals, shifts, and why this release matters today."
+    },
+    "industria": {
+      "label": "Industry Applications Report",
+      "description": "Operational guidance and implementation blueprints to activate the release in the field."
+    },
+    "academico": {
+      "label": "Academic Foundations Report",
+      "description": "Source studies, references, and theoretical framing that underpin the release."
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "hero": {
+    "badge": "SOTA Command",
+    "titleSuffix": "you’re steering the art.",
+    "description": "Oversee membership, releases, and telemetry from a single surface. Every action syncs instantly across the platform.",
+    "cta": "View public surface",
+    "fallbackName": "Operator"
+  },
+  "stats": {
+    "users": "Total users",
+    "lines": "Research lines",
+    "releases": "Releases",
+    "events": "Events tracked"
+  },
+  "sections": {
+    "users": {
+      "title": "User management",
+      "description": "Review accounts, roles, and membership tiers.",
+      "cta": "Open users"
+    },
+    "lines": {
+      "title": "Research lines",
+      "description": "Create, edit, and publish new lines.",
+      "cta": "Manage lines"
+    },
+    "releases": {
+      "title": "Releases",
+      "description": "Ship new art drops and maintain versions.",
+      "cta": "Manage releases"
+    },
+    "audit": {
+      "title": "Audit trail",
+      "description": "Inspect admin actions and revalidation events.",
+      "cta": "View logs"
+    },
+    "metrics": {
+      "title": "Metrics",
+      "description": "Dig into engagement signals and event volumes.",
+      "cta": "View metrics"
+    }
+  }
+}

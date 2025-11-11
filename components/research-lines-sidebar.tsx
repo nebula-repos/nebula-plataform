@@ -13,9 +13,14 @@ type ResearchLine = {
 
 type ResearchLinesSidebarProps = {
   researchLines: ResearchLine[]
+  copy: {
+    heading: string
+    toggle: string
+    close: string
+  }
 }
 
-export function ResearchLinesSidebar({ researchLines }: ResearchLinesSidebarProps) {
+export function ResearchLinesSidebar({ researchLines, copy }: ResearchLinesSidebarProps) {
   const [isOpen, setIsOpen] = useState(false)
 
   if (researchLines.length === 0) {
@@ -33,7 +38,7 @@ export function ResearchLinesSidebar({ researchLines }: ResearchLinesSidebarProp
         className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-border bg-background text-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
         aria-expanded={isOpen}
         aria-controls="research-lines-sidebar"
-        aria-label="Toggle research lines sidebar"
+        aria-label={copy.toggle}
       >
         <Menu className="h-5 w-5" aria-hidden="true" />
       </button>
@@ -56,12 +61,12 @@ export function ResearchLinesSidebar({ researchLines }: ResearchLinesSidebarProp
         aria-hidden={!isOpen}
       >
         <div className="flex items-center justify-between border-b border-border px-4 py-4">
-          <p className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">Active Research Lines</p>
+          <p className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">{copy.heading}</p>
           <button
             type="button"
             onClick={closeSidebar}
             className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-border bg-background text-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-            aria-label="Close research lines sidebar"
+            aria-label={copy.close}
           >
             <X className="h-4 w-4" aria-hidden="true" />
           </button>

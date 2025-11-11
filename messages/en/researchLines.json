@@ -1,0 +1,39 @@
+{
+  "hero": {
+    "eyebrow": "SOTA Atlas",
+    "title": "Research lines engineered to deliver State of the Art velocity.",
+    "description": "Explore the living catalogue of SOTA research lines. Each track curates the signals, releases, and playbooks that keep your teams aligned with the frontier.",
+    "primaryCta": "Browse active lines",
+    "authCta": "Go to my dashboard",
+    "guestCta": "Request SOTA access"
+  },
+  "stats": [
+    {
+      "icon": "sparkles",
+      "title": "Signals mapped",
+      "description": "Curators distill the noise into intel drops, refreshed weekly."
+    },
+    {
+      "icon": "layers",
+      "title": "Structured releases",
+      "description": "Each line ships with staged releases and activation notes."
+    },
+    {
+      "icon": "compass",
+      "title": "Sector coverage",
+      "description": "From AI infrastructure to policy shifts, we track the frontier."
+    },
+    {
+      "icon": "calendar",
+      "title": "Fresh every week",
+      "description": "Release cadence keeps the art aligned with present reality."
+    }
+  ],
+  "list": {
+    "badge": "SOTA Line",
+    "releasesLabel": "Releases live",
+    "viewReleases": "View releases",
+    "freshFallback": "Fresh drop",
+    "empty": "No research lines available at the moment."
+  }
+}

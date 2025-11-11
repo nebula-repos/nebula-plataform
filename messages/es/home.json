@@ -1,0 +1,87 @@
+{
+  "hero": {
+    "eyebrow": "SOTA · Estado del Arte",
+    "title": "Inteligencia orientada a señales para operadores en el estado del arte.",
+    "subtitle": "Destilamos el ruido en los informes SOTA que necesitas: lanzamientos estructurados, frameworks aplicados y jugadas listas para activar que mantienen a tu equipo por delante.",
+    "primaryCta": "Explorar lanzamientos SOTA",
+    "secondaryCta": "Comenzar gratis"
+  },
+  "highlights": [
+    {
+      "icon": "sparkles",
+      "label": "Señales curadas cada semana",
+      "value": "400+",
+      "description": "Investigación primaria, benchmarks y destilaciones listas para lanzar.",
+      "className": null
+    },
+    {
+      "icon": "radar",
+      "label": "Latencia hacia el mercado",
+      "value": "< 72 h",
+      "description": "Entregas frescas cuando la frontera se mueve; nada de PDFs obsoletos.",
+      "className": null
+    },
+    {
+      "icon": "gauge",
+      "label": "Pensado para operadores",
+      "value": "Playbooks accionables",
+      "description": "Cada lanzamiento incluye notas de implementación, métricas y planes de despliegue.",
+      "className": "sm:col-span-2 lg:col-span-1"
+    }
+  ],
+  "features": {
+    "title": "Pilares de SOTA para convertir la investigación de frontera en ventaja.",
+    "subtitle": "La capa SOTA combina rigor académico con contexto aplicado para que tu organización despliegue lo que sigue, no lo que fue relevante el trimestre pasado.",
+    "cards": [
+      {
+        "icon": "cpu",
+        "title": "Inteligencia de frontera",
+        "description": "Síntesis rápida de investigación de vanguardia con el contexto que importa a equipos de producto, política y crecimiento."
+      },
+      {
+        "icon": "workflow",
+        "title": "Playbooks SOTA",
+        "description": "Frameworks con criterio, arquitecturas de referencia y notas de implementación diseñadas para la velocidad."
+      },
+      {
+        "icon": "shield",
+        "title": "Guardarraíles de señal",
+        "description": "Curación, validación y revisión experta que filtran el ruido y elevan solo los movimientos duraderos."
+      }
+    ]
+  },
+  "latest": {
+    "eyebrow": "Últimas entregas SOTA",
+    "title": "Lanzamientos que llegan ahora a la plataforma.",
+    "description": "Tu carril rápido hacia el arte: destacamos las líneas más recientes, listas para integrarse en tu hoja de ruta.",
+    "newLabel": "Nuevo",
+    "cardEyebrow": "Lanzamiento SOTA",
+    "button": "Ver todos los lanzamientos",
+    "cta": "Sumergirse en el arte"
+  },
+  "releaseTags": ["Resumen", "Implementación", "Señales"],
+  "workflow": {
+    "title": "Un flujo de trabajo diseñado para decisiones SOTA.",
+    "description": "Desde la detección de señales hasta el despliegue, SOTA mantiene alineada a tu organización con el arte que importa. Cada lanzamiento recorre nuestro pipeline vivo para que confíes en el resultado.",
+    "steps": [
+      {
+        "title": "Captura y contexto",
+        "description": "Combina hallazgos académicos, inteligencia comunitaria y telemetría de mercado en un único mapa de señales."
+      },
+      {
+        "title": "Destilación del arte",
+        "description": "Sprints editoriales convierten las líneas en resúmenes concisos, diagramas anotados y frameworks aplicados."
+      },
+      {
+        "title": "Listo para activar",
+        "description": "Los playbooks llegan con métricas de éxito, checklists de despliegue y notas de integración para moverse al instante."
+      }
+    ]
+  },
+  "cta": {
+    "title": "¿Listo para operar en el estado del arte?",
+    "description": "Únete a la plataforma SOTA y transforma la forma en que tu equipo detecta, comprende y despliega lo que viene.",
+    "primary": "Crear una cuenta gratuita",
+    "secondary": "Conoce la misión"
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "header": {
+    "nav": {
+      "researchLines": "Research Lines",
+      "myAccount": "My Account",
+      "admin": "Admin"
+    },
+    "auth": {
+      "login": "Log in",
+      "signup": "Sign up",
+      "signout": "Sign out"
+    },
+    "cta": {
+      "explore": "Explore SOTA Releases",
+      "startFree": "Start for Free"
+    }
+  },
+  "sidebar": {
+    "heading": "Active Research Lines",
+    "toggle": "Toggle research lines sidebar",
+    "close": "Close research lines sidebar"
+  },
+  "footer": {
+    "tagline": "High-quality academic and industry research platform.",
+    "sections": {
+      "links": "Links",
+      "legal": "Legal"
+    },
+    "links": {
+      "researchLines": "Research Lines",
+      "about": "About",
+      "privacy": "Privacy",
+      "terms": "Terms"
+    },
+    "rights": "All rights reserved."
+  },
+  "actions": {
+    "viewPublicSurface": "View public surface",
+    "backToAdmin": "Back to admin",
+    "backToLines": "Back to lines"
+  },
+  "carousel": {
+    "scrollLeft": "Scroll releases left",
+    "scrollRight": "Scroll releases right"
+  }
+}

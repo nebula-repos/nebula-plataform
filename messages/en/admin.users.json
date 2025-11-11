@@ -1,0 +1,34 @@
+{
+  "hero": {
+    "badge": "Access Control",
+    "title": "Manage operators and membership tiers.",
+    "description": "Audit roles, upgrade membership, and ensure every workspace has the right privileges to deploy the art.",
+    "back": "Back to admin"
+  },
+  "stats": {
+    "total": "Total users",
+    "admins": "Admins",
+    "members": "Premium members"
+  },
+  "list": {
+    "title": "All users",
+    "description": "Complete list of registered operators and their status.",
+    "role": {
+      "admin": "Admin",
+      "member": "Member"
+    },
+    "tier": {
+      "premium": "Premium",
+      "free": "Free"
+    },
+    "noName": "No name",
+    "registered": "Registered",
+    "empty": "No registered users yet. Onboard a team to populate this list."
+  },
+  "actions": {
+    "promote": "Make Admin",
+    "demote": "Remove Admin",
+    "upgrade": "Upgrade to Member",
+    "downgrade": "Switch to Free"
+  }
+}

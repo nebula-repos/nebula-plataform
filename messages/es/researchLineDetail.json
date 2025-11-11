@@ -1,0 +1,50 @@
+{
+  "labels": {
+    "recentlyUpdated": "Actualizado recientemente",
+    "inceptionPending": "Inicio pendiente"
+  },
+  "hero": {
+    "badge": "Línea SOTA",
+    "cards": {
+      "signal": {
+        "title": "Densidad de señal",
+        "description": "Drops curados e insights aplicados diseñados para el dominio {lineTitle}."
+      },
+      "refresh": {
+        "title": "Última actualización",
+        "launch": "Línea lanzada {date}"
+      },
+      "cadence": {
+        "title": "Cadencia de drops",
+        "description": "Los editores de SOTA publican nuevos lanzamientos a medida que surgen señales; espera movimiento varias veces al mes."
+      }
+    },
+    "access": {
+      "status": {
+        "admin": "Acceso admin",
+        "subscribed": "Suscrito",
+        "locked": "Bloqueado"
+      },
+      "streamLabel": "Flujo de lanzamientos",
+      "granted": "Tienes acceso completo a cada lanzamiento y nota de activación dentro de esta línea SOTA.",
+      "locked": "Suscríbete para desbloquear lanzamientos, frameworks e inteligencia continua para esta línea.",
+      "actions": {
+        "unsubscribe": "Cancelar suscripción",
+        "subscribe": "Suscribirse para desbloquear",
+        "login": "Inicia sesión para suscribirte",
+        "back": "Volver a todas las líneas"
+      }
+    }
+  },
+  "releases": {
+    "eyebrow": "Bóveda de lanzamientos",
+    "title": "Últimos drops dentro de {lineTitle}",
+    "description": "Accede al flujo completo del arte: cada lanzamiento incluye briefs, notas de implementación y señales destacadas.",
+    "cardBadge": "Lanzamiento SOTA",
+    "viewRelease": "Ver lanzamiento",
+    "empty": "Aún no hay lanzamientos para esta línea de investigación.",
+    "locked": "Suscríbete para desbloquear cada lanzamiento SOTA en esta línea y recibir alertas cuando lleguen nuevos drops.",
+    "login": "Inicia sesión para suscribirte",
+    "unpublished": "Sin publicar"
+  }
+}

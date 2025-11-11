@@ -1,0 +1,46 @@
+{
+  "header": {
+    "nav": {
+      "researchLines": "Líneas de investigación",
+      "myAccount": "Mi cuenta",
+      "admin": "Administración"
+    },
+    "auth": {
+      "login": "Iniciar sesión",
+      "signup": "Crear cuenta",
+      "signout": "Cerrar sesión"
+    },
+    "cta": {
+      "explore": "Explorar lanzamientos SOTA",
+      "startFree": "Comenzar gratis"
+    }
+  },
+  "sidebar": {
+    "heading": "Líneas de investigación activas",
+    "toggle": "Abrir o cerrar menú de líneas de investigación",
+    "close": "Cerrar menú de líneas de investigación"
+  },
+  "footer": {
+    "tagline": "Plataforma de investigación académica e industrial de alta calidad.",
+    "sections": {
+      "links": "Enlaces",
+      "legal": "Legal"
+    },
+    "links": {
+      "researchLines": "Líneas de investigación",
+      "about": "Acerca de",
+      "privacy": "Privacidad",
+      "terms": "Términos"
+    },
+    "rights": "Todos los derechos reservados."
+  },
+  "actions": {
+    "viewPublicSurface": "Ver superficie pública",
+    "backToAdmin": "Volver a administración",
+    "backToLines": "Volver a líneas"
+  },
+  "carousel": {
+    "scrollLeft": "Desplazar lanzamientos a la izquierda",
+    "scrollRight": "Desplazar lanzamientos a la derecha"
+  }
+}

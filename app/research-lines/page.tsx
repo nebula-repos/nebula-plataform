@@ -5,11 +5,23 @@ import { Footer } from "@/components/footer"
 import { createClient } from "@/lib/supabase/server"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, CalendarDays, Compass, Layers, Sparkles } from "lucide-react"
+import { getLocale } from "@/lib/i18n/server"
+import { getDictionary } from "@/lib/i18n/get-dictionary"
 
 export const dynamic = "force-dynamic"
 
+const statIcons = {
+  sparkles: Sparkles,
+  layers: Layers,
+  compass: Compass,
+  calendar: CalendarDays,
+} as const
+
 export default async function ResearchLinesPage() {
   const supabase = await createClient()
+  const locale = await getLocale()
+  const researchLinesCopy = await getDictionary(locale, "researchLines")
+  const dateFormatter = locale === "es" ? "es-ES" : "en-US"
 
   const {
     data: { user },
@@ -32,65 +44,47 @@ export default async function ResearchLinesPage() {
           </div>
           <div className="container mx-auto px-4">
             <div className="max-w-3xl">
-              <p className="text-sm font-semibold uppercase tracking-[0.35em] text-primary">SOTA Atlas</p>
+              <p className="text-sm font-semibold uppercase tracking-[0.35em] text-primary">{researchLinesCopy.hero.eyebrow}</p>
               <h1 className="mt-6 text-balance text-4xl font-semibold tracking-tight text-foreground md:text-5xl">
-                Research lines engineered to deliver State of the Art velocity.
+                {researchLinesCopy.hero.title}
               </h1>
-              <p className="mt-6 max-w-2xl text-pretty text-lg text-muted-foreground">
-                Explore the living catalogue of SOTA research lines. Each track curates the signals, releases, and
-                playbooks that keep your teams aligned with the frontier.
-              </p>
+              <p className="mt-6 max-w-2xl text-pretty text-lg text-muted-foreground">{researchLinesCopy.hero.description}</p>
             </div>
             <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
               <Link href="#lines">
                 <Button size="lg" className="group gap-2">
-                  Browse active lines
+                  {researchLinesCopy.hero.primaryCta}
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden />
                 </Button>
               </Link>
               {user ? (
                 <Link href="/dashboard">
                   <Button size="lg" variant="outline" className="border-primary/40 bg-background/70 backdrop-blur">
-                    Go to my dashboard
+                    {researchLinesCopy.hero.authCta}
                   </Button>
                 </Link>
               ) : (
                 <Link href="/auth/signup">
                   <Button size="lg" variant="outline" className="border-primary/40 bg-background/70 backdrop-blur">
-                    Request SOTA access
+                    {researchLinesCopy.hero.guestCta}
                   </Button>
                 </Link>
               )}
             </div>
             <div className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              <div className="rounded-2xl border border-border/60 bg-background/80 p-5 shadow-lg shadow-primary/5 backdrop-blur">
-                <Sparkles className="mb-3 h-8 w-8 text-primary" aria-hidden />
-                <p className="text-sm font-semibold uppercase tracking-wide text-primary/80">Signals mapped</p>
-                <p className="text-base text-muted-foreground">
-                  Curators distill the noise into intel drops, refreshed weekly.
-                </p>
-              </div>
-              <div className="rounded-2xl border border-border/60 bg-background/80 p-5 shadow-lg shadow-primary/5 backdrop-blur">
-                <Layers className="mb-3 h-8 w-8 text-primary" aria-hidden />
-                <p className="text-sm font-semibold uppercase tracking-wide text-primary/80">Structured releases</p>
-                <p className="text-base text-muted-foreground">
-                  Each line ships with staged releases and activation notes.
-                </p>
-              </div>
-              <div className="rounded-2xl border border-border/60 bg-background/80 p-5 shadow-lg shadow-primary/5 backdrop-blur">
-                <Compass className="mb-3 h-8 w-8 text-primary" aria-hidden />
-                <p className="text-sm font-semibold uppercase tracking-wide text-primary/80">Sector coverage</p>
-                <p className="text-base text-muted-foreground">
-                  From AI infrastructure to policy shifts, we track the frontier.
-                </p>
-              </div>
-              <div className="rounded-2xl border border-border/60 bg-background/80 p-5 shadow-lg shadow-primary/5 backdrop-blur">
-                <CalendarDays className="mb-3 h-8 w-8 text-primary" aria-hidden />
-                <p className="text-sm font-semibold uppercase tracking-wide text-primary/80">Fresh every week</p>
-                <p className="text-base text-muted-foreground">
-                  Release cadence keeps the art aligned with present reality.
-                </p>
-              </div>
+              {researchLinesCopy.stats.map((card, index) => {
+                const Icon = statIcons[card.icon as keyof typeof statIcons] ?? Sparkles
+                return (
+                  <div
+                    key={`${card.title}-${index}`}
+                    className="rounded-2xl border border-border/60 bg-background/80 p-5 shadow-lg shadow-primary/5 backdrop-blur"
+                  >
+                    <Icon className="mb-3 h-8 w-8 text-primary" aria-hidden />
+                    <p className="text-sm font-semibold uppercase tracking-wide text-primary/80">{card.title}</p>
+                    <p className="text-base text-muted-foreground">{card.description}</p>
+                  </div>
+                )
+              })}
             </div>
           </div>
         </section>
@@ -101,8 +95,8 @@ export default async function ResearchLinesPage() {
               <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {researchLines.map((line) => {
                   const createdLabel = line.created_at
-                    ? new Date(line.created_at).toLocaleDateString()
-                    : "Fresh drop"
+                    ? new Date(line.created_at).toLocaleDateString(dateFormatter)
+                    : researchLinesCopy.list.freshFallback
 
                   return (
                     <Card
@@ -112,17 +106,19 @@ export default async function ResearchLinesPage() {
                       <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-primary via-sky-500 to-emerald-400 opacity-60 transition-opacity group-hover:opacity-100" />
                       <CardHeader className="space-y-3">
                         <div className="flex items-center justify-between text-xs uppercase tracking-[0.3em] text-muted-foreground/70">
-                          <span>SOTA Line</span>
+                          <span>{researchLinesCopy.list.badge}</span>
                           <span>{createdLabel}</span>
                         </div>
                         <CardTitle className="text-2xl font-semibold leading-snug text-foreground">{line.title}</CardTitle>
                         <CardDescription className="text-pretty text-muted-foreground">{line.description}</CardDescription>
                       </CardHeader>
                       <CardContent className="flex items-center justify-between">
-                        <span className="text-xs uppercase tracking-[0.25em] text-primary/80">Releases live</span>
+                        <span className="text-xs uppercase tracking-[0.25em] text-primary/80">
+                          {researchLinesCopy.list.releasesLabel}
+                        </span>
                         <Link href={`/research-lines/${line.slug}`}>
                           <Button variant="ghost" size="sm" className="gap-1 text-primary">
-                            View releases
+                            {researchLinesCopy.list.viewReleases}
                             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden />
                           </Button>
                         </Link>
@@ -133,7 +129,7 @@ export default async function ResearchLinesPage() {
               </div>
             ) : (
               <div className="py-12 text-center">
-                <p className="text-muted-foreground">No research lines available at the moment.</p>
+                <p className="text-muted-foreground">{researchLinesCopy.list.empty}</p>
               </div>
             )}
           </div>

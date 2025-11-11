@@ -11,9 +11,13 @@ interface ReleasesCarouselProps {
   children: ReactNode
   className?: string
   itemClassName?: string
+  copy: {
+    scrollLeft: string
+    scrollRight: string
+  }
 }
 
-export function ReleasesCarousel({ children, className, itemClassName }: ReleasesCarouselProps) {
+export function ReleasesCarousel({ children, className, itemClassName, copy }: ReleasesCarouselProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const [canScrollLeft, setCanScrollLeft] = useState(false)
   const [canScrollRight, setCanScrollRight] = useState(false)
@@ -77,7 +81,7 @@ export function ReleasesCarousel({ children, className, itemClassName }: Release
           onClick={() => handleScroll("left")}
           disabled={!canScrollLeft}
           className="pointer-events-auto rounded-full bg-background shadow"
-          aria-label="Scroll releases left"
+          aria-label={copy.scrollLeft}
         >
           <ChevronLeft className="h-5 w-5" />
         </Button>
@@ -90,7 +94,7 @@ export function ReleasesCarousel({ children, className, itemClassName }: Release
           onClick={() => handleScroll("right")}
           disabled={!canScrollRight}
           className="pointer-events-auto rounded-full bg-background shadow"
-          aria-label="Scroll releases right"
+          aria-label={copy.scrollRight}
         >
           <ChevronRight className="h-5 w-5" />
         </Button>

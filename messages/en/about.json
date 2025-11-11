@@ -1,0 +1,67 @@
+{
+  "hero": {
+    "eyebrow": "Inside SOTA",
+    "title": "Nebula turns frontier research into State of the Art operating leverage.",
+    "description": "We map the signals, curate the art, and ship activation-ready releases so teams can deploy what is next — not what was relevant last quarter.",
+    "primaryCta": "Explore SOTA lines",
+    "secondaryCta": "View recent releases"
+  },
+  "principles": [
+    {
+      "icon": "target",
+      "title": "Our mission",
+      "description": "We close the gap between academic research and real implementation across organizations, teams, and communities.",
+      "body": "We select research with high transformational potential, structure it into understandable journeys, and highlight the concrete steps needed to put it into practice.",
+      "bullets": null
+    },
+    {
+      "icon": "users",
+      "title": "Expert community",
+      "description": "We collaborate with researchers, industry specialists, and mentors to validate every line.",
+      "body": "The platform evolves alongside the community. Every release blends feedback, usage metrics, and outcomes from real teams.",
+      "bullets": null
+    },
+    {
+      "icon": "lightbulb",
+      "title": "Methodology",
+      "description": "Each release combines current context, implementation guidance, and academic foundations in one place.",
+      "body": null,
+      "bullets": [
+        "Current landscape: what is happening and why it matters.",
+        "Implementation: tactical guides, tools, and real cases.",
+        "Academic foundations: theoretical frameworks and references to go deeper."
+      ]
+    },
+    {
+      "icon": "shield",
+      "title": "Commitment",
+      "description": "Transparency, security, and content quality are the pillars of our operation.",
+      "body": "We invest in robust editorial processes, ongoing audits, and metrics that let us measure the real impact of every release.",
+      "bullets": null
+    }
+  ],
+  "how": {
+    "title": "How we work",
+    "intro": "The Nebula collective blends research, product, and operations expertise. Every SOTA release moves through an editorial pipeline that pairs qualitative insights with measurable outcomes.",
+    "body": "Our roadmap is community-built: we surface emerging art, co-design lines with partners, and sustain recurring update cycles so the intelligence never goes stale.",
+    "pillars": {
+      "title": "Impact pillars",
+      "items": [
+        "Enable informed strategic decisions across teams.",
+        "Shorten adoption timelines for emergent technologies.",
+        "Strengthen academia–industry knowledge exchange.",
+        "Measure outcomes and circulate learnings back to the network."
+      ]
+    },
+    "collaboration": {
+      "title": "Want to collaborate?",
+      "description": "We partner with researchers, operators, and organisations willing to share projects, data, or use cases. Reach out at"
+    }
+  },
+  "cta": {
+    "title": "Ready to build with the art?",
+    "description": "Join the SOTA platform, explore active lines, and collaborate with us on future releases.",
+    "primary": "Create a free account",
+    "secondary": "Browse SOTA lines"
+  }
+}

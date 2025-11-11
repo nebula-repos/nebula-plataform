@@ -1,0 +1,27 @@
+{
+  "hero": {
+    "badge": "Profile Sync",
+    "title": "Tune your SOTA identity.",
+    "description": "Keep your details sharp so we can tailor releases, alerts, and collaboration invites to your operating context.",
+    "backCta": "Back to dashboard"
+  },
+  "details": {
+    "currentName": "Current name",
+    "email": "Email",
+    "missing": "Not specified"
+  },
+  "form": {
+    "cardTitle": "Personal information",
+    "cardDescription": "Update your profile details. Changes take effect immediately across SOTA surfaces.",
+    "missingUser": "Could not identify the current user.",
+    "genericError": "An error occurred.",
+    "emailLabel": "Email address",
+    "emailHelp": "Email address cannot be changed",
+    "fullNameLabel": "Full name",
+    "fullNamePlaceholder": "Your full name",
+    "success": "Profile updated successfully",
+    "saving": "Saving...",
+    "save": "Save changes",
+    "cancel": "Cancel"
+  }
+}

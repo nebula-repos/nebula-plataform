@@ -1,0 +1,67 @@
+{
+  "hero": {
+    "title": "Términos y condiciones",
+    "subtitle": "Estos términos regulan el acceso y uso de Nebula. Al crear una cuenta o usar el sitio aceptas estas condiciones.",
+    "effective": "Vigentes desde el 10 de octubre de 2025"
+  },
+  "sections": [
+    {
+      "title": "1. Servicio",
+      "body": [
+        "Nebula ofrece acceso a líneas de investigación curadas, lanzamientos y herramientas de análisis. Nos reservamos el derecho de modificar funciones, suspender el acceso por mantenimiento o actualizar contenido sin previo aviso."
+      ]
+    },
+    {
+      "title": "2. Cuentas y elegibilidad",
+      "body": [
+        "Debes proporcionar información precisa y mantener tus credenciales confidenciales. Eres responsable de todas las acciones realizadas desde tu cuenta. Podemos suspender cuentas que infrinjan estos términos o representen un riesgo para la comunidad."
+      ]
+    },
+    {
+      "title": "3. Uso aceptable",
+      "list": [
+        "No interfieras con la seguridad o disponibilidad de la plataforma.",
+        "No redistribuyas contenido exclusivo sin autorización previa.",
+        "No uses Nebula para actividades ilegales ni para infringir derechos de terceros."
+      ]
+    },
+    {
+      "title": "4. Propiedad intelectual",
+      "body": [
+        "El contenido original, las marcas y los materiales de la plataforma pertenecen a Nebula o a sus colaboradores. Concedes a Nebula una licencia para usar comentarios, sugerencias o contenido que envíes para mejorar el servicio."
+      ]
+    },
+    {
+      "title": "5. Membresías y pagos",
+      "body": [
+        "Ofrecemos planes gratuitos y de pago. Las suscripciones pagas se renuevan automáticamente, pero puedes cancelar antes del siguiente período de facturación. Las tarifas no son reembolsables salvo obligación legal."
+      ]
+    },
+    {
+      "title": "6. Limitación de responsabilidad",
+      "body": [
+        "La información proporcionada es con fines educativos y estratégicos. Nebula no garantiza resultados específicos y no es responsable por pérdidas indirectas, incidentales o consecuentes derivadas del uso de la plataforma."
+      ]
+    },
+    {
+      "title": "7. Cambios a estos términos",
+      "body": [
+        "Podemos actualizar estos términos cuando sea necesario. Si los cambios son significativos, notificaremos a los usuarios registrados con un aviso razonable. Continuar usando el servicio implica aceptar los nuevos términos."
+      ],
+      "note": "Vigentes desde el 10 de octubre de 2025."
+    },
+    {
+      "title": "8. Contacto",
+      "body": [
+        "Para preguntas o inquietudes, escríbenos a"
+      ],
+      "email": "legal@nebula.ai"
+    }
+  ],
+  "cta": {
+    "title": "¿Necesitas un acuerdo a medida?",
+    "prefix": "Escríbenos a",
+    "email": "legal@nebula.ai",
+    "suffix": "para hablar de contratos personalizados o necesidades empresariales."
+  }
+}

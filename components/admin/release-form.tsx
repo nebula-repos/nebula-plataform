@@ -8,30 +8,9 @@ import { Button } from "@/components/ui/button"
 import { createClient } from "@/lib/supabase/client"
 
 type ReportType = "actualidad" | "industria" | "academico"
+const REPORT_TYPES: ReportType[] = ["actualidad", "industria", "academico"]
 
 const STORAGE_BUCKET = "research-release-assets"
-
-const REPORT_DEFINITIONS: Array<{
-  key: ReportType
-  label: string
-  helper: string
-}> = [
-  {
-    key: "actualidad",
-    label: "Current Landscape Report",
-    helper: "Signals, market moves, and why this drop matters right now.",
-  },
-  {
-    key: "industria",
-    label: "Industry Applications Report",
-    helper: "Deployment tactics, implementation notes, and field-tested patterns.",
-  },
-  {
-    key: "academico",
-    label: "Academic Foundations Report",
-    helper: "Key studies, references, and theoretical grounding for the release.",
-  },
-]
 
 interface ResearchLineOption {
   id: string
@@ -39,8 +18,68 @@ interface ResearchLineOption {
   slug: string
 }
 
+interface ReleaseFormCopy {
+  fields: {
+    researchLine: {
+      label: string
+      noLines: string
+      helper: string
+    }
+    title: {
+      label: string
+      placeholder: string
+    }
+    slug: {
+      label: string
+      placeholder: string
+      helperPrefix: string
+      helperSuffix: string
+      fallback: string
+    }
+    releaseDate: {
+      label: string
+      helper: string
+    }
+    published: {
+      label: string
+    }
+  }
+  reports: {
+    heading: string
+    description: string
+    descriptionSuffix: string
+    attached: string
+    definitions: Record<
+      ReportType,
+      {
+        label: string
+        helper: string
+      }
+    >
+  }
+  messages: {
+    selectLine: string
+    lineMissing: string
+    titleRequired: string
+    slugRequired: string
+    dateRequired: string
+    missingReport: string
+    session: string
+    uploadFailed: string
+    registerFailed: string
+    unexpected: string
+    success: string
+  }
+  buttons: {
+    saving: string
+    submit: string
+    cancel: string
+  }
+}
+
 interface ReleaseFormProps {
   researchLines: ResearchLineOption[]
+  copy: ReleaseFormCopy
 }
 
 type ReportFileState = Record<ReportType, File | null>
@@ -51,7 +90,7 @@ const DEFAULT_REPORT_STATE: ReportFileState = {
   academico: null,
 }
 
-export function ReleaseForm({ researchLines }: ReleaseFormProps) {
+export function ReleaseForm({ researchLines, copy }: ReleaseFormProps) {
   const router = useRouter()
   const [researchLineId, setResearchLineId] = useState(researchLines[0]?.id ?? "")
   const [title, setTitle] = useState("")
@@ -65,6 +104,10 @@ export function ReleaseForm({ researchLines }: ReleaseFormProps) {
   const [isSlugEdited, setIsSlugEdited] = useState(false)
 
   const supabase = useMemo(() => createClient(), [])
+  const reportDefinitions = REPORT_TYPES.map((key) => ({
+    key,
+    ...copy.reports.definitions[key],
+  }))
 
   useEffect(() => {
     if (!isSlugEdited) {
@@ -92,34 +135,35 @@ export function ReleaseForm({ researchLines }: ReleaseFormProps) {
     setSuccess(null)
 
     if (!researchLineId) {
-      setError("Select a research line.")
+      setError(copy.messages.selectLine)
       return
     }
 
     const researchLine = researchLines.find((line) => line.id === researchLineId)
     if (!researchLine) {
-      setError("The selected research line could not be found.")
+      setError(copy.messages.lineMissing)
       return
     }
 
     if (!title.trim()) {
-      setError("Title is required.")
+      setError(copy.messages.titleRequired)
       return
     }
 
     if (!slug.trim()) {
-      setError("Slug is required.")
+      setError(copy.messages.slugRequired)
       return
     }
 
     if (!publishedAt) {
-      setError("Choose the release date to build the storage path.")
+      setError(copy.messages.dateRequired)
       return
     }
 
-    for (const definition of REPORT_DEFINITIONS) {
+    for (const definition of reportDefinitions) {
       if (!reports[definition.key]) {
-        setError(`Upload the ${definition.label.toLowerCase()}.`)
+        const reportName = definition.label.toLowerCase()
+        setError(copy.messages.missingReport.replace("{report}", reportName))
         return
       }
     }
@@ -137,7 +181,7 @@ export function ReleaseForm({ researchLines }: ReleaseFormProps) {
       } = await supabase.auth.getUser()
 
       if (authError || !user) {
-        throw new Error("Could not validate the user session.")
+        throw new Error(copy.messages.session)
       }
 
       const payload = {
@@ -157,7 +201,7 @@ export function ReleaseForm({ researchLines }: ReleaseFormProps) {
       if (createError) throw createError
       createdReleaseId = release.id
 
-      for (const definition of REPORT_DEFINITIONS) {
+      for (const definition of reportDefinitions) {
         const file = reports[definition.key]
         if (!file) continue
 
@@ -174,7 +218,12 @@ export function ReleaseForm({ researchLines }: ReleaseFormProps) {
           })
 
         if (uploadError) {
-          throw new Error(`Failed to upload ${definition.label.toLowerCase()}: ${uploadError.message}`)
+          const reportName = definition.label.toLowerCase()
+          throw new Error(
+            copy.messages.uploadFailed
+              .replace("{report}", reportName)
+              .replace("{error}", uploadError.message),
+          )
         }
 
         uploadedObjectPaths.push(objectPath)
@@ -189,7 +238,12 @@ export function ReleaseForm({ researchLines }: ReleaseFormProps) {
         })
 
         if (documentError) {
-          throw new Error(`Failed to register ${definition.label.toLowerCase()}: ${documentError.message}`)
+          const reportName = definition.label.toLowerCase()
+          throw new Error(
+            copy.messages.registerFailed
+              .replace("{report}", reportName)
+              .replace("{error}", documentError.message),
+          )
         }
       }
 
@@ -201,17 +255,17 @@ export function ReleaseForm({ researchLines }: ReleaseFormProps) {
         details: {
           ...payload,
           storage_bucket: STORAGE_BUCKET,
-          reports: REPORT_DEFINITIONS.map((definition) => definition.key),
+          reports: REPORT_TYPES,
         },
       })
 
-      setSuccess("Release created and reports uploaded.")
+      setSuccess(copy.messages.success)
       setTimeout(() => {
         router.push("/admin/releases")
         router.refresh()
       }, 1200)
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : "An unexpected error occurred."
+      const message = err instanceof Error ? err.message : copy.messages.unexpected
       setError(message)
 
       if (uploadedObjectPaths.length > 0) {
@@ -231,7 +285,7 @@ export function ReleaseForm({ researchLines }: ReleaseFormProps) {
   return (
     <form onSubmit={handleSubmit} className="space-y-8">
       <div className="space-y-2">
-        <Label htmlFor="researchLine">Research line</Label>
+        <Label htmlFor="researchLine">{copy.fields.researchLine.label}</Label>
         <select
           id="researchLine"
           value={researchLineId}
@@ -242,7 +296,7 @@ export function ReleaseForm({ researchLines }: ReleaseFormProps) {
           disabled={isDisabled}
         >
           {researchLines.length === 0 ? (
-            <option value="">No lines available</option>
+            <option value="">{copy.fields.researchLine.noLines}</option>
           ) : (
             researchLines.map((line) => (
               <option key={line.id} value={line.id}>
@@ -251,24 +305,22 @@ export function ReleaseForm({ researchLines }: ReleaseFormProps) {
             ))
           )}
         </select>
-        <p className="text-sm text-muted-foreground">
-          Choose where these reports will land. One release per line per date folder.
-        </p>
+        <p className="text-sm text-muted-foreground">{copy.fields.researchLine.helper}</p>
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="title">Title</Label>
+        <Label htmlFor="title">{copy.fields.title.label}</Label>
         <Input
           id="title"
           value={title}
           onChange={(event) => setTitle(event.target.value)}
-          placeholder="e.g. AI trends in healthcare systems 2025"
+          placeholder={copy.fields.title.placeholder}
           disabled={isDisabled}
         />
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="slug">Slug</Label>
+        <Label htmlFor="slug">{copy.fields.slug.label}</Label>
         <Input
           id="slug"
           value={slug}
@@ -276,17 +328,21 @@ export function ReleaseForm({ researchLines }: ReleaseFormProps) {
             setSlug(event.target.value)
             setIsSlugEdited(true)
           }}
-          placeholder="e.g. ai-trends-healthcare-2025"
+          placeholder={copy.fields.slug.placeholder}
           disabled={isDisabled}
         />
         <p className="text-sm text-muted-foreground">
-          This slug determines the public URL: `/research-lines/&lt;line&gt;/{slug || "your-slug"}`.
+          {copy.fields.slug.helperPrefix}{" "}
+          <code className="rounded bg-muted px-1 py-0.5 text-xs">
+            /research-lines/&lt;line&gt;/{slug || copy.fields.slug.fallback}
+          </code>
+          {copy.fields.slug.helperSuffix}
         </p>
       </div>
 
       <div className="grid gap-6 md:grid-cols-2">
         <div className="space-y-2">
-          <Label htmlFor="publishedAt">Release date</Label>
+          <Label htmlFor="publishedAt">{copy.fields.releaseDate.label}</Label>
           <Input
             id="publishedAt"
             type="datetime-local"
@@ -294,9 +350,7 @@ export function ReleaseForm({ researchLines }: ReleaseFormProps) {
             onChange={(event) => setPublishedAt(event.target.value)}
             disabled={isDisabled}
           />
-          <p className="text-sm text-muted-foreground">
-            The date is used for scheduling and for the storage folder name.
-          </p>
+          <p className="text-sm text-muted-foreground">{copy.fields.releaseDate.helper}</p>
         </div>
         <div className="flex items-center gap-2 pt-6 md:pt-10">
           <input
@@ -308,24 +362,24 @@ export function ReleaseForm({ researchLines }: ReleaseFormProps) {
             disabled={isDisabled}
           />
           <Label htmlFor="isPublished" className="text-sm font-normal">
-            Mark as published and visible to members immediately
+            {copy.fields.published.label}
           </Label>
         </div>
       </div>
 
       <div className="space-y-8">
-        <h3 className="text-lg font-semibold">Upload the reports</h3>
+        <h3 className="text-lg font-semibold">{copy.reports.heading}</h3>
         <p className="text-sm text-muted-foreground">
-          Each focus area expects a single archive (PDF, docx, or similar). Files are stored under{" "}
+          {copy.reports.description}{" "}
           <code className="rounded bg-muted px-1 py-0.5 text-xs">
             {STORAGE_BUCKET}/
             {researchLines.find((line) => line.id === researchLineId)?.slug ?? "line"}/
             {publishedAt ? normaliseDateFolder(publishedAt) : "YYYY-MM-DD"}
           </code>
-          .
+          {copy.reports.descriptionSuffix}
         </p>
 
-        {REPORT_DEFINITIONS.map((definition) => (
+        {reportDefinitions.map((definition) => (
           <div
             key={definition.key}
             className="space-y-3 rounded-xl border border-border/70 bg-background/80 p-4 shadow-sm shadow-primary/5 backdrop-blur"
@@ -344,7 +398,7 @@ export function ReleaseForm({ researchLines }: ReleaseFormProps) {
             />
             {reports[definition.key] && (
               <p className="text-xs text-muted-foreground">
-                Attached: {reports[definition.key]?.name} · {formatFileSize(reports[definition.key]?.size ?? 0)}
+                {copy.reports.attached}: {reports[definition.key]?.name} · {formatFileSize(reports[definition.key]?.size ?? 0)}
               </p>
             )}
           </div>
@@ -356,10 +410,10 @@ export function ReleaseForm({ researchLines }: ReleaseFormProps) {
 
       <div className="flex flex-wrap gap-3">
         <Button type="submit" disabled={isLoading || isDisabled}>
-          {isLoading ? "Saving..." : "Create release"}
+          {isLoading ? copy.buttons.saving : copy.buttons.submit}
         </Button>
         <Button type="button" variant="outline" onClick={() => router.push("/admin/releases")} disabled={isLoading}>
-          Cancel
+          {copy.buttons.cancel}
         </Button>
       </div>
     </form>

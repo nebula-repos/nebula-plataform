@@ -1,0 +1,16 @@
+{
+  "hero": {
+    "eyebrow": "Rastro de auditoría",
+    "title": "Monitorea cada movimiento administrativo SOTA.",
+    "subtitle": "Inspecciona las acciones administrativas, revalidaciones y cambios de estado más recientes para mantener el arte protegido.",
+    "back": "Volver a administración"
+  },
+  "stats": {
+    "records": "Registros revisados"
+  },
+  "list": {
+    "title": "Últimas 100 acciones",
+    "description": "Bitácora completa de actividad administrativa.",
+    "empty": "Aún no hay registros de auditoría."
+  }
+}
