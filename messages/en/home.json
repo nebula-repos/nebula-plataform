@@ -78,6 +78,19 @@
       }
     ]
   },
+  "contactPreview": {
+    "eyebrow": "Need a signal?",
+    "title": "Talk directly with the Nebula team.",
+    "description": "Partnerships, editorial collaborations, or support questions — drop us a line and we will map the next steps with you.",
+    "cta": "Open the contact page",
+    "emailCta": "Email the team",
+    "email": "hola@nebula.ai",
+    "highlights": [
+      "Enterprise onboarding and custom deployments",
+      "Research partnerships and content collaborations",
+      "Support for existing operators and teams"
+    ]
+  },
   "cta": {
     "title": "Ready to operate at the state of the art?",
     "description": "Join the SOTA platform and transform how your team senses, understands, and deploys what is next.",

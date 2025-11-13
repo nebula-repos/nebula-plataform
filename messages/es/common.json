@@ -31,8 +31,29 @@
       "researchLines": "Líneas de investigación",
       "pricing": "Precios",
       "about": "Acerca de",
+      "contact": "Contacto",
       "privacy": "Privacidad",
       "terms": "Términos"
+    },
+    "socials": {
+      "title": "Social",
+      "items": [
+        {
+          "label": "Instagram",
+          "handle": "@nebula.sota",
+          "url": "https://www.instagram.com/nebula.sota/"
+        },
+        {
+          "label": "X (Twitter)",
+          "handle": "@nebula_sota",
+          "url": "https://x.com/nebula_sota"
+        },
+        {
+          "label": "LinkedIn",
+          "handle": "Nebula · SotA",
+          "url": "https://www.linkedin.com/company/nebula-sota/"
+        }
+      ]
     },
     "rights": "Todos los derechos reservados."
   },

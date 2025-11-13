@@ -78,6 +78,19 @@
       }
     ]
   },
+  "contactPreview": {
+    "eyebrow": "¿Necesitas una señal?",
+    "title": "Habla directo con el equipo de Nebula.",
+    "description": "Alianzas, colaboraciones editoriales o dudas de soporte: escríbenos y trazamos los siguientes pasos contigo.",
+    "cta": "Ir a la página de contacto",
+    "emailCta": "Escríbenos un correo",
+    "email": "hola@nebula.ai",
+    "highlights": [
+      "Onboarding empresarial y despliegues a medida",
+      "Alianzas de investigación y colaboraciones de contenido",
+      "Soporte para operadores y equipos existentes"
+    ]
+  },
   "cta": {
     "title": "¿Listo para operar en el estado del arte?",
     "description": "Únete a la plataforma SOTA y transforma la forma en que tu equipo detecta, comprende y despliega lo que viene.",

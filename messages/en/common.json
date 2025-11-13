@@ -31,8 +31,29 @@
       "researchLines": "Research Lines",
       "pricing": "Pricing",
       "about": "About",
+      "contact": "Contact",
       "privacy": "Privacy",
       "terms": "Terms"
+    },
+    "socials": {
+      "title": "Social",
+      "items": [
+        {
+          "label": "Instagram",
+          "handle": "@nebula.sota",
+          "url": "https://www.instagram.com/nebula.sota/"
+        },
+        {
+          "label": "X (Twitter)",
+          "handle": "@nebula_sota",
+          "url": "https://x.com/nebula_sota"
+        },
+        {
+          "label": "LinkedIn",
+          "handle": "Nebula · SotA",
+          "url": "https://www.linkedin.com/company/nebula-sota/"
+        }
+      ]
     },
     "rights": "All rights reserved."
   },

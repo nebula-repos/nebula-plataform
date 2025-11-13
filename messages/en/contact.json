@@ -1,0 +1,53 @@
+{
+  "hero": {
+    "eyebrow": "Contact",
+    "title": "Let's plan your next State of the Art move together.",
+    "description": "Share what you are building, the teams you support, or the partnerships you have in mind. We'll route you to the right editors and operators inside Nebula.",
+    "meta": "We reply within two business days.",
+    "emailLabel": "Email the team",
+    "email": "hola@nebula.ai"
+  },
+  "form": {
+    "title": "Send us a note",
+    "description": "Give us the context and desired outcomes. The more signal you share, the faster we can respond with a tailored plan.",
+    "fields": {
+      "name": "Full name",
+      "email": "Work email",
+      "company": "Organization",
+      "role": "Role or team",
+      "topic": "Focus or topic",
+      "message": "How can we help?"
+    },
+    "consent": "By submitting this form you agree to let Nebula contact you about the request.",
+    "submit": "Send message",
+    "success": "Thanks for reaching out. We'll come back with next steps shortly.",
+    "error": "We couldn't send your message. Please try again or email us directly."
+  },
+  "details": {
+    "title": "Other ways to connect",
+    "items": [
+      {
+        "label": "General inquiries",
+        "description": "For partnerships, research collaborations, or anything platform related.",
+        "value": "hola@nebula.ai"
+      },
+      {
+        "label": "Enterprise & onboarding",
+        "description": "Tailored programs, multi-seat deployments, or procurement needs.",
+        "value": "partners@nebula.ai"
+      },
+      {
+        "label": "Support",
+        "description": "Account questions or issues inside the platform.",
+        "value": "support@nebula.ai"
+      }
+    ],
+    "note": "Prefer async? Send us an email and include timelines, goals, and any relevant links to speed things up.",
+    "response": "Average response time: < 48 hours"
+  },
+  "socials": {
+    "title": "Follow Nebula across social",
+    "description": "Signal drops, release teases, and behind-the-scenes notes to stay close to the platform.",
+    "cta": "Visit profile"
+  }
+}

@@ -272,6 +272,50 @@ export default async function HomePage() {
           </div>
         </section>
 
+        {/* Contact Preview Section */}
+        <section className="border-y border-border/60 bg-gradient-to-b from-background via-muted/20 to-background py-20">
+          <div className="container mx-auto px-4">
+            <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.35em] text-primary/80">{home.contactPreview.eyebrow}</p>
+                <h2 className="mt-4 text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
+                  {home.contactPreview.title}
+                </h2>
+                <p className="mt-4 text-pretty text-muted-foreground">{home.contactPreview.description}</p>
+                <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
+                  <Link href="/contact">
+                    <Button className="rounded-full px-8">
+                      <span className="flex items-center gap-2">
+                        {home.contactPreview.cta}
+                        <ArrowRight className="h-4 w-4" aria-hidden />
+                      </span>
+                    </Button>
+                  </Link>
+                  <a
+                    href={`mailto:${home.contactPreview.email}`}
+                    className="inline-flex items-center gap-2 text-sm font-semibold text-primary"
+                  >
+                    {home.contactPreview.emailCta}
+                    <span className="text-muted-foreground">{home.contactPreview.email}</span>
+                  </a>
+                </div>
+              </div>
+              <div className="rounded-3xl border border-white/10 bg-white/5 p-8 shadow-[0_30px_100px_-60px_rgba(15,15,15,0.85)]">
+                <ul className="space-y-4">
+                  {home.contactPreview.highlights.map((highlight) => (
+                    <li key={highlight} className="flex items-start gap-3">
+                      <div className="mt-1 inline-flex size-6 items-center justify-center rounded-full border border-primary/30 bg-primary/10 text-primary">
+                        <Check className="h-3 w-3" aria-hidden />
+                      </div>
+                      <p className="text-base text-foreground">{highlight}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* CTA Section */}
         <section className="relative overflow-hidden py-28">
           <div className="container mx-auto px-4 text-center">

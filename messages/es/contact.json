@@ -1,0 +1,53 @@
+{
+  "hero": {
+    "eyebrow": "Contacto",
+    "title": "Planifiquemos juntos tu próximo movimiento en el estado del arte.",
+    "description": "Cuéntanos qué estás construyendo, a qué equipos acompañas o qué alianzas tienes en mente. Te conectaremos con las editoras y operadores correctos dentro de Nebula.",
+    "meta": "Respondemos en menos de dos días hábiles.",
+    "emailLabel": "Escríbenos",
+    "email": "hola@nebula.ai"
+  },
+  "form": {
+    "title": "Envíanos un mensaje",
+    "description": "Comparte el contexto y los resultados que buscas. Cuanta más señal tengamos, más rápido podremos responder con un plan a medida.",
+    "fields": {
+      "name": "Nombre completo",
+      "email": "Correo de trabajo",
+      "company": "Organización",
+      "role": "Rol o equipo",
+      "topic": "Tema o foco",
+      "message": "¿Cómo podemos ayudarte?"
+    },
+    "consent": "Al enviar aceptas que Nebula se comunique contigo sobre esta solicitud.",
+    "submit": "Enviar mensaje",
+    "success": "Gracias por escribirnos. Pronto volveremos con los siguientes pasos.",
+    "error": "No pudimos enviar tu mensaje. Inténtalo de nuevo o escríbenos directo."
+  },
+  "details": {
+    "title": "Otras vías de contacto",
+    "items": [
+      {
+        "label": "Consultas generales",
+        "description": "Alianzas, colaboraciones de investigación o cualquier tema de la plataforma.",
+        "value": "hola@nebula.ai"
+      },
+      {
+        "label": "Empresas y onboarding",
+        "description": "Programas a medida, despliegues multi-equipo o compras.",
+        "value": "partners@nebula.ai"
+      },
+      {
+        "label": "Soporte",
+        "description": "Preguntas de cuenta o incidencias dentro de la plataforma.",
+        "value": "support@nebula.ai"
+      }
+    ],
+    "note": "¿Prefieres async? Mándanos un correo con tiempos, objetivos y enlaces relevantes para acelerar la respuesta.",
+    "response": "Tiempo medio de respuesta: < 48 horas"
+  },
+  "socials": {
+    "title": "Sigue a Nebula en redes",
+    "description": "Señales, lanzamientos y notas del detrás de escena para estar cerca de la plataforma.",
+    "cta": "Abrir perfil"
+  }
+}
