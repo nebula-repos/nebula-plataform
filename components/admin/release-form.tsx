@@ -379,30 +379,45 @@ export function ReleaseForm({ researchLines, copy }: ReleaseFormProps) {
           {copy.reports.descriptionSuffix}
         </p>
 
-        {reportDefinitions.map((definition) => (
-          <div
-            key={definition.key}
-            className="space-y-3 rounded-xl border border-border/70 bg-background/80 p-4 shadow-sm shadow-primary/5 backdrop-blur"
-          >
-            <div className="flex flex-col gap-1">
-              <Label htmlFor={`report-${definition.key}`}>{definition.label}</Label>
-              <span className="text-sm text-muted-foreground">{definition.helper}</span>
+        {reportDefinitions.map((definition) => {
+          const inputId = `report-${definition.key}`
+          const file = reports[definition.key]
+          return (
+            <div
+              key={definition.key}
+              className="space-y-3 rounded-2xl border border-white/10 bg-background/85 p-4 shadow-sm shadow-primary/5 backdrop-blur"
+            >
+              <div className="flex flex-col gap-1">
+                <Label htmlFor={inputId}>{definition.label}</Label>
+                <span className="text-sm text-muted-foreground">{definition.helper}</span>
+              </div>
+              <input
+                id={inputId}
+                type="file"
+                accept=".pdf,.doc,.docx,.ppt,.pptx,.txt"
+                onChange={(event) => handleReportChange(definition.key, event.target.files)}
+                className="sr-only"
+                disabled={isDisabled}
+              />
+              <label
+                htmlFor={inputId}
+                className="group flex cursor-pointer items-center justify-between rounded-2xl border border-dashed border-white/20 bg-background/90 px-4 py-3 text-sm transition-all duration-200 hover:border-primary/60"
+              >
+                <div className="flex flex-col text-left">
+                  <span className="font-semibold text-foreground">{file?.name ?? definition.label}</span>
+                  <span className="text-xs text-muted-foreground">
+                    {file
+                      ? `${copy.reports.attached}: ${formatFileSize(file.size ?? 0)}`
+                      : definition.helper}
+                  </span>
+                </div>
+                <span className="rounded-full border border-white/15 px-3 py-1 text-[0.65rem] uppercase tracking-[0.35em] text-primary/80">
+                  {definition.key}
+                </span>
+              </label>
             </div>
-            <input
-              id={`report-${definition.key}`}
-              type="file"
-              accept=".pdf,.doc,.docx,.ppt,.pptx,.txt"
-              onChange={(event) => handleReportChange(definition.key, event.target.files)}
-              className="w-full cursor-pointer rounded-md border border-dashed border-input bg-background px-3 py-2 text-sm shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-              disabled={isDisabled}
-            />
-            {reports[definition.key] && (
-              <p className="text-xs text-muted-foreground">
-                {copy.reports.attached}: {reports[definition.key]?.name} · {formatFileSize(reports[definition.key]?.size ?? 0)}
-              </p>
-            )}
-          </div>
-        ))}
+          )
+        })}
       </div>
 
       {error && <p className="text-sm text-destructive">{error}</p>}

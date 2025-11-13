@@ -8,6 +8,7 @@ import { Users, BookOpen, FileText, Activity, Sparkles, ArrowRight } from "lucid
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { getLocale } from "@/lib/i18n/server"
+import { MouseGlowCard } from "@/components/mouse-glow-card"
 import { getDictionary } from "@/lib/i18n/get-dictionary"
 
 export default async function AdminPage() {
@@ -29,7 +30,6 @@ export default async function AdminPage() {
     redirect("/dashboard")
   }
 
-  // Get statistics
   const { count: totalUsers } = await supabase.from("users").select("*", { count: "exact", head: true })
 
   const { count: totalResearchLines } = await supabase
@@ -42,170 +42,174 @@ export default async function AdminPage() {
 
   const displayName = userProfile.full_name || userProfile.email || adminCopy.hero.fallbackName
 
+  const statsCards = [
+    {
+      label: adminCopy.stats.users,
+      value: totalUsers || 0,
+      icon: Users,
+    },
+    {
+      label: adminCopy.stats.lines,
+      value: totalResearchLines || 0,
+      icon: BookOpen,
+    },
+    {
+      label: adminCopy.stats.releases,
+      value: totalReleases || 0,
+      icon: FileText,
+    },
+    {
+      label: adminCopy.stats.events,
+      value: totalEvents || 0,
+      icon: Activity,
+    },
+  ]
+
+  const managementSections = [
+    {
+      icon: Users,
+      title: adminCopy.sections.users.title,
+      description: adminCopy.sections.users.description,
+      cta: adminCopy.sections.users.cta,
+      href: "/admin/users",
+    },
+    {
+      icon: BookOpen,
+      title: adminCopy.sections.lines.title,
+      description: adminCopy.sections.lines.description,
+      cta: adminCopy.sections.lines.cta,
+      href: "/admin/research-lines",
+    },
+    {
+      icon: FileText,
+      title: adminCopy.sections.releases.title,
+      description: adminCopy.sections.releases.description,
+      cta: adminCopy.sections.releases.cta,
+      href: "/admin/releases",
+    },
+    {
+      icon: Activity,
+      title: adminCopy.sections.audit.title,
+      description: adminCopy.sections.audit.description,
+      cta: adminCopy.sections.audit.cta,
+      href: "/admin/audit-logs",
+    },
+    {
+      icon: Sparkles,
+      title: adminCopy.sections.metrics.title,
+      description: adminCopy.sections.metrics.description,
+      cta: adminCopy.sections.metrics.cta,
+      href: "/admin/metrics",
+    },
+  ]
+
+  const managementEyebrow = adminCopy.hero.badge
+
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col bg-background">
       <Header />
       <main className="flex-1">
-        <section className="relative overflow-hidden border-b border-border bg-background py-20">
+        <section className="relative overflow-hidden border-b border-border/60 bg-gradient-to-b from-background via-background/80 to-primary/5 py-28">
           <div className="pointer-events-none absolute inset-0 -z-10">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/18 via-sky-500/10 to-transparent blur-3xl" />
-            <div className="absolute right-1/3 top-1/2 size-[420px] -translate-y-1/2 rounded-full bg-primary/12 blur-3xl" />
+            <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-primary/15 via-sky-500/10 to-transparent blur-3xl" />
+            <div className="absolute -right-10 top-1/3 size-[420px] rounded-full bg-emerald-400/10 blur-3xl" />
+            <div className="absolute left-1/4 bottom-0 size-[360px] rounded-full bg-primary/10 blur-[220px]" />
           </div>
           <div className="container mx-auto px-4">
-            <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+            <div className="grid gap-12 lg:grid-cols-[minmax(0,6fr)_minmax(0,5fr)] lg:items-center">
               <div>
-                <div className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-primary/80">
-                  <Sparkles className="h-4 w-4" aria-hidden />
-                  {adminCopy.hero.badge}
+                <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.4em] text-primary/90 shadow-lg shadow-primary/20 backdrop-blur">
+                  <Sparkles className="h-3.5 w-3.5" aria-hidden />
+                  <span>{adminCopy.hero.badge}</span>
                 </div>
-                <h1 className="mt-6 text-balance text-4xl font-semibold tracking-tight text-foreground md:text-5xl">
+                <h1 className="mt-8 max-w-2xl text-balance text-4xl font-semibold tracking-tight text-foreground md:text-5xl">
                   {displayName}, {adminCopy.hero.titleSuffix}
                 </h1>
-                <p className="mt-4 max-w-2xl text-pretty text-lg text-muted-foreground">
+                <p className="mt-6 max-w-2xl text-pretty text-lg text-muted-foreground md:text-xl">
                   {adminCopy.hero.description}
                 </p>
+                <div className="mt-10 flex flex-wrap gap-4">
+                  <Link href="/research-lines">
+                    <Button
+                      size="lg"
+                      className="group relative gap-3 overflow-hidden rounded-full !bg-gradient-to-r !from-primary !via-sky-500 !to-emerald-500 !text-primary-foreground px-8 shadow-xl shadow-primary/30 transition-all duration-300 hover:scale-[1.02]"
+                    >
+                      <span className="relative z-10 flex items-center gap-2">
+                        {adminCopy.hero.cta}
+                        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden />
+                      </span>
+                    </Button>
+                  </Link>
+                </div>
               </div>
-              <Link href="/research-lines">
-                <Button variant="outline" className="gap-2 border-primary/40 bg-background/70 backdrop-blur">
-                  {adminCopy.hero.cta}
-                  <ArrowRight className="h-4 w-4" aria-hidden />
-                </Button>
-              </Link>
-            </div>
-            <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              <Card className="border border-border/60 bg-background/80 shadow-lg shadow-primary/5 backdrop-blur">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground/80">
-                    {adminCopy.stats.users}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="text-3xl font-semibold text-foreground">{totalUsers || 0}</CardContent>
-              </Card>
-              <Card className="border border-border/60 bg-background/80 shadow-lg shadow-primary/5 backdrop-blur">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground/80">
-                    {adminCopy.stats.lines}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="text-3xl font-semibold text-foreground">{totalResearchLines || 0}</CardContent>
-              </Card>
-              <Card className="border border-border/60 bg-background/80 shadow-lg shadow-primary/5 backdrop-blur">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground/80">
-                    {adminCopy.stats.releases}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="text-3xl font-semibold text-foreground">{totalReleases || 0}</CardContent>
-              </Card>
-              <Card className="border border-border/60 bg-background/80 shadow-lg shadow-primary/5 backdrop-blur">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground/80">
-                    {adminCopy.stats.events}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="text-3xl font-semibold text-foreground">{totalEvents || 0}</CardContent>
-              </Card>
+              <div className="grid gap-4 sm:grid-cols-2">
+                {statsCards.map((stat) => {
+                  const Icon = stat.icon
+                  return (
+                    <MouseGlowCard
+                      key={stat.label}
+                      className="h-full border border-white/15 bg-gradient-to-b from-background/90 via-primary/5 to-background/70"
+                    >
+                      <div className="inline-flex size-12 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-primary">
+                        <Icon className="h-5 w-5" aria-hidden />
+                      </div>
+                      <p className="mt-4 text-[0.62rem] font-semibold uppercase tracking-[0.4em] text-primary/80">
+                        {stat.label}
+                      </p>
+                      <p className="text-4xl font-semibold text-foreground">{stat.value}</p>
+                    </MouseGlowCard>
+                  )
+                })}
+              </div>
             </div>
           </div>
         </section>
 
-        <section className="py-16">
+        <section className="relative overflow-hidden border-y border-border/60 bg-gradient-to-b from-background via-muted/20 to-background py-24">
+          <div className="pointer-events-none absolute inset-0 -z-10">
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-transparent to-emerald-300/10 blur-[240px]" />
+            <div className="absolute right-1/3 top-1/2 size-[360px] -translate-y-1/2 rounded-full bg-primary/5 blur-3xl" />
+          </div>
           <div className="container mx-auto px-4">
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              <Card className="group relative overflow-hidden border border-border/60 bg-background/85 shadow-lg shadow-primary/5 backdrop-blur">
-                <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-primary via-sky-500 to-emerald-400 opacity-60 group-hover:opacity-100" />
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Users className="h-4 w-4 text-primary" aria-hidden />
-                    {adminCopy.sections.users.title}
-                  </CardTitle>
-                  <CardDescription>{adminCopy.sections.users.description}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Link href="/admin/users">
-                    <Button className="w-full gap-2">
-                      {adminCopy.sections.users.cta}
-                      <ArrowRight className="h-4 w-4" aria-hidden />
-                    </Button>
-                  </Link>
-                </CardContent>
-              </Card>
-
-              <Card className="group relative overflow-hidden border border-border/60 bg-background/85 shadow-lg shadow-primary/5 backdrop-blur">
-                <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-primary via-sky-500 to-emerald-400 opacity-60 group-hover:opacity-100" />
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <BookOpen className="h-4 w-4 text-primary" aria-hidden />
-                    {adminCopy.sections.lines.title}
-                  </CardTitle>
-                  <CardDescription>{adminCopy.sections.lines.description}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Link href="/admin/research-lines">
-                    <Button className="w-full gap-2">
-                      {adminCopy.sections.lines.cta}
-                      <ArrowRight className="h-4 w-4" aria-hidden />
-                    </Button>
-                  </Link>
-                </CardContent>
-              </Card>
-
-              <Card className="group relative overflow-hidden border border-border/60 bg-background/85 shadow-lg shadow-primary/5 backdrop-blur">
-                <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-primary via-sky-500 to-emerald-400 opacity-60 group-hover:opacity-100" />
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <FileText className="h-4 w-4 text-primary" aria-hidden />
-                    {adminCopy.sections.releases.title}
-                  </CardTitle>
-                  <CardDescription>{adminCopy.sections.releases.description}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Link href="/admin/releases">
-                    <Button className="w-full gap-2">
-                      {adminCopy.sections.releases.cta}
-                      <ArrowRight className="h-4 w-4" aria-hidden />
-                    </Button>
-                  </Link>
-                </CardContent>
-              </Card>
-
-              <Card className="group relative overflow-hidden border border-border/60 bg-background/85 shadow-lg shadow-primary/5 backdrop-blur">
-                <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-primary via-sky-500 to-emerald-400 opacity-60 group-hover:opacity-100" />
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Activity className="h-4 w-4 text-primary" aria-hidden />
-                    {adminCopy.sections.audit.title}
-                  </CardTitle>
-                  <CardDescription>{adminCopy.sections.audit.description}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Link href="/admin/audit-logs">
-                    <Button className="w-full gap-2">
-                      {adminCopy.sections.audit.cta}
-                      <ArrowRight className="h-4 w-4" aria-hidden />
-                    </Button>
-                  </Link>
-                </CardContent>
-              </Card>
-
-              <Card className="group relative overflow-hidden border border-border/60 bg-background/85 shadow-lg shadow-primary/5 backdrop-blur">
-                <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-primary via-sky-500 to-emerald-400 opacity-60 group-hover:opacity-100" />
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Activity className="h-4 w-4 text-primary" aria-hidden />
-                    {adminCopy.sections.metrics.title}
-                  </CardTitle>
-                  <CardDescription>{adminCopy.sections.metrics.description}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Link href="/admin/metrics">
-                    <Button className="w-full gap-2">
-                      {adminCopy.sections.metrics.cta}
-                      <ArrowRight className="h-4 w-4" aria-hidden />
-                    </Button>
-                  </Link>
-                </CardContent>
-              </Card>
+            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+              {managementSections.map((section) => {
+                const Icon = section.icon
+                return (
+                  <Card
+                    key={section.title}
+                    className="group relative overflow-hidden rounded-3xl border border-white/10 bg-background/90 shadow-[0_35px_80px_-55px_rgba(15,15,15,0.75)] backdrop-blur transition-all duration-300 hover:-translate-y-2 hover:border-primary/50 hover:shadow-[0_55px_130px_-65px_rgba(15,15,15,0.9)]"
+                  >
+                    <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-primary via-sky-500 to-emerald-400 opacity-60 transition-opacity group-hover:opacity-100" />
+                    <CardHeader className="relative space-y-4">
+                      <div className="flex items-center justify-between text-[0.65rem] uppercase tracking-[0.35em] text-muted-foreground/70">
+                        <span className="inline-flex items-center gap-3 text-muted-foreground">
+                          <span className="inline-flex size-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-primary">
+                            <Icon className="h-4 w-4" aria-hidden />
+                          </span>
+                          {managementEyebrow}
+                        </span>
+                        <span className="text-primary/80">{section.cta}</span>
+                      </div>
+                      <CardTitle className="text-2xl text-foreground">{section.title}</CardTitle>
+                      <CardDescription className="text-pretty text-muted-foreground">{section.description}</CardDescription>
+                    </CardHeader>
+                    <CardContent className="relative">
+                      <Link href={section.href}>
+                        <Button
+                          variant="outline"
+                          className="group/btn w-full rounded-full border-primary/50 bg-white/5 text-primary shadow-lg shadow-primary/10 transition-all duration-300 hover:border-primary hover:bg-white/10 hover:shadow-primary/25"
+                        >
+                          {section.cta}
+                          <ArrowRight
+                            className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1"
+                            aria-hidden
+                          />
+                        </Button>
+                      </Link>
+                    </CardContent>
+                  </Card>
+                )
+              })}
             </div>
           </div>
         </section>
