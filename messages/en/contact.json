@@ -2,10 +2,10 @@
   "hero": {
     "eyebrow": "Contact",
     "title": "Let's plan your next State of the Art move together.",
-    "description": "Share what you are building, the teams you support, or the partnerships you have in mind. We'll route you to the right editors and operators inside Nebula.",
+    "description": "Share what you are building, the teams you support, or the partnerships you have in mind. We'll route you to the right editors and operators inside SotA Research.",
     "meta": "We reply within two business days.",
     "emailLabel": "Email the team",
-    "email": "hola@nebula.ai"
+    "email": "hola@sotar.ai"
   },
   "form": {
     "title": "Send us a note",
@@ -18,7 +18,7 @@
       "topic": "Focus or topic",
       "message": "How can we help?"
     },
-    "consent": "By submitting this form you agree to let Nebula contact you about the request.",
+    "consent": "By submitting this form you agree to let SotA Research contact you about the request.",
     "submit": "Send message",
     "success": "Thanks for reaching out. We'll come back with next steps shortly.",
     "error": "We couldn't send your message. Please try again or email us directly."
@@ -29,24 +29,24 @@
       {
         "label": "General inquiries",
         "description": "For partnerships, research collaborations, or anything platform related.",
-        "value": "hola@nebula.ai"
+        "value": "hola@sotar.ai"
       },
       {
         "label": "Enterprise & onboarding",
         "description": "Tailored programs, multi-seat deployments, or procurement needs.",
-        "value": "partners@nebula.ai"
+        "value": "partners@sotar.ai"
       },
       {
         "label": "Support",
         "description": "Account questions or issues inside the platform.",
-        "value": "support@nebula.ai"
+        "value": "support@sotar.ai"
       }
     ],
     "note": "Prefer async? Send us an email and include timelines, goals, and any relevant links to speed things up.",
     "response": "Average response time: < 48 hours"
   },
   "socials": {
-    "title": "Follow Nebula across social",
+    "title": "Follow SotA Research across social",
     "description": "Signal drops, release teases, and behind-the-scenes notes to stay close to the platform.",
     "cta": "Visit profile"
   }

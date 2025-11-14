@@ -1,7 +1,7 @@
 {
   "hero": {
     "title": "Política de privacidad",
-    "subtitle": "Conoce cómo recopilamos, usamos y protegemos tu información cuando utilizas Nebula.",
+    "subtitle": "Conoce cómo recopilamos, usamos y protegemos tu información cuando utilizas SotA Research.",
     "reviewed": "Última revisión: 10 de octubre de 2025"
   },
   "sections": {
@@ -39,7 +39,7 @@
     "rights": {
       "title": "5. Tus derechos",
       "body": "Puedes acceder, actualizar o eliminar tu información desde la plataforma o escribiendo a",
-      "email": "privacidad@nebula.ai",
+      "email": "privacidad@sotar.ai",
       "note": "Respondemos dentro de los 30 días."
     },
     "changes": {
@@ -51,7 +51,7 @@
   "cta": {
     "title": "¿Preguntas o solicitudes?",
     "prefix": "Escríbenos a",
-    "email": "privacidad@nebula.ai",
+    "email": "privacidad@sotar.ai",
     "suffix": "para solicitudes de privacidad o más información sobre nuestras prácticas de datos."
   }
 }

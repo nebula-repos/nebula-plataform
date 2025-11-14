@@ -1,14 +1,14 @@
 {
   "hero": {
     "title": "Terms and conditions",
-    "subtitle": "These terms govern access to and use of Nebula. By creating an account or using the site you agree to these conditions.",
+    "subtitle": "These terms govern access to and use of SotA Research. By creating an account or using the site you agree to these conditions.",
     "effective": "Effective October 10, 2025"
   },
   "sections": [
     {
       "title": "1. Service",
       "body": [
-        "Nebula provides access to curated research lines, releases, and analysis tools. We reserve the right to modify features, suspend access for maintenance, or update content without prior notice."
+        "SotA Research provides access to curated research lines, releases, and analysis tools. We reserve the right to modify features, suspend access for maintenance, or update content without prior notice."
       ]
     },
     {
@@ -22,13 +22,13 @@
       "list": [
         "Do not interfere with the security or availability of the platform.",
         "Do not redistribute exclusive content without prior authorization.",
-        "Do not use Nebula for illegal activities or those that infringe third-party rights."
+        "Do not use SotA Research for illegal activities or those that infringe third-party rights."
       ]
     },
     {
       "title": "4. Intellectual property",
       "body": [
-        "Original content, trademarks, and materials on the platform belong to Nebula or its contributors. You grant Nebula a license to use feedback, suggestions, or content you submit in order to improve the service."
+        "Original content, trademarks, and materials on the platform belong to SotA Research or its contributors. You grant SotA Research a license to use feedback, suggestions, or content you submit in order to improve the service."
       ]
     },
     {
@@ -40,7 +40,7 @@
     {
       "title": "6. Limitation of liability",
       "body": [
-        "The information provided is for educational and strategic purposes. Nebula does not guarantee specific results and is not liable for indirect, incidental, or consequential losses arising from use of the platform."
+        "The information provided is for educational and strategic purposes. SotA Research does not guarantee specific results and is not liable for indirect, incidental, or consequential losses arising from use of the platform."
       ]
     },
     {
@@ -55,13 +55,13 @@
       "body": [
         "For questions or concerns, contact us at"
       ],
-      "email": "legal@nebula.ai"
+      "email": "legal@sotar.ai"
     }
   ],
   "cta": {
     "title": "Need a tailored agreement?",
     "prefix": "Reach us at",
-    "email": "legal@nebula.ai",
+    "email": "legal@sotar.ai",
     "suffix": "to discuss custom contracts or enterprise requirements."
   }
 }

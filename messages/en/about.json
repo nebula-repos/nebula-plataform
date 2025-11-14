@@ -1,7 +1,7 @@
 {
   "hero": {
     "eyebrow": "Inside SOTA",
-    "title": "Nebula turns frontier research into State of the Art operating leverage.",
+    "title": "SotA Research turns frontier research into State of the Art operating leverage.",
     "description": "We map the signals, curate the art, and ship activation-ready releases so teams can deploy what is next — not what was relevant last quarter.",
     "primaryCta": "Explore SOTA lines",
     "secondaryCta": "View recent releases"
@@ -42,7 +42,7 @@
   ],
   "how": {
     "title": "How we work",
-    "intro": "The Nebula collective blends research, product, and operations expertise. Every SOTA release moves through an editorial pipeline that pairs qualitative insights with measurable outcomes.",
+    "intro": "The SotA Research collective blends research, product, and operations expertise. Every SOTA release moves through an editorial pipeline that pairs qualitative insights with measurable outcomes.",
     "body": "Our roadmap is community-built: we surface emerging art, co-design lines with partners, and sustain recurring update cycles so the intelligence never goes stale.",
     "pillars": {
       "title": "Impact pillars",

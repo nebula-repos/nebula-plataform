@@ -1,14 +1,14 @@
 {
   "hero": {
     "title": "Términos y condiciones",
-    "subtitle": "Estos términos regulan el acceso y uso de Nebula. Al crear una cuenta o usar el sitio aceptas estas condiciones.",
+    "subtitle": "Estos términos regulan el acceso y uso de SotA Research. Al crear una cuenta o usar el sitio aceptas estas condiciones.",
     "effective": "Vigentes desde el 10 de octubre de 2025"
   },
   "sections": [
     {
       "title": "1. Servicio",
       "body": [
-        "Nebula ofrece acceso a líneas de investigación curadas, lanzamientos y herramientas de análisis. Nos reservamos el derecho de modificar funciones, suspender el acceso por mantenimiento o actualizar contenido sin previo aviso."
+        "SotA Research ofrece acceso a líneas de investigación curadas, lanzamientos y herramientas de análisis. Nos reservamos el derecho de modificar funciones, suspender el acceso por mantenimiento o actualizar contenido sin previo aviso."
       ]
     },
     {
@@ -22,13 +22,13 @@
       "list": [
         "No interfieras con la seguridad o disponibilidad de la plataforma.",
         "No redistribuyas contenido exclusivo sin autorización previa.",
-        "No uses Nebula para actividades ilegales ni para infringir derechos de terceros."
+        "No uses SotA Research para actividades ilegales ni para infringir derechos de terceros."
       ]
     },
     {
       "title": "4. Propiedad intelectual",
       "body": [
-        "El contenido original, las marcas y los materiales de la plataforma pertenecen a Nebula o a sus colaboradores. Concedes a Nebula una licencia para usar comentarios, sugerencias o contenido que envíes para mejorar el servicio."
+        "El contenido original, las marcas y los materiales de la plataforma pertenecen a SotA Research o a sus colaboradores. Concedes a SotA Research una licencia para usar comentarios, sugerencias o contenido que envíes para mejorar el servicio."
       ]
     },
     {
@@ -40,7 +40,7 @@
     {
       "title": "6. Limitación de responsabilidad",
       "body": [
-        "La información proporcionada es con fines educativos y estratégicos. Nebula no garantiza resultados específicos y no es responsable por pérdidas indirectas, incidentales o consecuentes derivadas del uso de la plataforma."
+        "La información proporcionada es con fines educativos y estratégicos. SotA Research no garantiza resultados específicos y no es responsable por pérdidas indirectas, incidentales o consecuentes derivadas del uso de la plataforma."
       ]
     },
     {
@@ -55,13 +55,13 @@
       "body": [
         "Para preguntas o inquietudes, escríbenos a"
       ],
-      "email": "legal@nebula.ai"
+      "email": "legal@sotar.ai"
     }
   ],
   "cta": {
     "title": "¿Necesitas un acuerdo a medida?",
     "prefix": "Escríbenos a",
-    "email": "legal@nebula.ai",
+    "email": "legal@sotar.ai",
     "suffix": "para hablar de contratos personalizados o necesidades empresariales."
   }
 }

@@ -2,10 +2,10 @@
   "hero": {
     "eyebrow": "Contacto",
     "title": "Planifiquemos juntos tu próximo movimiento en el estado del arte.",
-    "description": "Cuéntanos qué estás construyendo, a qué equipos acompañas o qué alianzas tienes en mente. Te conectaremos con las editoras y operadores correctos dentro de Nebula.",
+    "description": "Cuéntanos qué estás construyendo, a qué equipos acompañas o qué alianzas tienes en mente. Te conectaremos con las editoras y operadores correctos dentro de SotA Research.",
     "meta": "Respondemos en menos de dos días hábiles.",
     "emailLabel": "Escríbenos",
-    "email": "hola@nebula.ai"
+    "email": "hola@sotar.ai"
   },
   "form": {
     "title": "Envíanos un mensaje",
@@ -18,7 +18,7 @@
       "topic": "Tema o foco",
       "message": "¿Cómo podemos ayudarte?"
     },
-    "consent": "Al enviar aceptas que Nebula se comunique contigo sobre esta solicitud.",
+    "consent": "Al enviar aceptas que SotA Research se comunique contigo sobre esta solicitud.",
     "submit": "Enviar mensaje",
     "success": "Gracias por escribirnos. Pronto volveremos con los siguientes pasos.",
     "error": "No pudimos enviar tu mensaje. Inténtalo de nuevo o escríbenos directo."
@@ -29,24 +29,24 @@
       {
         "label": "Consultas generales",
         "description": "Alianzas, colaboraciones de investigación o cualquier tema de la plataforma.",
-        "value": "hola@nebula.ai"
+        "value": "hola@sotar.ai"
       },
       {
         "label": "Empresas y onboarding",
         "description": "Programas a medida, despliegues multi-equipo o compras.",
-        "value": "partners@nebula.ai"
+        "value": "partners@sotar.ai"
       },
       {
         "label": "Soporte",
         "description": "Preguntas de cuenta o incidencias dentro de la plataforma.",
-        "value": "support@nebula.ai"
+        "value": "support@sotar.ai"
       }
     ],
     "note": "¿Prefieres async? Mándanos un correo con tiempos, objetivos y enlaces relevantes para acelerar la respuesta.",
     "response": "Tiempo medio de respuesta: < 48 horas"
   },
   "socials": {
-    "title": "Sigue a Nebula en redes",
+    "title": "Sigue a SotA Research en redes",
     "description": "Señales, lanzamientos y notas del detrás de escena para estar cerca de la plataforma.",
     "cta": "Abrir perfil"
   }

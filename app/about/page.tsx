@@ -146,8 +146,8 @@ export default async function AboutPage() {
                   <CardContent>
                     <p className="text-sm text-muted-foreground">
                       {about.how.collaboration.description}{" "}
-                      <a className="underline decoration-dotted underline-offset-4" href="mailto:hola@nebula.ai">
-                        hola@nebula.ai
+                      <a className="underline decoration-dotted underline-offset-4" href="mailto:hola@sotar.ai">
+                        hola@sotar.ai
                       </a>
                       .
                     </p>
