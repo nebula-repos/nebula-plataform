@@ -25,7 +25,7 @@ export default async function AboutPage() {
       <main className="flex-1">
         <section className="relative overflow-hidden border-b border-border/60 bg-gradient-to-b from-background via-background/80 to-primary/5 py-28">
           <div className="pointer-events-none absolute inset-0 -z-10">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/25 via-sky-500/15 to-transparent blur-3xl" />
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-800/25 via-cyan-600/15 to-transparent blur-3xl" />
             <div className="absolute left-1/2 top-1/2 size-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/15 blur-3xl" />
           </div>
           <div className="container mx-auto px-4 text-center">
@@ -42,7 +42,7 @@ export default async function AboutPage() {
               <Link href="/research-lines">
                 <Button
                   size="lg"
-                  className="group relative gap-2 overflow-hidden rounded-full !bg-gradient-to-r !from-primary !via-sky-500 !to-emerald-500 !text-primary-foreground px-8 shadow-xl shadow-primary/30 transition-all duration-300 hover:scale-[1.02]"
+                  className="group relative gap-2 overflow-hidden rounded-full !bg-gradient-to-r !from-blue-800 !via-cyan-600 !to-emerald-400 !text-primary-foreground px-8 shadow-xl shadow-primary/30 transition-all duration-300 hover:scale-[1.02]"
                 >
                   <span className="relative z-10 flex items-center gap-2">
                     {about.hero.primaryCta}
@@ -105,13 +105,13 @@ export default async function AboutPage() {
 
         <section className="relative overflow-hidden border-b border-border/60 bg-gradient-to-br from-background via-primary/5 to-background py-24">
           <div className="pointer-events-none absolute inset-0 -z-10">
-            <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 via-sky-500/12 to-transparent blur-3xl" />
+            <div className="absolute inset-0 bg-gradient-to-tr from-blue-800/20 via-cyan-600/12 to-transparent blur-3xl" />
             <div className="absolute right-1/4 top-1/2 size-[420px] -translate-y-1/2 rounded-full bg-primary/10 blur-3xl" />
           </div>
           <div className="container mx-auto px-4">
             <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-start">
               <Card className="relative overflow-hidden border border-white/10 bg-gradient-to-b from-background/95 via-background/70 to-background/50 shadow-[0_35px_80px_-50px_rgba(15,15,15,0.7)] backdrop-blur">
-                <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-primary via-sky-500 to-emerald-400 opacity-80" />
+                <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-blue-800 via-cyan-600 to-emerald-400 opacity-80" />
                 <CardHeader className="space-y-4">
                   <p className="text-sm font-semibold uppercase tracking-[0.35em] text-primary/80">{about.hero.eyebrow}</p>
                   <CardTitle className="text-3xl font-semibold">{about.how.title}</CardTitle>
@@ -123,7 +123,7 @@ export default async function AboutPage() {
               </Card>
               <div className="space-y-6">
                 <Card className="relative overflow-hidden border border-white/10 bg-gradient-to-b from-background/90 via-primary/5 to-background/70 shadow-[0_30px_70px_-45px_rgba(15,15,15,0.65)]">
-                  <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-primary via-sky-500 to-emerald-400 opacity-80" />
+                  <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-blue-800 via-cyan-600 to-emerald-400 opacity-80" />
                   <CardHeader className="space-y-2">
                     <CardTitle className="text-lg font-semibold">{about.how.pillars.title}</CardTitle>
                   </CardHeader>
@@ -139,7 +139,7 @@ export default async function AboutPage() {
                   </CardContent>
                 </Card>
                 <Card className="relative overflow-hidden border border-white/10 bg-gradient-to-b from-background/90 via-background/70 to-background/60 shadow-[0_30px_70px_-45px_rgba(15,15,15,0.6)]">
-                  <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-primary via-sky-500 to-emerald-400 opacity-80" />
+                  <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-blue-800 via-cyan-600 to-emerald-400 opacity-80" />
                   <CardHeader className="space-y-2">
                     <CardTitle className="text-lg font-semibold">{about.how.collaboration.title}</CardTitle>
                   </CardHeader>
@@ -160,7 +160,7 @@ export default async function AboutPage() {
 
         <section className="relative overflow-hidden border-t border-border/60 bg-gradient-to-b from-background via-background/80 to-primary/5 py-24">
           <div className="pointer-events-none absolute inset-0 -z-10">
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/18 via-sky-500/12 to-transparent blur-3xl" />
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-800/18 via-cyan-600/12 to-transparent blur-3xl" />
           </div>
           <div className="container mx-auto px-4 text-center">
             <h2 className="mx-auto max-w-3xl text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
@@ -171,7 +171,7 @@ export default async function AboutPage() {
               <Link href="/auth/signup">
                 <Button
                   size="lg"
-                  className="group relative gap-2 overflow-hidden rounded-full !bg-gradient-to-r !from-primary !via-sky-500 !to-emerald-500 !text-primary-foreground px-8 shadow-xl shadow-primary/30 transition-all duration-300 hover:scale-[1.02]"
+                  className="group relative gap-2 overflow-hidden rounded-full !bg-gradient-to-r !from-blue-800 !via-cyan-600 !to-emerald-400 !text-primary-foreground px-8 shadow-xl shadow-primary/30 transition-all duration-300 hover:scale-[1.02]"
                 >
                   <span className="relative z-10 flex items-center gap-2">
                     {about.cta.primary}

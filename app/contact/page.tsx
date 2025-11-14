@@ -27,7 +27,7 @@ export default async function ContactPage() {
       <main className="flex-1">
         <section className="relative overflow-hidden border-b border-border/60 bg-gradient-to-b from-background via-background/80 to-primary/5 py-24">
           <div className="pointer-events-none absolute inset-0 -z-10">
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-sky-500/10 to-transparent blur-3xl" />
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-800/20 via-cyan-600/10 to-transparent blur-3xl" />
           </div>
           <div className="container mx-auto px-4 text-center">
             <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1 text-xs font-semibold uppercase tracking-[0.35em] text-primary/80">
@@ -39,7 +39,7 @@ export default async function ContactPage() {
             <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">{contact.hero.description}</p>
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Link href={`mailto:${contact.hero.email}`} className="group">
-                <span className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-primary via-sky-500 to-emerald-500 px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition-transform group-hover:-translate-y-0.5">
+                <span className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-800 via-cyan-600 to-emerald-400 px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition-transform group-hover:-translate-y-0.5">
                   <Mail className="h-4 w-4" aria-hidden />
                   {contact.hero.emailLabel}
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden />

@@ -30,7 +30,7 @@ export default async function PricingPage() {
         <section className="relative overflow-hidden border-b border-border/60 bg-gradient-to-b from-background via-background/80 to-primary/5 py-28">
           <div className="pointer-events-none absolute inset-0 -z-10">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.15),_transparent_60%)]" />
-            <div className="absolute inset-y-0 left-1/2 h-full w-[55rem] -translate-x-1/2 bg-gradient-to-r from-primary/20 via-transparent to-primary/20 opacity-20 blur-3xl" />
+            <div className="absolute inset-y-0 left-1/2 h-full w-[55rem] -translate-x-1/2 bg-gradient-to-r from-blue-800/20 via-transparent to-primary/20 opacity-20 blur-3xl" />
           </div>
           <div className="container mx-auto px-4 text-center">
             <div className="mx-auto inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.4em] text-primary/90 shadow-lg shadow-primary/20 backdrop-blur">
@@ -46,7 +46,7 @@ export default async function PricingPage() {
               <Link href="/auth/signup">
                 <Button
                   size="lg"
-                  className="group relative gap-2 overflow-hidden rounded-full !bg-gradient-to-r !from-primary !via-sky-500 !to-emerald-500 !text-primary-foreground px-8 shadow-xl shadow-primary/30 transition-all duration-300 hover:scale-[1.02]"
+                  className="group relative gap-2 overflow-hidden rounded-full !bg-gradient-to-r !from-blue-800 !via-cyan-600 !to-emerald-400 !text-primary-foreground px-8 shadow-xl shadow-primary/30 transition-all duration-300 hover:scale-[1.02]"
                 >
                   <span className="relative z-10 flex items-center gap-2">
                     {pricingCopy.hero.primaryCta}
@@ -72,7 +72,7 @@ export default async function PricingPage() {
 
         <section className="relative overflow-hidden border-b border-border/60 bg-gradient-to-b from-background via-muted/30 to-background py-24">
           <div className="pointer-events-none absolute inset-0 -z-10">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-primary/10 opacity-60 blur-3xl" />
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-800/10 via-transparent to-primary/10 opacity-60 blur-3xl" />
             <div className="absolute bottom-0 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-primary/20 blur-[120px]" />
           </div>
           <div className="container mx-auto px-4">
@@ -93,14 +93,14 @@ export default async function PricingPage() {
                     plan.highlightLabel ? "ring-2 ring-primary/70" : ""
                   }`}
                 >
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-emerald-500/5 opacity-60" />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-blue-800/10 via-transparent to-emerald-400/5 opacity-60" />
                   {plan.tag && (
                     <span className="absolute left-6 top-6 rounded-full border border-primary/40 bg-primary/15 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-primary/80">
                       {plan.tag}
                     </span>
                   )}
                   {plan.highlightLabel && (
-                    <span className="absolute right-6 top-6 rounded-full bg-gradient-to-r from-primary via-sky-500 to-emerald-500 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-primary-foreground">
+                    <span className="absolute right-6 top-6 rounded-full bg-gradient-to-r from-blue-800 via-cyan-600 to-emerald-400 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-primary-foreground">
                       {plan.highlightLabel}
                     </span>
                   )}
@@ -135,7 +135,7 @@ export default async function PricingPage() {
 
         <section className="relative overflow-hidden py-24">
           <div className="pointer-events-none absolute inset-0 -z-10">
-            <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-primary/5 opacity-80 blur-3xl" />
+            <div className="absolute inset-0 bg-gradient-to-b from-blue-800/5 via-transparent to-primary/5 opacity-80 blur-3xl" />
           </div>
           <div className="container mx-auto px-4">
             <div className="grid gap-8 lg:grid-cols-2">
@@ -143,7 +143,7 @@ export default async function PricingPage() {
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(14,165,233,0.15),_transparent_60%)]" />
                 <CardHeader className="relative space-y-4">
                   <CardTitle className="text-2xl text-foreground">{pricingCopy.included.title}</CardTitle>
-                  <div className="h-px w-16 bg-gradient-to-r from-primary to-transparent" />
+                  <div className="h-px w-16 bg-gradient-to-r from-blue-800 to-transparent" />
                 </CardHeader>
                 <CardContent className="relative">
                   <ul className="space-y-3 text-sm text-muted-foreground">

@@ -42,7 +42,7 @@ export default async function ResearchLinesPage() {
       <main className="flex-1">
         <section className="relative overflow-hidden border-b border-border/60 bg-gradient-to-b from-background via-background/80 to-primary/5 py-28">
           <div className="pointer-events-none absolute inset-0 -z-10">
-            <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-primary/15 via-sky-500/10 to-transparent blur-3xl" />
+            <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-blue-800/15 via-cyan-600/10 to-transparent blur-3xl" />
             <div className="absolute -right-16 top-1/4 size-[360px] rounded-full bg-emerald-400/10 blur-3xl" />
           </div>
           <div className="container mx-auto px-4">
@@ -62,7 +62,7 @@ export default async function ResearchLinesPage() {
                   <Link href="#lines" className="w-full sm:w-auto">
                     <Button
                       size="lg"
-                      className="group relative w-full gap-2 overflow-hidden rounded-full !bg-gradient-to-r !from-primary !via-sky-500 !to-emerald-500 !text-primary-foreground px-8 shadow-xl shadow-primary/30 transition-all duration-300 hover:scale-[1.02]"
+                      className="group relative w-full gap-2 overflow-hidden rounded-full !bg-gradient-to-r !from-blue-800 !via-cyan-600 !to-emerald-400 !text-primary-foreground px-8 shadow-xl shadow-primary/30 transition-all duration-300 hover:scale-[1.02]"
                     >
                       <span className="relative z-10 flex items-center justify-center gap-2">
                         {researchLinesCopy.hero.primaryCta}
@@ -126,7 +126,7 @@ export default async function ResearchLinesPage() {
 
         <section id="lines" className="relative overflow-hidden border-y border-border/60 bg-gradient-to-b from-background via-muted/20 to-background py-24">
           <div className="pointer-events-none absolute inset-0 -z-10">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-emerald-300/10 blur-[260px]" />
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-800/10 via-transparent to-emerald-300/10 blur-[260px]" />
             <div className="absolute left-1/3 top-1/3 size-[420px] -translate-x-1/2 rounded-full bg-primary/5 blur-3xl" />
           </div>
           <div className="container mx-auto px-4">

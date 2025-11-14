@@ -103,7 +103,7 @@ export default async function ResearchLinePage({ params }: { params: Promise<{ s
       <main className="flex-1">
         <section className="relative overflow-hidden border-b border-border/60 bg-gradient-to-b from-background via-background/80 to-primary/5 py-24">
           <div className="pointer-events-none absolute inset-0 -z-10">
-            <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-primary/15 via-sky-500/10 to-transparent blur-3xl" />
+            <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-blue-800/15 via-cyan-600/10 to-transparent blur-3xl" />
             <div className="absolute left-1/3 top-1/2 size-[420px] -translate-y-1/2 rounded-full bg-primary/12 blur-3xl" />
             <div className="absolute -right-20 top-1/4 size-[360px] rounded-full bg-emerald-400/10 blur-3xl" />
           </div>
@@ -160,7 +160,7 @@ export default async function ResearchLinePage({ params }: { params: Promise<{ s
                       <form action={subscribeToResearchLine}>
                         <input type="hidden" name="researchLineId" value={researchLine.id} />
                         <input type="hidden" name="slug" value={slug} />
-                        <Button className="w-full gap-2 rounded-full bg-gradient-to-r from-primary via-sky-500 to-emerald-500 text-primary-foreground shadow-lg shadow-primary/20 transition-transform transition-colors hover:scale-[1.01] hover:text-primary-foreground hover:brightness-110">
+                        <Button className="w-full gap-2 rounded-full bg-gradient-to-r from-blue-800 via-cyan-600 to-emerald-400 text-primary-foreground shadow-lg shadow-primary/20 transition-transform transition-colors hover:scale-[1.01] hover:text-primary-foreground hover:brightness-110">
                           {detailCopy.hero.access.actions.subscribe}
                           <ArrowRight className="h-4 w-4" aria-hidden />
                         </Button>
@@ -168,7 +168,7 @@ export default async function ResearchLinePage({ params }: { params: Promise<{ s
                     )
                   ) : (
                     <Link href={`/auth/login?next=/research-lines/${slug}`}>
-                      <Button className="w-full gap-2 rounded-full bg-gradient-to-r from-primary via-sky-500 to-emerald-500 text-primary-foreground shadow-lg shadow-primary/20 transition-transform transition-colors hover:scale-[1.01] hover:text-primary-foreground hover:brightness-110">
+                      <Button className="w-full gap-2 rounded-full bg-gradient-to-r from-blue-800 via-cyan-600 to-emerald-400 text-primary-foreground shadow-lg shadow-primary/20 transition-transform transition-colors hover:scale-[1.01] hover:text-primary-foreground hover:brightness-110">
                         {detailCopy.hero.access.actions.login}
                         <ArrowRight className="h-4 w-4" aria-hidden />
                       </Button>
@@ -187,7 +187,7 @@ export default async function ResearchLinePage({ params }: { params: Promise<{ s
 
         <section id="releases" className="relative overflow-hidden border-t border-border/60 bg-gradient-to-b from-background via-muted/20 to-background py-24">
           <div className="pointer-events-none absolute inset-0 -z-10">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-emerald-300/10 blur-[260px]" />
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-800/10 via-transparent to-emerald-300/10 blur-[260px]" />
             <div className="absolute left-1/3 top-1/3 size-[420px] -translate-x-1/2 rounded-full bg-primary/5 blur-3xl" />
           </div>
           <div className="container mx-auto px-4">
@@ -222,7 +222,7 @@ export default async function ResearchLinePage({ params }: { params: Promise<{ s
                           className={cn(
                             "group relative flex min-w-[260px] flex-shrink-0 flex-col items-center pt-16 pb-12 text-center sm:min-w-[320px]",
                             hasMultipleReleases &&
-                              "before:pointer-events-none before:absolute before:-left-6 before:top-8 before:h-px before:w-[calc(100%+3rem)] before:bg-gradient-to-r before:from-primary/40 before:via-border before:to-primary/40 before:opacity-80 before:content-[''] before:-z-10 first:before:left-0 first:before:w-[calc(100%+1.5rem)] last:before:-left-6 last:before:w-[calc(100%+1.5rem)] only:before:hidden",
+                              "before:pointer-events-none before:absolute before:-left-6 before:top-8 before:h-px before:w-[calc(100%+3rem)] before:bg-gradient-to-r before:from-blue-800/40 before:via-border before:to-primary/40 before:opacity-80 before:content-[''] before:-z-10 first:before:left-0 first:before:w-[calc(100%+1.5rem)] last:before:-left-6 last:before:w-[calc(100%+1.5rem)] only:before:hidden",
                           )}
                         >
                           <span
@@ -247,7 +247,7 @@ export default async function ResearchLinePage({ params }: { params: Promise<{ s
                             <p className="text-xs text-muted-foreground">{publishedLabel}</p>
                           </div>
                           <span
-                            className="mt-5 block h-16 w-px bg-gradient-to-b from-primary/70 via-primary/20 to-transparent"
+                            className="mt-5 block h-16 w-px bg-gradient-to-b from-blue-800/70 via-primary/20 to-transparent"
                             aria-hidden
                           />
                           <Card className="mt-6 w-full max-w-sm border border-white/10 bg-gradient-to-b from-background/95 via-background/70 to-background/40 text-left shadow-[0_25px_60px_-40px_rgba(15,15,15,0.7)] backdrop-blur">
@@ -290,7 +290,7 @@ export default async function ResearchLinePage({ params }: { params: Promise<{ s
                 {!user && (
                   <div className="mt-6 flex justify-center">
                     <Link href={`/auth/login?next=/research-lines/${slug}`}>
-                      <Button className="gap-2 rounded-full bg-gradient-to-r from-primary via-sky-500 to-emerald-500 text-primary-foreground shadow-lg shadow-primary/20 transition-transform transition-colors hover:scale-[1.01] hover:text-primary-foreground hover:brightness-110">
+                      <Button className="gap-2 rounded-full bg-gradient-to-r from-blue-800 via-cyan-600 to-emerald-400 text-primary-foreground shadow-lg shadow-primary/20 transition-transform transition-colors hover:scale-[1.01] hover:text-primary-foreground hover:brightness-110">
                         {detailCopy.releases.login}
                         <ArrowRight className="h-4 w-4" aria-hidden />
                       </Button>

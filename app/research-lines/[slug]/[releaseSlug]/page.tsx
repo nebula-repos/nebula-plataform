@@ -136,7 +136,7 @@ export default async function ReleasePage({
         <main className="flex-1">
           <section className="relative overflow-hidden border-b border-border/60 bg-gradient-to-b from-background via-background/80 to-primary/5 py-28">
             <div className="pointer-events-none absolute inset-0 -z-10">
-              <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-primary/25 via-sky-500/10 to-transparent blur-3xl" />
+              <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-blue-800/25 via-cyan-600/10 to-transparent blur-3xl" />
               <div className="absolute left-1/4 top-1/3 size-[420px] -translate-x-1/2 rounded-full bg-primary/15 blur-3xl" />
               <div className="absolute right-0 top-1/2 size-[360px] -translate-y-1/2 rounded-full bg-emerald-400/10 blur-3xl" />
             </div>
@@ -211,7 +211,7 @@ export default async function ReleasePage({
                         <input type="hidden" name="slug" value={slug} />
                         <Button
                           size="lg"
-                          className="group relative w-full gap-2 overflow-hidden rounded-full bg-gradient-to-r from-primary via-sky-500 to-emerald-500 px-6 text-base font-semibold text-primary-foreground shadow-lg shadow-primary/30 transition duration-300 hover:scale-[1.01]"
+                          className="group relative w-full gap-2 overflow-hidden rounded-full bg-gradient-to-r from-blue-800 via-cyan-600 to-emerald-400 px-6 text-base font-semibold text-primary-foreground shadow-lg shadow-primary/30 transition duration-300 hover:scale-[1.01]"
                         >
                           <span className="relative z-10 flex items-center gap-2">
                             {releaseCopy.gate.subscribe.cta}
@@ -223,7 +223,7 @@ export default async function ReleasePage({
                       <Link href={`/auth/login?next=/research-lines/${slug}/${releaseSlug}`}>
                         <Button
                           size="lg"
-                          className="group relative w-full gap-2 overflow-hidden rounded-full bg-gradient-to-r from-primary via-sky-500 to-emerald-500 px-6 text-base font-semibold text-primary-foreground shadow-lg shadow-primary/30 transition duration-300 hover:scale-[1.01]"
+                          className="group relative w-full gap-2 overflow-hidden rounded-full bg-gradient-to-r from-blue-800 via-cyan-600 to-emerald-400 px-6 text-base font-semibold text-primary-foreground shadow-lg shadow-primary/30 transition duration-300 hover:scale-[1.01]"
                         >
                           <span className="relative z-10 flex items-center gap-2">
                             {releaseCopy.gate.subscribe.login}
@@ -307,7 +307,7 @@ export default async function ReleasePage({
       <main className="flex-1">
         <section className="relative overflow-hidden border-b border-border/60 bg-gradient-to-b from-background via-background/80 to-primary/5 py-24">
           <div className="pointer-events-none absolute inset-0 -z-10">
-            <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-primary/20 via-sky-500/10 to-transparent blur-3xl" />
+            <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-blue-800/20 via-cyan-600/10 to-transparent blur-3xl" />
             <div className="absolute right-1/4 top-1/2 size-[520px] -translate-y-1/2 rounded-full bg-primary/15 blur-3xl" />
             <div className="absolute -left-24 bottom-0 size-[360px] rounded-full bg-emerald-400/10 blur-[120px]" />
           </div>
@@ -368,7 +368,7 @@ export default async function ReleasePage({
 
         <section className="relative overflow-hidden border-b border-border/60 bg-gradient-to-b from-background via-muted/25 to-background py-24">
           <div className="pointer-events-none absolute inset-0 -z-10">
-            <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-primary/15 via-sky-500/5 to-transparent blur-3xl" />
+            <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-blue-800/15 via-cyan-600/5 to-transparent blur-3xl" />
             <div className="absolute left-0 top-1/2 size-[420px] -translate-y-1/2 rounded-full bg-primary/10 blur-3xl" />
           </div>
           <div className="container mx-auto max-w-5xl px-4">
@@ -405,7 +405,7 @@ export default async function ReleasePage({
                             <Button
                               asChild
                               size="sm"
-                              className="gap-2 rounded-full bg-gradient-to-r from-primary via-sky-500 to-emerald-500 text-primary-foreground shadow-md shadow-primary/30"
+                              className="gap-2 rounded-full bg-gradient-to-r from-blue-800 via-cyan-600 to-emerald-400 text-primary-foreground shadow-md shadow-primary/30"
                             >
                               <a href={publicUrl} target="_blank" rel="noopener noreferrer">
                                 <ArrowDownToLine className="h-4 w-4" aria-hidden />
@@ -437,7 +437,7 @@ export default async function ReleasePage({
                       key={section.id}
                       className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-background/95 via-primary/5 to-background/70 shadow-2xl shadow-primary/10 backdrop-blur"
                     >
-                      <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-primary via-sky-500 to-emerald-400 opacity-80" />
+                      <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-blue-800 via-cyan-600 to-emerald-400 opacity-80" />
                       <CardHeader className="pt-10">
                         <CardTitle className="text-xl font-semibold text-foreground">
                           {sectionTitleMap[section.section_type] ?? section.section_type}
@@ -459,7 +459,7 @@ export default async function ReleasePage({
 
               {extraDocuments.length > 0 && (
                 <Card className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-background/95 via-primary/5 to-background/70 shadow-2xl shadow-primary/10 backdrop-blur">
-                  <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-primary via-sky-500 to-emerald-400 opacity-80" />
+                  <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-blue-800 via-cyan-600 to-emerald-400 opacity-80" />
                   <CardHeader className="pt-10">
                     <CardTitle className="text-xl font-semibold text-foreground">{releaseCopy.release.documents.title}</CardTitle>
                   </CardHeader>

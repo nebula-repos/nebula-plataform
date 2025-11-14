@@ -14,7 +14,7 @@ export default async function TermsPage() {
       <main className="flex-1">
         <section className="relative overflow-hidden border-b border-border/60 bg-gradient-to-b from-background via-background/80 to-primary/5 py-28">
           <div className="pointer-events-none absolute inset-0 -z-10">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-sky-500/12 to-transparent blur-3xl" />
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-800/20 via-cyan-600/12 to-transparent blur-3xl" />
             <div className="absolute right-1/3 top-1/2 size-[420px] -translate-y-1/2 rounded-full bg-primary/15 blur-3xl" />
           </div>
           <div className="container mx-auto px-4 text-center">
@@ -75,7 +75,7 @@ export default async function TermsPage() {
 
         <section className="relative overflow-hidden border-t border-border/60 bg-gradient-to-b from-background via-background/70 to-primary/5 py-24">
           <div className="pointer-events-none absolute inset-0 -z-10">
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/18 via-sky-500/12 to-transparent blur-3xl" />
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-800/18 via-cyan-600/12 to-transparent blur-3xl" />
           </div>
           <div className="container mx-auto px-4 text-center">
             <h2 className="mx-auto max-w-2xl text-3xl font-semibold tracking-tight text-foreground md:text-4xl">

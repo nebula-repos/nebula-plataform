@@ -32,7 +32,7 @@ export default async function ProfilePage() {
       <main className="flex-1">
         <section className="relative overflow-hidden border-b border-border/60 bg-gradient-to-b from-background via-background/80 to-primary/5 py-24">
           <div className="pointer-events-none absolute inset-0 -z-10">
-            <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-primary/15 via-sky-500/10 to-transparent blur-3xl" />
+            <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-blue-800/15 via-cyan-600/10 to-transparent blur-3xl" />
             <div className="absolute right-1/3 top-1/2 size-[420px] -translate-y-1/2 rounded-full bg-emerald-400/10 blur-3xl" />
           </div>
           <div className="container mx-auto px-4">
@@ -80,12 +80,12 @@ export default async function ProfilePage() {
 
         <section className="relative overflow-hidden border-y border-border/60 bg-gradient-to-b from-background via-muted/20 to-background py-20">
           <div className="pointer-events-none absolute inset-0 -z-10">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-emerald-300/10 blur-[260px]" />
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-800/10 via-transparent to-emerald-300/10 blur-[260px]" />
             <div className="absolute left-1/3 top-1/3 size-[360px] -translate-x-1/2 rounded-full bg-primary/5 blur-3xl" />
           </div>
           <div className="container mx-auto max-w-2xl px-4">
             <Card className="group relative overflow-hidden border border-white/10 bg-gradient-to-b from-background/95 via-background/70 to-background/40 shadow-[0_35px_80px_-50px_rgba(15,15,15,0.6)] backdrop-blur">
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-emerald-300/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-blue-800/10 via-transparent to-emerald-300/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               <CardHeader>
                 <CardTitle className="text-lg text-foreground">{profileCopy.form.cardTitle}</CardTitle>
                 <CardDescription className="text-muted-foreground">{profileCopy.form.cardDescription}</CardDescription>

@@ -38,7 +38,7 @@ export async function Header() {
             href="/"
             className="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-4 py-2 text-lg font-semibold tracking-tight text-foreground shadow-inner shadow-white/5 transition-transform duration-200 hover:-translate-y-0.5"
           >
-            <span className="bg-gradient-to-r from-primary via-sky-400 to-emerald-400 bg-clip-text text-transparent">SotA</span>
+            <span className="bg-gradient-to-r from-blue-800 via-cyan-600 to-emerald-400 bg-clip-text text-transparent">SotA</span>
           </Link>
         </div>
         <nav className="flex flex-1 items-center justify-end gap-3">
@@ -74,7 +74,7 @@ export async function Header() {
                 <Link href="/auth/signup">
                   <Button
                     size="sm"
-                    className="rounded-full px-6 text-sm font-semibold text-primary-foreground bg-gradient-to-r from-primary via-sky-500 to-emerald-500 shadow-lg shadow-primary/20 transition-transform hover:scale-[1.02]"
+                    className="rounded-full px-6 text-sm font-semibold text-primary-foreground bg-gradient-to-r from-blue-800 via-cyan-600 to-emerald-400 shadow-lg shadow-primary/20 transition-transform hover:scale-[1.02]"
                   >
                     {common.header.auth.signup}
                   </Button>

@@ -68,7 +68,7 @@ export default async function HomePage() {
               <Link href="/research-lines">
                 <Button
                   size="lg"
-                  className="group relative gap-2 overflow-hidden rounded-full !bg-gradient-to-r !from-primary !via-sky-500 !to-emerald-500 !text-primary-foreground px-8 shadow-xl shadow-primary/30 transition-all duration-300 hover:scale-[1.02]"
+                  className="group relative gap-2 overflow-hidden rounded-full !bg-gradient-to-r !from-blue-800 !via-cyan-600 !to-emerald-400 !text-primary-foreground px-8 shadow-xl shadow-primary/30 transition-all duration-300 hover:scale-[1.02]"
                 >
                   <span className="relative z-10 flex items-center gap-2">
                     {home.hero.primaryCta}
@@ -125,7 +125,7 @@ export default async function HomePage() {
                     className="group relative overflow-hidden border border-white/10 bg-gradient-to-b from-background/90 via-background/60 to-background/80 shadow-[0_30px_70px_-45px_rgba(15,15,15,0.65)] transition-all duration-300 hover:-translate-y-2 hover:border-primary/40 hover:shadow-[0_45px_110px_-55px_rgba(15,15,15,0.82)]"
                   >
                     <CardHeader className="relative space-y-4">
-                      <div className="inline-flex size-12 items-center justify-center rounded-2xl border border-white/10 bg-gradient-to-br from-primary/20 via-sky-500/20 to-background text-primary">
+                      <div className="inline-flex size-12 items-center justify-center rounded-2xl border border-white/10 bg-gradient-to-br from-blue-800/20 via-cyan-600/20 to-background text-primary">
                         <Icon className="h-5 w-5" aria-hidden />
                       </div>
                       <CardTitle className="text-2xl text-foreground">{pillar.title}</CardTitle>
@@ -175,7 +175,7 @@ export default async function HomePage() {
                     </span>
                   )}
                   {plan.highlightLabel && (
-                    <span className="absolute right-6 top-6 rounded-full bg-gradient-to-r from-primary via-sky-500 to-emerald-500 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-primary-foreground">
+                    <span className="absolute right-6 top-6 rounded-full bg-gradient-to-r from-blue-800 via-cyan-600 to-emerald-400 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-primary-foreground">
                       {plan.highlightLabel}
                     </span>
                   )}
@@ -199,7 +199,7 @@ export default async function HomePage() {
                       ))}
                     </ul>
                     <Link href="/auth/signup">
-                      <Button className="w-full rounded-full bg-gradient-to-r from-primary via-sky-500 to-emerald-500 text-primary-foreground shadow-md shadow-primary/30">
+                      <Button className="w-full rounded-full bg-gradient-to-r from-blue-800 via-cyan-600 to-emerald-400 text-primary-foreground shadow-md shadow-primary/30">
                         {plan.cta}
                       </Button>
                     </Link>
@@ -256,9 +256,9 @@ export default async function HomePage() {
                 <ol className="space-y-6">
                   {home.workflow.steps.map((step, index) => (
                     <li key={step.title} className="flex gap-4">
-                      <div className="relative flex size-12 items-center justify-center rounded-2xl border border-primary/30 bg-gradient-to-br from-primary/20 via-sky-500/10 to-background text-sm font-semibold text-primary">
+                      <div className="relative flex size-12 items-center justify-center rounded-2xl border border-primary/30 bg-gradient-to-br from-blue-800/20 via-cyan-600/10 to-background text-sm font-semibold text-primary">
                         <span>{index + 1}</span>
-                        <span className="absolute -right-4 top-1/2 hidden h-px w-12 -translate-y-1/2 bg-gradient-to-r from-primary/30 to-transparent lg:block" />
+                        <span className="absolute -right-4 top-1/2 hidden h-px w-12 -translate-y-1/2 bg-gradient-to-r from-blue-800/30 to-transparent lg:block" />
                       </div>
                       <div>
                         <p className="text-base font-semibold text-foreground">{step.title}</p>
@@ -326,7 +326,7 @@ export default async function HomePage() {
                 <Link href="/auth/signup">
                   <Button
                     size="lg"
-                    className="rounded-full bg-gradient-to-r from-primary via-sky-500 to-emerald-500 px-8 text-primary-foreground shadow-xl shadow-primary/30 transition-transform hover:scale-[1.02]"
+                    className="rounded-full bg-gradient-to-r from-blue-800 via-cyan-600 to-emerald-400 px-8 text-primary-foreground shadow-xl shadow-primary/30 transition-transform hover:scale-[1.02]"
                   >
                     {home.cta.primary}
                     <ArrowRight className="h-4 w-4" aria-hidden />

@@ -53,7 +53,7 @@ export default async function AdminUsersPage() {
       <main className="flex-1">
         <section className="relative overflow-hidden border-b border-border/60 bg-gradient-to-b from-background via-background/80 to-primary/5 py-28">
           <div className="pointer-events-none absolute inset-0 -z-10">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-sky-500/12 to-transparent blur-3xl" />
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-800/20 via-cyan-600/12 to-transparent blur-3xl" />
             <div className="absolute left-1/2 top-1/2 size-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/15 blur-3xl" />
             <div className="absolute -right-10 bottom-10 size-[360px] rounded-full bg-emerald-300/10 blur-3xl" />
           </div>
@@ -101,12 +101,12 @@ export default async function AdminUsersPage() {
 
         <section className="relative overflow-hidden border-y border-border/60 bg-gradient-to-b from-background via-muted/20 to-background py-24">
           <div className="pointer-events-none absolute inset-0 -z-10">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-transparent to-emerald-300/10 blur-[240px]" />
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-800/15 via-transparent to-emerald-300/10 blur-[240px]" />
             <div className="absolute right-1/3 top-1/2 size-[360px] -translate-y-1/2 rounded-full bg-primary/5 blur-3xl" />
           </div>
           <div className="container mx-auto px-4">
             <Card className="relative overflow-hidden rounded-[32px] border border-white/10 bg-background/90 shadow-[0_60px_140px_-80px_rgba(15,15,15,0.85)] backdrop-blur">
-              <div className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-primary via-sky-500 to-emerald-400" />
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-800 via-cyan-600 to-emerald-400" />
               <CardHeader className="space-y-4">
                 <div className="inline-flex items-center gap-3 text-[0.65rem] font-semibold uppercase tracking-[0.35em] text-primary/80">
                   {copy.hero.badge}
@@ -128,7 +128,7 @@ export default async function AdminUsersPage() {
                           className="group relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-background/95 via-primary/5 to-background/75 p-6 shadow-[0_45px_100px_-75px_rgba(15,15,15,0.95)] backdrop-blur transition-all duration-300 hover:-translate-y-1"
                         >
                           <div className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                            <div className="absolute inset-0 bg-gradient-to-r from-primary/15 via-sky-500/10 to-emerald-400/10 blur-3xl" />
+                            <div className="absolute inset-0 bg-gradient-to-r from-blue-800/15 via-cyan-600/10 to-emerald-400/10 blur-3xl" />
                           </div>
                           <div className="relative flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
                             <div className="space-y-3">

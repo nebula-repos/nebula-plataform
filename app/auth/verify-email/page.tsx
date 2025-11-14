@@ -10,7 +10,7 @@ export default async function VerifyEmailPage() {
   return (
     <div className="relative flex min-h-svh w-full items-center justify-center overflow-hidden bg-background">
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-sky-500/12 to-transparent blur-3xl" />
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-800/15 via-cyan-600/12 to-transparent blur-3xl" />
         <div className="absolute left-1/2 top-1/2 size-[400px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/10 blur-3xl" />
       </div>
       <div className="relative z-10 w-full max-w-md px-6">

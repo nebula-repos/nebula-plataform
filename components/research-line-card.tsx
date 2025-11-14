@@ -41,7 +41,7 @@ export function ResearchLineCard({
       className="group relative overflow-hidden border border-white/10 bg-background/90 shadow-[0_30px_70px_-45px_rgba(15,15,15,0.65)] backdrop-blur transition-all duration-300 hover:-translate-y-2 hover:border-primary/50 hover:shadow-[0_50px_120px_-55px_rgba(15,15,15,0.88)]"
       data-testid="research-line-card"
     >
-      <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-primary via-sky-500 to-emerald-400 opacity-60 transition-opacity group-hover:opacity-100" />
+      <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-800 via-cyan-600 to-emerald-400 opacity-60 transition-opacity group-hover:opacity-100" />
       <CardHeader className="relative space-y-3">
         <div className="flex items-center justify-between text-xs uppercase tracking-[0.3em] text-muted-foreground/70">
           <span>{eyebrowLabel}</span>

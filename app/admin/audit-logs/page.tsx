@@ -60,7 +60,7 @@ export default async function AdminAuditLogsPage() {
       <main className="flex-1">
         <section className="relative overflow-hidden border-b border-border/60 bg-gradient-to-b from-background via-background/80 to-primary/5 py-28">
           <div className="pointer-events-none absolute inset-0 -z-10">
-            <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-primary/15 via-sky-500/10 to-transparent blur-3xl" />
+            <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-blue-800/15 via-cyan-600/10 to-transparent blur-3xl" />
             <div className="absolute -right-12 top-1/3 size-[420px] rounded-full bg-emerald-400/10 blur-3xl" />
             <div className="absolute left-1/3 bottom-0 size-[320px] rounded-full bg-primary/10 blur-[240px]" />
           </div>
@@ -105,12 +105,12 @@ export default async function AdminAuditLogsPage() {
 
         <section className="relative overflow-hidden border-y border-border/60 bg-gradient-to-b from-background via-muted/25 to-background py-24">
           <div className="pointer-events-none absolute inset-0 -z-10">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-transparent to-emerald-300/10 blur-[240px]" />
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-800/15 via-transparent to-emerald-300/10 blur-[240px]" />
             <div className="absolute right-1/4 top-0 size-[360px] rounded-full bg-primary/5 blur-3xl" />
           </div>
           <div className="container mx-auto px-4">
             <Card className="group relative overflow-hidden rounded-3xl border border-white/10 bg-background/90 shadow-[0_35px_80px_-55px_rgba(15,15,15,0.75)] backdrop-blur transition-all duration-300 hover:border-primary/40">
-              <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-primary via-sky-500 to-emerald-400 opacity-60" />
+              <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-800 via-cyan-600 to-emerald-400 opacity-60" />
               <CardHeader className="relative space-y-4 pt-10">
                 <p className="text-xs font-semibold uppercase tracking-[0.35em] text-primary/80">{copy.hero.eyebrow}</p>
                 <CardTitle className="text-2xl text-foreground">{copy.list.title}</CardTitle>

@@ -85,7 +85,7 @@ export function SignupClient({ copy }: SignupClientProps) {
   return (
     <div className="relative flex min-h-svh w-full items-center justify-center overflow-hidden bg-background">
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-sky-500/12 to-transparent blur-3xl" />
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-800/15 via-cyan-600/12 to-transparent blur-3xl" />
         <div className="absolute right-1/2 top-1/2 size-[520px] translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/10 blur-3xl" />
       </div>
       <div className="relative z-10 grid w-full max-w-5xl gap-10 px-6 py-12 md:grid-cols-[1.1fr_1fr] md:px-12">
